@@ -14,27 +14,16 @@ header{
 	margin-top:60px;
 }
 
-.table{
-	width:100%;
+table{
 
 	display: block;
 
 	overflow-x: auto;
 
 }
-.table tr:nth-child(2n){
-	background-color: #eee;
-}
-.table tr:first-child td{
-	font-weight: bold;
-}
 
+table td{
 
-.btn{
-	margin-bottom: 20px !important;
+	padding:30px;
 }
 
-
-.comp{
-	width:9%;
-}
