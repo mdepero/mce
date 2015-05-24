@@ -24,13 +24,16 @@ $(document).ready(function(){
    *|    End result array for testing     |
    *+-------------------------------------+
    */
+  var faculty = [ "Bob", "Bill", "Brock", "Beth" ];
 
-  var faculty = { "Bob", "Billy", "Brock", "Beth" };
+
+
+
 
 
   // Add current faculty to the list of faculty
-  $.each(faculty, function(val, text) {
-    $('#faculty').append( new Option(text,val) );
+  $.each(faculty, function(text) {
+    $('#faculty').append( new Option(text,text) );
 
   });
 
