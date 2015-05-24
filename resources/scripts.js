@@ -37,6 +37,8 @@ $(document).ready(function(){
 
   });
 
+  $("#loading").hide();
+
   $("#0").fadeIn(2000);
 
 
