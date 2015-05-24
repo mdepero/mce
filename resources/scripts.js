@@ -67,4 +67,18 @@ $(document).ready(function(){
   $("#0").fadeIn(2000);
 
 
+
+  function addStudents(){
+
+    $.each(students[$("#faculty").val()], function(index, text) {
+      $('#students').append( "<tr><td>" + text + "</td></tr>" );
+
+    });
+
+    $("#1").fadeIn(2000);
+
+
+  }
+
+
 });// end document ready
