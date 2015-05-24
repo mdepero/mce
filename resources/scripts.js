@@ -24,8 +24,26 @@ $(document).ready(function(){
    *|    End result array for testing     |
    *+-------------------------------------+
    */
-  var faculty = [ "Bob", "Bill", "Brock", "Beth" ];
+  var faculty = [ "Bob", "Bill", "Barry", "Beth" ];
   var semesters = [ "Fall 2001", "Spring 2001", "Fall 2002", "Spring 2002" ];
+  var students = {
+    Bob:{
+      1001: "Moe",
+      1002: "Moro"
+    },
+    Bill:{
+      1003: "Milly",
+      1004: "Miles"
+    },
+    Barry:{
+      1005: "Matt",
+      1006: "Mary"
+    },
+    Beth:{
+      1007: "Meredeth",
+      1008: "Me"
+    }
+  }
 
 
 

@@ -5,8 +5,10 @@ title: Home
 
 <img src="{{site.baseurl}}/resources/img/loading.gif" alt="loading icon" id="loading">
 
-<div class="row form-item" id="0">
 
+
+
+<div class="row form-item" id="0">
 <table>
   <tr>
     <td>Your Name </td>
@@ -23,12 +25,40 @@ title: Home
     <td>Semester </td>
     <td>
       <select id="faculty" class="form-control">
-        <option>Select a name...</option>
+        <option>Select a Semester...</option>
 
       </select>
     </td>
   </tr>
+  <tr>
+    <td>
+      Which block?
+    </td>
+    <td>
+      <input type="radio" name="block" value="Content Integration Block"> &nbsp;Content Integration Block<br />
+      <input type="radio" name="block" value="Early Field Block"> &nbsp;Early Field Block<br />
+    </td>
+  </tr>
 </table>
+
+<button class="btn btn-primary">Next</button>
+
+</div>
+
+
+
+
+
+
+<div class="row form-item" id="1">
+
+<h4>Select students you would like to evaluate</h4>
+
+<table id="students">
+
+</table>
+
+
 
 <button class="btn btn-primary">Next</button>
 
