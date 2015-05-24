@@ -1,6 +1,7 @@
-// Your scripts go here.
+// All Code by Matt DePero Unless Noted
 
 
+// Smooth Scroll Code provided by CSS Tricks https://css-tricks.com/snippets/jquery/smooth-scrolling/
 $(document).ready(function(){
   $('a[href*=#]').click(function() {
     if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'')
@@ -18,6 +19,20 @@ $(document).ready(function(){
   });
 
 
-  
+  /*+-------------------------------------+
+   *|   To be retreived from database     |
+   *|    End result array for testing     |
+   *+-------------------------------------+
+   */
 
-});
+  var faculty = { "Bob", "Billy", "Brock", "Beth" };
+
+
+  // Add current faculty to the list of faculty
+  $.each(faculty, function(val, text) {
+    $('#faculty').append( new Option(text,val) );
+
+  });
+
+
+});// end document ready
