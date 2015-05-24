@@ -32,7 +32,7 @@ $(document).ready(function(){
 
 
   // Add current faculty to the list of faculty
-  $.each(faculty, function(text) {
+  $.each(faculty, function(index, text) {
     $('#faculty').append( new Option(text,text) );
 
   });
