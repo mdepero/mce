@@ -37,5 +37,7 @@ $(document).ready(function(){
 
   });
 
+  $("#0").fadeIn(2000);
+
 
 });// end document ready
