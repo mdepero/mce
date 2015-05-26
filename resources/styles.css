@@ -38,3 +38,8 @@ table td{
 	display: none;
 }
 
+#error{
+	color:red;
+	font-weight: bold;
+}
+

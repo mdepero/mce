@@ -5,7 +5,8 @@ title: Home
 
 <img src="{{site.baseurl}}/resources/img/loading.gif" alt="loading icon" id="loading">
 
-
+<p id="error">
+</p>
 
 
 <div class="row form-item" id="0">
@@ -15,7 +16,7 @@ title: Home
     <td>
       
       <select id="faculty" class="form-control">
-        <option>Select a name...</option>
+        <option value="">Select a name...</option>
 
       </select>
 
@@ -24,8 +25,8 @@ title: Home
   <tr>
     <td>Semester </td>
     <td>
-      <select id="faculty" class="form-control">
-        <option>Select a Semester...</option>
+      <select id="semester" class="form-control">
+        <option value="">Select a Semester...</option>
 
       </select>
     </td>
@@ -35,13 +36,13 @@ title: Home
       Which block?
     </td>
     <td>
-      <input type="radio" name="block" value="Content Integration Block"> &nbsp;Content Integration Block<br />
-      <input type="radio" name="block" value="Early Field Block"> &nbsp;Early Field Block<br />
+      <input type="radio" id="block1" name="block" value="Content Integration Block" checked> &nbsp;<label for="block1">Content Integration Block</label><br />
+      <input type="radio" id="block2" name="block" value="Early Field Block"> &nbsp;<label for="block2">Early Field Block</label><br />
     </td>
   </tr>
 </table>
 
-<button class="btn btn-primary" onclick="javascript:addStudents();">Next</button>
+<button class="btn btn-primary" id="addStudents" onclick="javascript:addStudents();">Next</button>
 
 </div>
 
@@ -54,19 +55,31 @@ title: Home
 
 <h4>Select students you would like to evaluate</h4>
 
-<table id="students">
+<p id="students">
 
-</table>
+</p>
 
 
-
-<button class="btn btn-primary">Next</button>
+<button class="btn btn-primary" id="addForms" onclick="javascript:addForms();">Next</button>
 
 </div>
 
 
 
 
+
+
+
+
+<div class="row form-item" id="2">
+
+<div id="forms">
+
+</div>
+
+<button class="btn btn-primary" id="submit" onclick="javascript:;">Submit</button>
+
+</div>
 
 
 
