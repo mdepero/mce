@@ -99,7 +99,7 @@ function addForms(){
   $.each( $('input[name="students"]:checked'), function(index, text) {
 
     $("#forms").append(
-        "<p><h2>" + students[$(text).val()] + "</h2>"+'<input type="hidden" name="id[]" value="'+$(text).val()+'"'+"<p>THIS WILL BE THIS PERSONS FORM TO FILL OUT</p></p>"
+        "<p><h2>" + students[$(text).val()] + "</h2>"+'<input type="hidden" name="id[]" value="'+$(text).val()+'"'+"<p>THIS WILL BE THIS PERSON'S FORM TO FILL OUT</p></p>"
       );
 
 
