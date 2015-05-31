@@ -4,7 +4,7 @@
  */
 
 
-
+/*
 // URL to folder that contains serverfile.php, including '/' on the end
 var serverRootURL = "http://107.10.18.206/";
 
@@ -37,7 +37,7 @@ function fetchData(){
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
-
+*/
 
 var faculty,semesters,students,facultyToStudents;
 
