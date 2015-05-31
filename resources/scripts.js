@@ -1,12 +1,64 @@
-// All Code by Matt DePero Unless Noted
+/*
+ * All Code by Matt DePero Unless Noted
+ *
+ */
 
 
 
-  /*+-------------------------------------+
-   *|   To be retreived from database     |
-   *|    End result array for testing     |
-   *+-------------------------------------+
-   */
+// URL to folder that contains serverfile.php, including '/' on the end
+var serverRootURL = "http://107.10.18.206/";
+
+
+var xmlhttp;
+if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
+
+  xmlhttp=new XMLHttpRequest();
+}else{// code for IE6, IE5
+
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+}
+
+
+
+function setData( data ){
+  var url = serverRootURL+"serverfile.php?set="+data+"&t=" + Math.random();
+  xmlhttp.open("GET",url,true);
+  xmlhttp.send();
+}
+
+var returnedData = "";
+function fetchData(){
+  var url = serverRootURL+"serverfile.php?get&t=" + Math.random();
+  xmlhttp.onreadystatechange = function() {
+        if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            returnedData = xmlhttp.responseText;
+        }
+    }
+    xmlhttp.open("GET", url, true);
+    xmlhttp.send();
+}
+
+
+var faculty,semesters,students,facultyToStudents;
+
+function getCurrentData(){
+
+  //fetchData();
+
+  returnedData = 'Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{1001: "Matt",1101: "Todd",1002: "Ed",1003: "Norm",1004: "Mike",1104: "Joe",1105: "Jill",1005: "Samantha",1006: "Steven",1007: "Marco",1008: "Elaine",1009: "Kate",1010: "Hailey}';
+
+  var raw = returnedData.split("*ARRAY*");
+  var faculty = raw[0].split("*SPLIT*");
+  var semesters = raw[1].split("*SPLIT*");
+  var students = JSON.parse(raw[2]);
+
+}
+
+/*
+  Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{1001: "Matt",1101: "Todd",1002: "Ed",1003: "Norm",1004: "Mike",1104: "Joe",1105: "Jill",1005: "Samantha",1006: "Steven",1007: "Marco",1008: "Elaine",1009: "Kate",1010: "Hailey}
+  
+
+
   var faculty = [ "Bob", "Bill", "Barry", "Beth" ];
   var semesters = [ "Fall 2001", "Spring 2001", "Fall 2002", "Spring 2002" ];
   var students = {
@@ -25,6 +77,7 @@
       1010: "Hailey"
     };
   var facultyToStudents = [ [1001,1002,1101], [1003,1004,1104,1105], [1005,1006,1009], [1007,1008,1010] ];
+*/
 
 
 
@@ -49,7 +102,7 @@ $(document).ready(function(){
   });
 
 
-
+  getCurrentData();
 
 
   // Add current faculty to the list of faculty
