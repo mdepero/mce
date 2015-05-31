@@ -48,9 +48,9 @@ function getCurrentData(){
   returnedData = 'Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{"1001": "Matt","1101": "Todd","1002": "Ed","1003": "Norm","1004": "Mike","1104": "Joe","1105": "Jill","1005": "Samantha","1006": "Steven","1007": "Marco","1008": "Elaine","1009": "Kate","1010": "Hailey"}';
 
   var raw = returnedData.split("*ARRAY*");
-  var faculty = raw[0].split("*SPLIT*");
-  var semesters = raw[1].split("*SPLIT*");
-  var students = JSON.parse(raw[2]);
+  faculty = raw[0].split("*SPLIT*");
+  semesters = raw[1].split("*SPLIT*");
+  students = JSON.parse(raw[2]);
 
 }
 
