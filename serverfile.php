@@ -10,15 +10,15 @@ header("access-control-allow-origin: *");
 
 
 if(isset($_REQUEST['set'])){
-	$myfile = fopen("data.txt", "w") or die("Unable to open file!");
+	$myfile = fopen("database.txt", "w") or die("Unable to open file!");
 	$data = $_GET["set"];
 	fwrite($myfile, $data);
 	fclose($myfile);
 }
 
 if(isset($_REQUEST['get'])){
-	$myfile = fopen("data.txt", "r") or die("Unable to open file!");
-	echo fread($myfile,filesize("data.txt"));
+	$myfile = fopen("database.txt", "r") or die("Unable to open file!");
+	echo fread($myfile,filesize("database.txt"));
 	fclose($myfile);
 }
 
