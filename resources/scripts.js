@@ -52,6 +52,10 @@ function getCurrentData(){
   var semesters = raw[1].split("*SPLIT*");
   var students = JSON.parse(raw[2]);
 
+  alert(faculty);
+  alert(semesters);
+  alert(students);
+
 }
 
 /*
