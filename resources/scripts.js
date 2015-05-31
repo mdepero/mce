@@ -26,7 +26,10 @@ function setData( data ){
   xmlhttp.send();
 }
 
+
+
 var returnedData,faculty,semesters,students,facultyToStudents;
+
 function fetchData(){
   var url = serverRootURL+"serverfile.php?get&t=" + Math.random();
   xmlhttp.onreadystatechange = function() {
@@ -43,6 +46,9 @@ function fetchData(){
             semesters = raw[1].split("*SPLIT*");
             students = JSON.parse(raw[2]);
             facultyToStudents = JSON.parse(raw[3]);
+
+
+            buildInitialForm();
         }
     }
     xmlhttp.open("GET", url, true);
@@ -102,6 +108,14 @@ $(document).ready(function(){
   fetchData();
 
 
+  
+
+
+});// end document ready
+
+
+function buildInitialForm(){
+
 
   // Add current faculty to the list of faculty
   $.each(faculty, function(index, text) {
@@ -119,8 +133,8 @@ $(document).ready(function(){
 
   $("#0").fadeIn(2000);
 
+}
 
-});// end document ready
 
 
 function addStudents(){
