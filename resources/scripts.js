@@ -36,9 +36,7 @@ function fetchData(){
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
             if(returnedData == "" || returnedData == null){
-              alert("Could not retreive data");
-            }else{
-              alert("Got data");
+              alert("ERROR: Could not retreive data or database is empty");
             }
 
             var raw = returnedData.split("*ARRAY*");
