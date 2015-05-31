@@ -32,6 +32,7 @@ function fetchData(){
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
+            alert("got data");
         }
     }
     xmlhttp.open("GET", url, true);
