@@ -34,6 +34,8 @@ function fetchData(){
             returnedData = xmlhttp.responseText;
             if(returnedData == "" || returnedData == null){
               alert("Could not retreive data");
+            }else{
+              alert("Got data");
             }
 
             var raw = returnedData.split("*ARRAY*");
