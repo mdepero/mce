@@ -45,6 +45,10 @@ function getCurrentData(){
 
   fetchData();
 
+  if(returnedData == ""){
+    alert("Could not retreive data");
+  }
+
   var raw = returnedData.split("*ARRAY*");
   faculty = raw[0].split("*SPLIT*");
   semesters = raw[1].split("*SPLIT*");
