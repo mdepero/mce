@@ -52,10 +52,6 @@ function getCurrentData(){
   var semesters = raw[1].split("*SPLIT*");
   var students = JSON.parse(raw[2]);
 
-  alert(faculty);
-  alert(semesters);
-  alert(students);
-
 }
 
 /*
@@ -109,12 +105,13 @@ $(document).ready(function(){
   getCurrentData();
 
 
+alert(faculty);
   // Add current faculty to the list of faculty
   $.each(faculty, function(index, text) {
     $('#faculty').append( new Option(text,index) );
 
   });
-
+alert(semesters);
   // Add available semesters
   $.each(semesters, function(index, text) {
     $('#semester').append( new Option(text,text) );
