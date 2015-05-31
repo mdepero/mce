@@ -45,12 +45,13 @@ function getCurrentData(){
 
   //fetchData();
 
-  returnedData = 'Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{"1001": "Matt","1101": "Todd","1002": "Ed","1003": "Norm","1004": "Mike","1104": "Joe","1105": "Jill","1005": "Samantha","1006": "Steven","1007": "Marco","1008": "Elaine","1009": "Kate","1010": "Hailey"}';
+  returnedData = 'Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{"1001": "Matt","1101": "Todd","1002": "Ed","1003": "Norm","1004": "Mike","1104": "Joe","1105": "Jill","1005": "Samantha","1006": "Steven","1007": "Marco","1008": "Elaine","1009": "Kate","1010": "Hailey"}*ARRAY*[ [1001,1002,1101], [1003,1004,1104,1105], [1005,1006,1009], [1007,1008,1010] ]';
 
   var raw = returnedData.split("*ARRAY*");
   faculty = raw[0].split("*SPLIT*");
   semesters = raw[1].split("*SPLIT*");
   students = JSON.parse(raw[2]);
+  facultyToStudents = JSON.parse(raw[3]);
 
 }
 
@@ -105,13 +106,13 @@ $(document).ready(function(){
   getCurrentData();
 
 
-alert(faculty);
+
   // Add current faculty to the list of faculty
   $.each(faculty, function(index, text) {
     $('#faculty').append( new Option(text,index) );
 
   });
-alert(semesters);
+
   // Add available semesters
   $.each(semesters, function(index, text) {
     $('#semester').append( new Option(text,text) );
