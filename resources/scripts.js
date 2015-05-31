@@ -26,13 +26,21 @@ function setData( data ){
   xmlhttp.send();
 }
 
-var returnedData = "";
+var returnedData,faculty,semesters,students,facultyToStudents;
 function fetchData(){
   var url = serverRootURL+"serverfile.php?get&t=" + Math.random();
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
-            alert("got data");
+            if(returnedData == "" || returnedData == null){
+              alert("Could not retreive data");
+            }
+
+            var raw = returnedData.split("*ARRAY*");
+            faculty = raw[0].split("*SPLIT*");
+            semesters = raw[1].split("*SPLIT*");
+            students = JSON.parse(raw[2]);
+            facultyToStudents = JSON.parse(raw[3]);
         }
     }
     xmlhttp.open("GET", url, true);
@@ -40,23 +48,6 @@ function fetchData(){
 }
 
 
-var faculty,semesters,students,facultyToStudents;
-
-function getCurrentData(){
-
-  fetchData();
-
-  if(returnedData == ""){
-    alert("Could not retreive data");
-  }
-
-  var raw = returnedData.split("*ARRAY*");
-  faculty = raw[0].split("*SPLIT*");
-  semesters = raw[1].split("*SPLIT*");
-  students = JSON.parse(raw[2]);
-  facultyToStudents = JSON.parse(raw[3]);
-
-}
 
 /*
   Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{1001: "Matt",1101: "Todd",1002: "Ed",1003: "Norm",1004: "Mike",1104: "Joe",1105: "Jill",1005: "Samantha",1006: "Steven",1007: "Marco",1008: "Elaine",1009: "Kate",1010: "Hailey}
@@ -106,7 +97,7 @@ $(document).ready(function(){
   });
 
 
-  getCurrentData();
+  fetchData();
 
 
 
