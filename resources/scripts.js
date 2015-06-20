@@ -31,7 +31,7 @@ function setData( data ){
 var returnedData;
 
 function fetchData( callback ){
-  var url = serverRootURL+"serverfile.php?get=" + callback + "&t=" + Math.random();
+  var url = serverRootURL+"serverfile.php?get=" + callback.getName + "&t=" + Math.random();
   alert(url);
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
@@ -137,3 +137,13 @@ function addForms(){
   });
 
 }
+
+
+
+/*  This is used to get the name of a callback function (or any function) as a string. 
+    Credit to: http://stackoverflow.com/questions/10624057/get-name-as-string-from-a-javascript-function-reference
+*/
+Function.prototype.getName = function(){
+  // Find zero or more non-paren chars after the function start
+  return /function ([^(]*)/.exec( this+"" )[1];
+};
