@@ -28,57 +28,27 @@ function setData( data ){
 
 
 
-var returnedData,faculty,semesters,students,facultyToStudents;
+var returnedData;
 
-function fetchData(){
+function fetchData( callback ){
   var url = serverRootURL+"serverfile.php?get&t=" + Math.random();
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
             if(returnedData == "" || returnedData == null){
               alert("ERROR: Could not retreive data or database is empty");
+              return;
             }
 
-            var raw = returnedData.split("*ARRAY*");
-            faculty = raw[0].split("*SPLIT*");
-            semesters = raw[1].split("*SPLIT*");
-            students = JSON.parse(raw[2]);
-            facultyToStudents = JSON.parse(raw[3]);
+            returnedData = JSON.parse(returnedData);
 
-
-            buildInitialForm();
+            callback();
         }
     }
     xmlhttp.open("GET", url, true);
     xmlhttp.send();
 }
 
-
-
-/*
-  Bob*SPLIT*Bill*SPLIT*Barry*SPLIT*Beth*ARRAY*Fall 2001*SPLIT*Spring 2001*SPLIT*Fall 2002*SPLIT*Spring 2002*ARRAY*{1001: "Matt",1101: "Todd",1002: "Ed",1003: "Norm",1004: "Mike",1104: "Joe",1105: "Jill",1005: "Samantha",1006: "Steven",1007: "Marco",1008: "Elaine",1009: "Kate",1010: "Hailey}
-  
-
-
-  var faculty = [ "Bob", "Bill", "Barry", "Beth" ];
-  var semesters = [ "Fall 2001", "Spring 2001", "Fall 2002", "Spring 2002" ];
-  var students = {
-      1001: "Matt",
-      1101: "Todd",
-      1002: "Ed",
-      1003: "Norm",
-      1004: "Mike",
-      1104: "Joe",
-      1105: "Jill",
-      1005: "Samantha",
-      1006: "Steven",
-      1007: "Marco",
-      1008: "Elaine",
-      1009: "Kate",
-      1010: "Hailey"
-    };
-  var facultyToStudents = [ [1001,1002,1101], [1003,1004,1104,1105], [1005,1006,1009], [1007,1008,1010] ];
-*/
 
 
 
@@ -103,27 +73,19 @@ $(document).ready(function(){
   });
 
 
-  fetchData();
-
-
-  
+  fetchData( buildInitialForm );
 
 
 });// end document ready
+
 
 
 function buildInitialForm(){
 
 
   // Add current faculty to the list of faculty
-  $.each(faculty, function(index, text) {
+  $.each(returnedData.faculty, function(index, text) {
     $('#faculty').append( new Option(text,index) );
-
-  });
-
-  // Add available semesters
-  $.each(semesters, function(index, text) {
-    $('#semester').append( new Option(text,text) );
 
   });
 
