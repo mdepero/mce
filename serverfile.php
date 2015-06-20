@@ -37,7 +37,7 @@ if(isset($_REQUEST['get'])){
 	 *  +--------------------------------------+
      */
 
-	if($_REQUEST['get'] == "getReviewForm0"){
+	if($_REQUEST['get'] == "buildInitialReviewForm"){
 		// Return list of active faculty options and available class semesters
 
 	    $return = '{"Faculty": {';

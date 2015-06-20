@@ -31,7 +31,7 @@ function setData( data ){
 var returnedData;
 
 function fetchData( callback ){
-  var url = serverRootURL+"serverfile.php?get&t=" + Math.random();
+  var url = serverRootURL+"serverfile.php?get=".."&t=" + Math.random();
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
@@ -73,14 +73,14 @@ $(document).ready(function(){
   });
 
 
-  fetchData( buildInitialForm );
+  fetchData( buildInitialReviewForm );
 
 
 });// end document ready
 
 
 
-function buildInitialForm(){
+function buildInitialReviewForm(){
 
 
   // Add current faculty to the list of faculty
