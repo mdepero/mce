@@ -31,7 +31,7 @@ function setData( data ){
 var returnedData;
 
 function fetchData( callback ){
-  var url = serverRootURL+"serverfile.php?get=" + callback.getName + "&t=" + Math.random();
+  var url = serverRootURL+"serverfile.php?get=" + callback.getName() + "&t=" + Math.random();
   alert(url);
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
