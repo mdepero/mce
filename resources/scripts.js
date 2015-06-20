@@ -32,7 +32,6 @@ var returnedData;
 
 function fetchData( callback ){
   var url = serverRootURL+"serverfile.php?get=" + callback.getName() + "&t=" + Math.random();
-  alert(url);
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
@@ -41,6 +40,7 @@ function fetchData( callback ){
               return;
             }
 
+            alert(returneddata);
             returnedData = JSON.parse(returnedData);
 
             callback();
