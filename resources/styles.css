@@ -18,19 +18,34 @@ nav{
 	margin-top: 30px; 
 }
 
+h3{
+	margin-bottom: 20px;
+}
+
+table td{
+	padding: 6px 10px;
+}
+
 .form{
 
 	display: block;
 
 	overflow-x: auto;
 
+	margin-bottom: 40px;
+
 }
 
 .form td{
 
-	padding: 10px 30px;
+	padding: 10px 7px;
 
-	margin-bottom: 15px;
+}
+
+.checkboxes td{
+
+	padding: 5px 5px;
+
 }
 
 .form-item{

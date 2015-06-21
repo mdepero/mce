@@ -30,17 +30,19 @@ function setData( data ){
 
 var returnedData;
 
-function fetchData( callback ){
-  var url = serverRootURL+"serverfile.php?get=" + callback.getName() + "&t=" + Math.random();
+function fetchData( callback, v1, v2 ){
+  var url = serverRootURL+"serverfile.php?get=" + callback.getName() + "&v1=" +v1+ "&v2=" +v2+ "&t=" + Math.random();
+  url = url.replace(" ","%20");
+  console.log("SENT URL: "+url);
   xmlhttp.onreadystatechange = function() {
         if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             returnedData = xmlhttp.responseText;
+            console.log("RECEIVED DATA: "+returnedData);
             if(returnedData == "" || returnedData == null){
-              alert("ERROR: Could not retreive data or database is empty");
+              alert("ERROR: Could not connect or returned no results.");
               return;
             }
 
-            alert(returneddata);
             returnedData = JSON.parse(returnedData);
 
             callback();
@@ -74,7 +76,7 @@ $(document).ready(function(){
   });
 
 
-  fetchData( buildInitialReviewForm );
+  fetchData( buildInitialReviewForm ,"", "" );
 
 
 });// end document ready
@@ -84,9 +86,14 @@ $(document).ready(function(){
 function buildInitialReviewForm(){
 
 
-  // Add current faculty to the list of faculty
-  $.each(returnedData.faculty, function(index, text) {
+  // Add current faculty and semesters
+  $.each(returnedData["Faculty"], function(index, text) {
     $('#faculty').append( new Option(text,index) );
+
+  });
+
+  $.each(returnedData["Semesters"], function(index, text) {
+    $('#semester').append( new Option(text,text) );
 
   });
 
@@ -96,9 +103,11 @@ function buildInitialReviewForm(){
 
 }
 
+function callAddClasses(){
+  fetchData(addClassList,$('#faculty').val(),$('#semester').val());
+}
 
-
-function addStudents(){
+function addClassList(){
 
   $("#error").html("");
   if($("#faculty").val() == "" || $("#semester").val() == ""){
@@ -106,15 +115,75 @@ function addStudents(){
     return;
   }
 
-  $.each(facultyToStudents[$("#faculty").val()], function(index, text) {
-    $('#students').append( '<input type="checkbox" name="students" value="' + text + '" id="' + text + '">&nbsp;<label for="' + text + '"">' + students[text] + "</label><br/>" );
+
+  if($.isEmptyObject(returnedData["Classes"])){ // Checks to see if the returned javascript object has any given properties or not
+    alert("Sorry, no matches found. Try again");
+    return;
+  }
+
+  // Populate class list for professor
+  $.each(returnedData["Classes"], function(index, text) {
+
+    $('#classes').append( newCheckBox(index, text, "class") );
 
   });
 
-  $("#addStudents").prop("disabled",true);
+  $("#addClasses").prop("disabled",true);
 
   $("#0").fadeOut(1000, "swing", function(){
     $("#1").fadeIn(1000);
+  });
+
+}
+
+function callAddStudents(){
+  var classList = "[";
+  var first = true;
+  $.each($('input[type="checkbox"][name="class\\[\\]"]:checked').map(function() { return this.value; }), function(index, value){
+    if(first)
+      first = false;
+    else
+      classList += ",";
+
+    classList += value;
+  });
+  classList += "]";
+  fetchData(addStudents,classList,"");
+}
+
+function addStudents(){
+
+  if ($("#1 input:checkbox:checked").length == 0){
+    $("#error").html("You are missing something on the current form.");
+    return;
+  }
+
+  
+  for(var i = 0;i<returnedData.length;i++){
+
+    var Row = returnedData[i];
+
+    $("#studentListClasses").append(' <h4>'+Row.Class["Name"]+'</h4>');
+
+    $("#studentListClasses").append(' <table class="form checkboxes" id="'+ Row.Class["ID"] +'">');
+
+
+      $.each(Row.Students, function(index, text) {
+
+        $('#'+Row.Class["ID"]).append( newCheckBox(index, text, Row.Class["ID"]) );
+
+      });
+
+
+    $("#studentListClasses").append(' </table>');
+
+  }
+
+
+  $("#addStudents").prop("disabled",true);
+
+  $("#1").fadeOut(1000, "swing", function(){
+    $("#2").fadeIn(1000);
   });
 
 }
@@ -130,14 +199,28 @@ function addForms(){
 
 
 
-  $("#1").fadeOut(1000, "swing", function(){
-    $("#2").fadeIn(1000);
+  $("#2").fadeOut(1000, "swing", function(){
+    $("#3").fadeIn(1000);
   });
 
   });
 
 }
 
+
+
+
+
+/*
+ * This function is for quickly creating check boxes with labels
+ */
+function newCheckBox( value, label, name){
+
+  var randID = Math.floor(Math.random()*1000000);
+
+  return '<tr><td><input type="checkbox" name="' + name + '[]" value="'+ value + '" id="' +randID+ '"></td><td><label for="'+randID+'">'+label+'</label></td></tr>';
+
+}
 
 
 /*  This is used to get the name of a callback function (or any function) as a string. 

@@ -31,53 +31,58 @@ title: Home
       </select>
     </td>
   </tr>
-  <tr>
-    <td>
-      Which block?
-    </td>
-    <td>
-      <input type="radio" id="block1" name="block" value="Content Integration Block" checked> &nbsp;<label for="block1">Content Integration Block</label><br />
-      <input type="radio" id="block2" name="block" value="Early Field Block"> &nbsp;<label for="block2">Early Field Block</label><br />
-    </td>
-  </tr>
 </table>
 
-<button class="btn btn-primary" id="addStudents" onclick="javascript:addStudents();">Next</button>
+<button class="btn btn-primary" id="addClasses" onclick="javascript:callAddClasses();">Next</button>
 
 </div>
-
-
-
-
 
 
 <div class="row form-item" id="1">
 
-<h4>Select students you would like to evaluate</h4>
+  <h3>Select from your classes during that semester:</h3>
 
-<p id="students">
+  <table id="classes" class="form checkboxes">
 
-</p>
+  </table>
 
-
-<button class="btn btn-primary" id="addForms" onclick="javascript:addForms();">Next</button>
+  <br />
+  <button class="btn btn-primary" id="addStudents" onclick="javascript:callAddStudents();">Next</button>
 
 </div>
-
-
-
-
 
 
 
 
 <div class="row form-item" id="2">
 
-<div id="forms">
+  <h3>Select students you would like to evaluate</h3>
+
+  <div id="studentListClasses">
+
+   
+
+  </div>
+
+
+  <button class="btn btn-primary" id="addForms" onclick="javascript:addForms();">Next</button>
 
 </div>
 
-<button class="btn btn-primary" id="submit" onclick="javascript:;">Submit</button>
+
+
+
+
+
+
+
+<div class="row form-item" id="3">
+
+  <div id="forms">
+
+  </div>
+
+  <button class="btn btn-primary" id="submit" onclick="javascript:;">Submit</button>
 
 </div>
 

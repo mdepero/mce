@@ -3,7 +3,7 @@ name: MCE Dispositions | Miami University
 
 description: The Miami Notebook Program at Miami University
 
-baseurl: /mce
+baseurl: file:///home/matt/Documents/Projects/mce/_site
 
 markdown: rdiscount
 
