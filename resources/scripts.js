@@ -8,6 +8,12 @@
 // URL to folder that contains serverfile.php, including '/' on the end
 var serverRootURL = "http://107.10.18.206/";
 
+var SLOW_ANI_SPEED = 1500;
+
+var DEFAULT_ANI_SPEED = 1000;
+
+var FAST_ANI_SPEED = 600;
+
 
 var xmlhttp;
 if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -99,9 +105,11 @@ function buildInitialReviewForm(){
 
   $("#loading").hide();
 
-  $("#0").fadeIn(2000);
+  $("#0").fadeIn(SLOW_ANI_SPEED);
 
 }
+
+
 
 function callAddClasses(){
   fetchData(addClassList,$('#faculty').val(),$('#semester').val());
@@ -130,16 +138,18 @@ function addClassList(){
 
   $("#addClasses").prop("disabled",true);
 
-  $("#0").fadeOut(1000, "swing", function(){
-    $("#1").fadeIn(1000);
+  $("#0").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+    $("#1").fadeIn(DEFAULT_ANI_SPEED);
   });
 
 }
 
+
+
 function callAddStudents(){
   var classList = "[";
   var first = true;
-  $.each($('input[type="checkbox"][name="class\\[\\]"]:checked').map(function() { return this.value; }), function(index, value){
+  $.each($('input[type="checkbox"][name="class"]:checked').map(function() { return this.value; }), function(index, value){
     if(first)
       first = false;
     else
@@ -153,17 +163,18 @@ function callAddStudents(){
 
 function addStudents(){
 
+  $("#error").html("");
   if ($("#1 input:checkbox:checked").length == 0){
     $("#error").html("You are missing something on the current form.");
     return;
   }
 
-  
+
   for(var i = 0;i<returnedData.length;i++){
 
     var Row = returnedData[i];
 
-    $("#studentListClasses").append(' <h4>'+Row.Class["Name"]+'</h4>');
+    $("#studentListClasses").append(' <h4 id="'+Row.Class["ID"]+'name">'+Row.Class["Name"]+'</h4>');
 
     $("#studentListClasses").append(' <table class="form checkboxes" id="'+ Row.Class["ID"] +'">');
 
@@ -182,33 +193,154 @@ function addStudents(){
 
   $("#addStudents").prop("disabled",true);
 
-  $("#1").fadeOut(1000, "swing", function(){
-    $("#2").fadeIn(1000);
-  });
-
-}
-
-
-function addForms(){
-
-  $.each( $('input[name="students"]:checked'), function(index, text) {
-
-    $("#forms").append(
-        "<p><h2>" + students[$(text).val()] + "</h2>"+'<input type="hidden" name="id[]" value="'+$(text).val()+'"'+'<p><table><tr><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td></td></tr><br /><tr><td><input type="radio" name="1[]" value="1"></td><td><input type="radio" name="1[]" value="2"></td><td><input type="radio" name="1[]" value="3"></td><td><input type="radio" name="1[]" value="4"></td><td><input type="radio" name="1[]" value="5"></td><td>Test Field Number One</td></tr><tr><td><input type="radio" name="1[]" value="1"></td><td><input type="radio" name="1[]" value="2"></td><td><input type="radio" name="1[]" value="3"></td><td><input type="radio" name="1[]" value="4"></td><td><input type="radio" name="1[]" value="5"></td><td>Test Field Number Two</td></tr><tr><td><input type="radio" name="1[]" value="1"></td><td><input type="radio" name="1[]" value="2"></td><td><input type="radio" name="1[]" value="3"></td><td><input type="radio" name="1[]" value="4"></td><td><input type="radio" name="1[]" value="5"></td><td>Test Field Number Three</td></tr></table>'
-      );
-
-
-
-  $("#2").fadeOut(1000, "swing", function(){
-    $("#3").fadeIn(1000);
-  });
-
+  $("#1").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+    $("#2").fadeIn(DEFAULT_ANI_SPEED);
   });
 
 }
 
 
 
+
+
+var formCheckBoxes,formNumber,headerNumber,questions;
+
+function callAddForms(){
+
+  formCheckBoxes = $("#studentListClasses input:checkbox:checked");
+
+  $("#error").html("");
+  if(formCheckBoxes.length == 0){
+    $("#error").html("You are missing something on the current form.");
+    return;
+  }
+
+  // get the list of questions and question IDs
+  fetchData(startForms,"","");
+
+
+}
+
+function startForms(){
+
+  questions = returnedData;
+
+  formNumber = -1;
+
+  headerNumber = -1;
+
+  // Build the forms
+  $.each($("#studentListClasses h4"), function(index, value) {
+
+    $('#forms').append( '<h2 id="header_'+index+'">'+value.innerHTML+'</h2>');
+  });
+
+  $.each(formCheckBoxes, function(index, value) {
+
+    $('#forms').append( '<h3 id="name_'+index+'">'+$('label[for="'+value.id+'"]').html()+'</h3>');
+
+    $('#forms').append( '<table id="form_'+index+'" class="radios"></table>' );
+
+      $.each(questions, function(index2, value2) {
+
+        newQuestionSet(value.value, value.name, value2["ID"], value2["Question"], $('#form_'+index)[0] );
+
+      });
+
+      var row = $('#form_'+index)[0].insertRow(0);
+      row.insertCell().innerHTML = "1";
+      row.insertCell().innerHTML = "2";
+      row.insertCell().innerHTML = "3";
+      row.insertCell().innerHTML = "4";
+      row.insertCell().innerHTML = "5";
+      row.insertCell().innerHTML = "";
+
+      if(index < formCheckBoxes.length-1){
+
+        $('#form_'+index).append( '<tr><td></td><td></td><td></td><td></td><td></td><td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm();">Next Student</button></td></tr>' );
+      }else{
+
+        $('#form_'+index).append( '<tr><td></td><td></td><td></td><td></td><td></td><td><button class="btn btn-success" id="submit" onclick="javascript:submitForm();">Submit</button></td></tr>' );
+      }
+
+  });
+
+
+  $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+    $("#3").show();
+    $("#forms h2,h3,table").hide();
+    $("#forms").promise().done(function() { nextForm(); });// Wait until all of the inner elements of forms have been hidden, then begin nextForm
+  });
+
+}
+
+var lastClass = "";
+function nextForm(){
+
+
+  // new class, move to next class header
+  if(headerNumber == -1){
+    // just show the header
+    console.log("Just showing new header");
+    headerNumber++;
+    $('#header_'+headerNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+    lastClass = formCheckBoxes[0].name;
+  }else{
+    console.log("Comparison ("+(formNumber+1)+"): "+lastClass +", "+formCheckBoxes[formNumber+1].name);
+    if(lastClass != formCheckBoxes[formNumber+1].name){
+      console.log("Getting rid of old header and showing new: "+headerNumber);
+      $('#header_'+headerNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED, function() {
+        headerNumber++;
+        $('#header_'+headerNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+      });
+      lastClass = formCheckBoxes[formNumber].name;
+    }
+  }
+
+
+
+
+  // new class, move to next class header
+  if(formNumber == -1){
+
+    console.log("Just showing new name and form");
+    formNumber++;
+    $('#name_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+    $('#form_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+  }else{
+    console.log("Getting rid of old form and old name: "+ formNumber);
+    $('#name_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED);
+    $('#form_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED, function(){
+      formNumber++;
+      $('#name_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+      $('#form_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+    });
+  }
+
+
+}
+
+
+
+
+/*
+ * This function creates sets of radio buttons for each review question
+ */
+function newQuestionSet( StudentID, ClassID, QuestionID, Question, table){
+
+  var row = table.insertRow();
+
+  for(var i=1; i<=5; i++){
+
+    if(i==3)
+      var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}' checked>";
+    else
+      var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>";
+
+  }
+
+  row.insertCell().innerHTML = Question;
+}
 
 
 /*
@@ -218,7 +350,7 @@ function newCheckBox( value, label, name){
 
   var randID = Math.floor(Math.random()*1000000);
 
-  return '<tr><td><input type="checkbox" name="' + name + '[]" value="'+ value + '" id="' +randID+ '"></td><td><label for="'+randID+'">'+label+'</label></td></tr>';
+  return '<tr><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="' +randID+ '"></td><td><label for="'+randID+'">'+label+'</label></td></tr>';
 
 }
 

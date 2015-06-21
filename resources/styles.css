@@ -44,8 +44,18 @@ table td{
 
 .checkboxes td{
 
-	padding: 5px 5px;
+	padding: 0px 5px;
 
+}
+
+.radios td{
+	padding: 4px 0px;
+	text-align:center;
+}
+
+.radios td:last-child{
+	text-align:left;
+	padding-left: 10px;
 }
 
 .form-item{

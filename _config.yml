@@ -3,10 +3,13 @@ name: MCE Dispositions | Miami University
 
 description: The Miami Notebook Program at Miami University
 
-baseurl: file:///home/matt/Documents/Projects/mce/_site
+baseurl: /mce
 
 markdown: rdiscount
 
 permalink: pretty
 
 exclude: [README.markdown, package.json, grunt.js, Gruntfile.js, Gruntfile.coffee, node_modules]
+
+#Range (from 1 to ? inclusive)
+review_range: 5
