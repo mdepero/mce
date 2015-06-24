@@ -323,6 +323,16 @@ function nextForm(){
 
 
 
+function submitForm(){
+
+  var checkedResponses = $('#forms input:radio:checked');
+  alert(checkedResponses.length);
+
+}
+
+
+
+
 /*
  * This function creates sets of radio buttons for each review question
  */
