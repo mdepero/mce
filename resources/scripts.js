@@ -326,7 +326,23 @@ function nextForm(){
 function submitForm(){
 
   var checkedResponses = $('#forms input:radio:checked');
-  alert(checkedResponses.length);
+  var responseJSON = '[';
+
+  var first = true;
+  $.each(checkedResponses, function(index,value){
+
+    if(first)
+      first = false;
+    else
+      responseJSON += ', ';
+
+    responseJSON += value.value;
+
+  });
+
+  responseJSON += ']';
+
+  alert(responseJSON);
 
 }
 
