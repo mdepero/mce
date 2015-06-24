@@ -342,7 +342,7 @@ function submitForm(){
 
   responseJSON += ']';
 
-  alert("JSON Object to Send"+responseJSON);
+  alert("JSON Object to Send to Server: "+responseJSON);
 
 }
 
