@@ -26,14 +26,6 @@ if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 
 
 
-function setData( data ){
-  var url = serverRootURL+"serverfile.php?set="+data+"&t=" + Math.random();
-  xmlhttp.open("GET",url,true);
-  xmlhttp.send();
-}
-
-
-
 var returnedData;
 
 function fetchData( callback, v1, v2 ){
@@ -326,23 +318,58 @@ function nextForm(){
 function submitForm(){
 
   var checkedResponses = $('#forms input:radio:checked');
-  var responseJSON = '[';
+  var responseJSON = '[ [';
 
   var first = true;
+  var lastStudentID = "";
+  var lastClassID = "";
   $.each(checkedResponses, function(index,value){
 
-    if(first)
+    if(first){
       first = false;
-    else
-      responseJSON += ', ';
+
+      lastStudentID = JSON.parse(value.value)["StudentID"];
+      lastClassID = JSON.parse(value.value)["ClassID"];
+
+    }else{
+        if(JSON.parse(value.value)["StudentID"] != lastStudentID || JSON.parse(value.value)["ClassID"] != lastCLassID){
+
+          lastStudentID = JSON.parse(value.value)["StudentID"];
+          lastClassID = JSON.parse(value.value)["ClassID"];
+
+          responseJSON += '], [';
+        }else{
+          responseJSON += ', ';
+        }
+      
+    }
 
     responseJSON += value.value;
 
   });
 
-  responseJSON += ']';
+  responseJSON += '] ]';
 
-  alert("JSON Object to Send to Server: "+responseJSON);
+  alert(responseJSON);
+
+  //fetchData(sendForm, responseJSON);
+
+}
+
+function sendForm(){
+
+  if(returnedData[0] == "Success"){
+
+    $("#success").html = "Your forms were successfully submitted";
+
+  }else{
+
+    $("#error").html = "An error occured attempting to submit your forms.";
+  }
+
+  $("#3").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+    $("#4").fadeIn(DEFAULT_ANI_SPEED);
+  });
 
 }
 

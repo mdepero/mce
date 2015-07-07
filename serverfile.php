@@ -172,6 +172,27 @@ if(isset($_REQUEST['get'])){
 	    echo $return;
 	}
 
+
+	if($_REQUEST['get'] == "sendForm"){
+
+	    // Submit Reviews
+	    $sql = "SELECT * FROM  mce_tl_questionlist where Active = '1'";
+	    $result = mysqli_query($conn, $sql);
+	    $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first == true)
+	    		$first = false;
+	    	else
+	    		$return .= ", ";
+	    	$return .= '{"ID": "'. $row['ID'] .'", "Question": "'.$row['Question'].'"}';
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+	}
+
 }
 
 
