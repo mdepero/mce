@@ -332,7 +332,7 @@ function submitForm(){
       lastClassID = JSON.parse(value.value)["ClassID"];
 
     }else{
-        if(JSON.parse(value.value)["StudentID"] != lastStudentID || JSON.parse(value.value)["ClassID"] != lastCLassID){
+        if(JSON.parse(value.value)["StudentID"] != lastStudentID || JSON.parse(value.value)["ClassID"] != lastClassID){
 
           lastStudentID = JSON.parse(value.value)["StudentID"];
           lastClassID = JSON.parse(value.value)["ClassID"];
