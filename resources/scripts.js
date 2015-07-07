@@ -318,7 +318,7 @@ function nextForm(){
 function submitForm(){
 
   var checkedResponses = $('#forms input:radio:checked');
-  var responseJSON = '[ [';
+  var responseJSON = '[[';
 
   var first = true;
   var lastStudentID = "";
@@ -348,7 +348,7 @@ function submitForm(){
 
   });
 
-  responseJSON += '] ]';
+  responseJSON += ']]';
 
   alert(responseJSON);
 
