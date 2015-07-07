@@ -350,9 +350,9 @@ function submitForm(){
 
   responseJSON += ']]';
 
-  alert(responseJSON);
+  //alert(responseJSON);
 
-  //fetchData(sendForm, responseJSON);
+  fetchData(sendForm, responseJSON, "");
 
 }
 
