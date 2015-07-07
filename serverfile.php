@@ -176,21 +176,31 @@ if(isset($_REQUEST['get'])){
 	if($_REQUEST['get'] == "sendForm"){
 
 	    // Submit Reviews
-	    $sql = "SELECT * FROM  mce_tl_questionlist where Active = '1'";
-	    $result = mysqli_query($conn, $sql);
-	    $first = true;
-	    while($row = mysqli_fetch_assoc($result)){
-	    	if($first == true)
-	    		$first = false;
-	    	else
-	    		$return .= ", ";
-	    	$return .= '{"ID": "'. $row['ID'] .'", "Question": "'.$row['Question'].'"}';
+	    $allReviews = json_decode($_REQUEST['v1']);
+	    foreach($answers as $review){
 
+	    	$nextID = "";
+	    	$result = mysqli_query($conn, "SHOW TABLE STATUS LIKE `mce_review`");
+			$data = mysql_fetch_assoc($result);
+			$nextID = $data['Auto_increment'];
+
+	    	$sql = "INSERT INTO `mce_review` (`ID`, `StudentID`, `ClassID`, `DateReviewed`) VALUES (NULL, '".$review[0]['StudentID']."', '".$review[0]['ClassID']."', CURRENT_TIMESTAMP);";
+	    	$result = mysqli_query($conn, $sql);
+	    	if(!$result){
+	    		die("ERROR inserting review");
+	    	}
+
+	    	foreach($review as $answer){
+
+	    		$sql = "INSERT INTO `mce_answer` (`ID`, `ReviewID`, `QuestionID`, `Value`) VALUES (NULL, '".$nextID."', '".$answer["QuestionID"]."', '".$answer["Value"]."');";
+	    		$result = mysqli_query($conn, $sql);
+		    	if(!$result){
+		    		die("ERROR inserting review");
+		    	}
+	    	}
 	    }
 
-	    $return .= "]";
-
-	    echo $return;
+	    echo "Success";
 	}
 
 }
