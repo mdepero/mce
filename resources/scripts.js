@@ -104,10 +104,6 @@ function buildInitialReviewForm(){
 
 
 function callAddClasses(){
-  fetchData(addClassList,$('#faculty').val(),$('#semester').val());
-}
-
-function addClassList(){
 
   $("#error").html("");
   if($("#faculty").val() == "" || $("#semester").val() == ""){
@@ -115,7 +111,14 @@ function addClassList(){
     return;
   }
 
+  $("#addClasses").prop("disabled",true);
 
+  fetchData(addClassList,$('#faculty').val(),$('#semester').val());
+}
+
+function addClassList(){
+
+  
   if($.isEmptyObject(returnedData["Classes"])){ // Checks to see if the returned javascript object has any given properties or not
     alert("Sorry, no matches found. Try again");
     return;
@@ -128,8 +131,6 @@ function addClassList(){
 
   });
 
-  $("#addClasses").prop("disabled",true);
-
   $("#0").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#1").fadeIn(DEFAULT_ANI_SPEED);
   });
@@ -139,6 +140,15 @@ function addClassList(){
 
 
 function callAddStudents(){
+
+  $("#error").html("");
+  if ($("#1 input:checkbox:checked").length == 0){
+    $("#error").html("You are missing something on the current form.");
+    return;
+  }
+
+
+
   var classList = "[";
   var first = true;
   $.each($('input[type="checkbox"][name="class"]:checked').map(function() { return this.value; }), function(index, value){
@@ -150,16 +160,13 @@ function callAddStudents(){
     classList += value;
   });
   classList += "]";
+
+  $("#addStudents").prop("disabled",true);
+
   fetchData(addStudents,classList,"");
 }
 
 function addStudents(){
-
-  $("#error").html("");
-  if ($("#1 input:checkbox:checked").length == 0){
-    $("#error").html("You are missing something on the current form.");
-    return;
-  }
 
 
   for(var i = 0;i<returnedData.length;i++){
@@ -183,8 +190,6 @@ function addStudents(){
   }
 
 
-  $("#addStudents").prop("disabled",true);
-
   $("#1").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#2").fadeIn(DEFAULT_ANI_SPEED);
   });
@@ -206,6 +211,8 @@ function callAddForms(){
     $("#error").html("You are missing something on the current form.");
     return;
   }
+
+  $("#addForms").prop("disabled",true);
 
   // get the list of questions and question IDs
   fetchData(startForms,"","");
@@ -360,11 +367,11 @@ function sendForm(){
 
   if(returnedData[0] == "Success"){
 
-    $("#success").html = "Your forms were successfully submitted";
+    $("#success").html("Your forms were successfully submitted");
 
   }else{
 
-    $("#error").html = "An error occured attempting to submit your forms.";
+    $("#error").html("An error occured attempting to submit your forms.");
   }
 
   $("#3").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){

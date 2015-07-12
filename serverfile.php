@@ -176,35 +176,38 @@ if(isset($_REQUEST['get'])){
 	if($_REQUEST['get'] == "sendForm"){
 
 	    // Submit Reviews
-	    $allReviews = json_decode($_REQUEST['v1']);
+	    $allReviews = json_decode($_REQUEST['v1'], TRUE);
 	    foreach($allReviews as $review){
 
-	    	$nextID = "";
-	    	$result = mysqli_query($conn, "SHOW TABLE STATUS LIKE `mce_review`");
+	    	$sql = "SELECT AUTO_INCREMENT
+				FROM information_schema.tables
+				WHERE table_name = 'mce_review'
+				AND table_schema = DATABASE( ) ;";
+	    	$result = mysqli_query($conn, $sql);
 			$data = mysqli_fetch_assoc($result);
-			$nextID = $data['Auto_increment'];
+			$nextID = $data['AUTO_INCREMENT'];
 
-			echo "Next ID: ".$nextID;
+			// echo "Next Review ID: ".$nextID;
 
-			echo " Student: ".$review[0]["StudentID"];
+			// echo "StudentID: ".$review[0]["StudentID"];
+			
+	    	$sql = "INSERT INTO `mce_review` (`ID`, `StudentID`, `ClassID`, `DateReviewed`) VALUES (NULL, '".$review[0]['StudentID']."', '".$review[0]['ClassID']."', CURRENT_TIMESTAMP);";
+	    	$result = mysqli_query($conn, $sql);
+	    	if(!$result){
+	    		die('["ERROR inserting review"]'); // Error messages formatted as JSON objects to ensure no error on front end
+	    	}
 
-	    	// $sql = "INSERT INTO `mce_review` (`ID`, `StudentID`, `ClassID`, `DateReviewed`) VALUES (NULL, '".$review[0]['StudentID']."', '".$review[0]['ClassID']."', CURRENT_TIMESTAMP);";
-	    	// $result = mysqli_query($conn, $sql);
-	    	// if(!$result){
-	    	// 	die("ERROR inserting review");
-	    	// }
+	    	foreach($review as $answer){
 
-	    	// foreach($review as $answer){
-
-	    	// 	$sql = "INSERT INTO `mce_answer` (`ID`, `ReviewID`, `QuestionID`, `Value`) VALUES (NULL, '".$nextID."', '".$answer["QuestionID"]."', '".$answer["Value"]."');";
-	    	// 	$result = mysqli_query($conn, $sql);
-		    // 	if(!$result){
-		    // 		die("ERROR inserting review");
-		    // 	}
-	    	// }
+	    		$sql = "INSERT INTO `mce_answer` (`ID`, `ReviewID`, `QuestionID`, `Value`) VALUES (NULL, '".$nextID."', '".$answer["QuestionID"]."', '".$answer["Value"]."');";
+	    		$result = mysqli_query($conn, $sql);
+		    	if(!$result){
+		    		die('["ERROR inserting review"]');
+		    	}
+	    	}
 	    }
 
-	    echo "Success";
+	    echo '["Success"]';
 	}
 
 }
