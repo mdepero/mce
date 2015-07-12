@@ -239,14 +239,16 @@ if(isset($_REQUEST['get'])){
 
 	    	$tempreturn .= "{";
 
-	    	$tempreturn .= 'Student: "'.$row['FirstName'].' '.$row['LastName'].'", ';
-	    	$tempreturn .= 'Class: "'.$row['ShortName'].'", ';
-	    	$tempreturn .= 'Question: "'.$row['Question'].'", ';
-	    	$tempreturn .= 'Value: "'.$row['Value'].'"';
+	    	$tempreturn .= '"Student": "'.$row['FirstName'].' '.$row['LastName'].'", ';
+	    	$tempreturn .= '"Class": "'.$row['ShortName'].'", ';
+	    	$tempreturn .= '"Question": "'.$row['Question'].'", ';
+	    	$tempreturn .= '"Value": "'.$row['Value'].'"';
 
 	    	$tempreturn .= "}";
 
 	    }
+
+	    $tempreturn .= "]";
 
 	    echo $tempreturn;
 
