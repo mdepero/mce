@@ -396,7 +396,11 @@ function sendForm(){
 
 function getReviews(){
 
-  
+  $.each(returnedData, function(index, value) {
+
+    $('#reviews').append( "<tr><td>Student: </td><td>"+ value['Student'] +"</td><td>Class: </td><td>"+value['Class']+"</td><td>Question: </td><td>"+value['Question']+"</td><td>Value: </td><td>"+value['Value']+"</td></tr>");
+
+  });
 
 }
 

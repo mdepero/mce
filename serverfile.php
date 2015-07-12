@@ -215,7 +215,7 @@ if(isset($_REQUEST['get'])){
 
 		// array of students, each student array of reviews, each review array of answers
 
-	    $return = '[';
+	    $return = '[[';
 
 	    // Create List of Professors [0]
 	    $sql = "SELECT * FROM  mce_answer as a
@@ -224,21 +224,56 @@ if(isset($_REQUEST['get'])){
 	    	LEFT JOIN mce_tl_questionlist as ql on a.QuestionID = ql.ID
 	    	LEFT JOIN mce_class as c on r.ClassID = c.ID
 	    	LEFT JOIN mce_tl_classlist as cl on c.ClassTypeID = cl.ID
-	    	ORDER BY a.ReviewID, r.StudentID";
+	    	ORDER BY r.StudentID, a.ReviewID";
 	    $result = mysqli_query($conn, $sql);
 
-	    $student = "";
-	    $review = "";
 
+	    $tempreturn = "[";
+	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
-	    	
-	    	echo $row["FirstName"]." ".$row["LastName"]." ".$row["FirstName"]." ".$row["ShortName"];
+
+	    	if($first)
+	    		$first = false;
+	    	else
+	    		$tempreturn .= ",";
+
+	    	$tempreturn .= "{";
+
+	    	$tempreturn .= 'Student: "'.$row['FirstName'].' '.$row['LastName'].'", ';
+	    	$tempreturn .= 'Class: "'.$row['ShortName'].'", ';
+	    	$tempreturn .= 'Question: "'.$row['Question'].'", ';
+	    	$tempreturn .= 'Value: "'.$row['Value'].'"';
+
+	    	$tempreturn .= "}";
 
 	    }
 
-	    $return .= "]";
+	    echo $tempreturn;
 
-	    echo $return;
+	    // $student = "";
+	    // $review = "";
+
+	    // while($row = mysqli_fetch_assoc($result)){
+
+	    // 	if($review != $row["ReviewID"] && $review != ""){
+	    // 		$return .= "],"
+	    // 	}
+
+	    // 	if($student != $row["StudentID"] && $student != ""){
+	    // 		$return .= "],"
+	    // 	}
+	    	
+	    // 	$return .= '{StudentID: "'.$row['StudentID'].'",Student: "'.$row['FirstName'].' '.$row['LastName'].'",Class: "'.$row['StudentID'].'",';
+
+
+	    // 	$review = $row["ReviewID"];
+	    // 	$student = $row["StudentID"];
+
+	    // }
+
+	    // $return .= "]]";
+
+	    // echo $return;
 	}
 
 }// end isSet Get
