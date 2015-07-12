@@ -177,27 +177,31 @@ if(isset($_REQUEST['get'])){
 
 	    // Submit Reviews
 	    $allReviews = json_decode($_REQUEST['v1']);
-	    foreach($answers as $review){
+	    foreach($allReviews as $review){
 
 	    	$nextID = "";
 	    	$result = mysqli_query($conn, "SHOW TABLE STATUS LIKE `mce_review`");
-			$data = mysql_fetch_assoc($result);
+			$data = mysqli_fetch_assoc($result);
 			$nextID = $data['Auto_increment'];
 
-	    	$sql = "INSERT INTO `mce_review` (`ID`, `StudentID`, `ClassID`, `DateReviewed`) VALUES (NULL, '".$review[0]['StudentID']."', '".$review[0]['ClassID']."', CURRENT_TIMESTAMP);";
-	    	$result = mysqli_query($conn, $sql);
-	    	if(!$result){
-	    		die("ERROR inserting review");
-	    	}
+			echo "Next ID: ".$nextID;
 
-	    	foreach($review as $answer){
+			echo " Student: ".$review[0]["StudentID"];
 
-	    		$sql = "INSERT INTO `mce_answer` (`ID`, `ReviewID`, `QuestionID`, `Value`) VALUES (NULL, '".$nextID."', '".$answer["QuestionID"]."', '".$answer["Value"]."');";
-	    		$result = mysqli_query($conn, $sql);
-		    	if(!$result){
-		    		die("ERROR inserting review");
-		    	}
-	    	}
+	    	// $sql = "INSERT INTO `mce_review` (`ID`, `StudentID`, `ClassID`, `DateReviewed`) VALUES (NULL, '".$review[0]['StudentID']."', '".$review[0]['ClassID']."', CURRENT_TIMESTAMP);";
+	    	// $result = mysqli_query($conn, $sql);
+	    	// if(!$result){
+	    	// 	die("ERROR inserting review");
+	    	// }
+
+	    	// foreach($review as $answer){
+
+	    	// 	$sql = "INSERT INTO `mce_answer` (`ID`, `ReviewID`, `QuestionID`, `Value`) VALUES (NULL, '".$nextID."', '".$answer["QuestionID"]."', '".$answer["Value"]."');";
+	    	// 	$result = mysqli_query($conn, $sql);
+		    // 	if(!$result){
+		    // 		die("ERROR inserting review");
+		    // 	}
+	    	// }
 	    }
 
 	    echo "Success";
