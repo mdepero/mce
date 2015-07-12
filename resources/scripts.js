@@ -396,14 +396,10 @@ function sendForm(){
 
 function getReviews(){
 
-  fetchData(buildReviews,classList,"");
-
-}
-
-
-function buildReviews(){
   
+
 }
+
 
 
 

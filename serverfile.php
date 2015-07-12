@@ -210,7 +210,7 @@ if(isset($_REQUEST['get'])){
 
 
 
-	if($_REQUEST['get'] == "buildReviews"){
+	if($_REQUEST['get'] == "getReviews"){
 		// Return the set of all reviews
 
 		// array of students, each student array of reviews, each review array of answers
@@ -222,6 +222,8 @@ if(isset($_REQUEST['get'])){
 	    	LEFT JOIN mce_review as r on a.ReviewID = r.ID
 	    	LEFT JOIN mce_student as s on r.StudentID = s.ID
 	    	LEFT JOIN mce_tl_questionlist as ql on a.QuestionID = ql.ID
+	    	LEFT JOIN mce_class as c on r.ClassID = c.ID
+	    	LEFT JOIN mce_tl_classlist as cl on c.ClassTypeID = cl.ID
 	    	ORDER BY a.ReviewID, r.StudentID";
 	    $result = mysqli_query($conn, $sql);
 
@@ -230,7 +232,7 @@ if(isset($_REQUEST['get'])){
 
 	    while($row = mysqli_fetch_assoc($result)){
 	    	
-	    	echo $row["a.ID"];
+	    	echo $row["FirstName"]." ".$row["LastName"]." ".$row["FirstName"]." ".$row["ShortName"];
 
 	    }
 
