@@ -20,9 +20,6 @@ header('content-type: application/json; charset=utf-8');
 header("access-control-allow-origin: *");
 
 
-if(isset($_REQUEST['set'])){
-	
-}
 
 if(isset($_REQUEST['get'])){
 
@@ -210,7 +207,39 @@ if(isset($_REQUEST['get'])){
 	    echo '["Success"]';
 	}
 
-}
+
+
+
+	if($_REQUEST['get'] == "buildReviews"){
+		// Return the set of all reviews
+
+		// array of students, each student array of reviews, each review array of answers
+
+	    $return = '[';
+
+	    // Create List of Professors [0]
+	    $sql = "SELECT * FROM  mce_answer as a
+	    	LEFT JOIN mce_review as r on a.ReviewID = r.ID
+	    	LEFT JOIN mce_student as s on r.StudentID = s.ID
+	    	LEFT JOIN mce_tl_questionlist as ql on a.QuestionID = ql.ID
+	    	ORDER BY a.ReviewID, r.StudentID";
+	    $result = mysqli_query($conn, $sql);
+
+	    $student = "";
+	    $review = "";
+
+	    while($row = mysqli_fetch_assoc($result)){
+	    	
+	    	echo $row["a.ID"];
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+	}
+
+}// end isSet Get
 
 
 ?>

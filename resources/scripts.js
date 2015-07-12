@@ -74,9 +74,6 @@ $(document).ready(function(){
   });
 
 
-  fetchData( buildInitialReviewForm ,"", "" );
-
-
 });// end document ready
 
 
@@ -118,9 +115,9 @@ function callAddClasses(){
 
 function addClassList(){
 
-  
+  $("#error").html("");
   if($.isEmptyObject(returnedData["Classes"])){ // Checks to see if the returned javascript object has any given properties or not
-    alert("Sorry, no matches found. Try again");
+    $("#error").html("Sorry, no matches found. Please try again.");
     return;
   }
 
@@ -379,6 +376,82 @@ function sendForm(){
   });
 
 }
+
+
+
+
+
+
+
+
+
+
+
+// =================================================================================================================================================
+// =================================================================================================================================================
+
+
+
+
+
+function getReviews(){
+
+  fetchData(buildReviews,classList,"");
+
+}
+
+
+function buildReviews(){
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
