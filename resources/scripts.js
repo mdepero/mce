@@ -6,7 +6,7 @@
 
 
 // URL to folder that contains serverfile.php, including '/' on the end
-var serverRootURL = "{{ site.serverRootURL }}";
+var serverRootURL = "http://107.10.18.206/";
 
 var SLOW_ANI_SPEED = 1500;
 

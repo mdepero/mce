@@ -1,5 +1,4 @@
 _site
-_config.yml
 node_modules
 validation-report.json
 validation-status.json
