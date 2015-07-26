@@ -264,7 +264,7 @@ if(isset($_REQUEST['get'])){
 	    	else
 	    		$return .= ', ';
 
-	    	$return .= '"'.str_replace('"', '\"', $row['Question']).'": "'.$row['Value'].'"';
+	    	$return .= '{"'.str_replace('"', '\"', $row['Question']).'": "'.$row['Value'].'"}';
 
 
 	    	$review = $row["ReviewID"];

@@ -400,7 +400,7 @@ function getReviews(){
 
     $('#reviews').append( '<h2 id="student'+ value['StudentID'] +'">'+ value['Student'] +"</h2>");
 
-    $.each(returnedData, function(index, review) {
+    $.each(value['Reviews'], function(index, review) {
 
        var ret = '<div id="reviewsFor'+value['StudentID']+'">';
 
