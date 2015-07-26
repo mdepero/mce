@@ -398,11 +398,11 @@ function getReviews(){
 
   $.each(returnedData, function(index, value) {
 
-    var ret = '<h2 id="student'+ value['StudentID'] +'">'+ value['Student'] +"</h2>"+'<div id="reviewsFor'+value['StudentID']+'">';
+    var ret = '<h2 id="'+ value['StudentID'] +'" onclick="$(\'#reviewsFor\'+this.id).fadeIn();">'+ value['Student'] +"</h2>"+'<div id="reviewsFor'+value['StudentID']+'">';
 
     $.each(value['Reviews'], function(index2, review) {
 
-      ret += '<h3 id="review'+review['ReviewID']+'">'+review['Class']+'</h3>';
+      ret += '<h3 id="review'+review['ReviewID']+'" style="display:none;">'+review['Class']+'</h3>';
 
       ret += '<div id="answersFor'+review['ReviewID']+'"><table><tr><th>Question</th><th>Value</th></tr>';
 
