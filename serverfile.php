@@ -294,6 +294,7 @@ if(isset($_REQUEST['get'])){
 	    	echo '["success"]';
 	    else
 	    	echo '["ERROR inserting faculty member"]';
+	}
 
 
 }// end isSet Get
