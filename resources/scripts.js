@@ -400,11 +400,19 @@ function getReviews(){
 
     var ret = '<h2 id="student'+ value['StudentID'] +'">'+ value['Student'] +"</h2>"+'<div id="reviewsFor'+value['StudentID']+'">';
 
-    $.each(value['Reviews'], function(index, review) {
+    $.each(value['Reviews'], function(index2, review) {
 
-       ret += '<h3 id="review'+review['ReviewID']+'">'+review['Class']+'</h3>';
+      ret += '<h3 id="review'+review['ReviewID']+'">'+review['Class']+'</h3>';
 
-       ret += '<div id="answersFor'+review['ReviewID']+'">';
+      ret += '<div id="answersFor'+review['ReviewID']+'"><table><tr><th>Question</th><th>Value</th></tr>';
+
+      $.each(review['Answers'], function(index3, answer) {
+
+        ret += '<tr><td>'+answer['Question']+'</td><td>'+answer['Value']+'</td></tr>';
+
+      });
+
+      ret += '</table></div>';
 
 
 
