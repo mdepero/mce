@@ -215,7 +215,7 @@ if(isset($_REQUEST['get'])){
 
 		// array of students, each student array of reviews, each review array of answers
 
-	    $return = '[[';
+	    $return = '[';
 
 	    // Create List of Professors [0]
 	    $sql = "SELECT * FROM  mce_answer as a
@@ -228,54 +228,53 @@ if(isset($_REQUEST['get'])){
 	    $result = mysqli_query($conn, $sql);
 
 
-	    $tempreturn = "[";
-	    $first = true;
+
+	    $student = "";
+	    $firstStudent = true;
+	    $review = "";
+	    $firstReview = true;
+	    $firstAnswer = true;
+
 	    while($row = mysqli_fetch_assoc($result)){
 
-	    	if($first)
-	    		$first = false;
+	    	if($student != $row["StudentID"]){
+	    		if($firstStudent)
+	    			$firstStudent = false;
+	    		else
+	    			$return .= ']}]},';
+
+	    		$return .= '{"StudentID": "'.$row['StudentID'].'","Student": "'.$row['FirstName'].' '.$row['LastName'].'", "Reviews":[';
+
+	    		$firstReview = true;
+
+	    	}
+
+	    	if($review != $row["ReviewID"]){
+	    		if($firstReview)
+	    			$firstReview = false;
+	    		else
+	    			$return .= ']},';
+
+	    		$return .= '{"ReviewID": "'.$row['ReviewID'].'","DateReviewed": "'.$row['DateReviewed'].'","Class": "'.$row['ShortName'].' - '.$row['LongName'].'", "Answers": [';
+	    		$firstAnswer = true;
+	    	}
+	    	
+	    	if($firstAnswer)
+	    		$firstAnswer = false;
 	    	else
-	    		$tempreturn .= ",";
+	    		$return .= ', ';
 
-	    	$tempreturn .= "{";
+	    	$return .= '"'.str_replace('"', '\"', $row['Question']).'": "'.$row['Value'].'"';
 
-	    	$tempreturn .= '"Student": "'.$row['FirstName'].' '.$row['LastName'].'", ';
-	    	$tempreturn .= '"Class": "'.$row['ShortName'].'", ';
-	    	$tempreturn .= '"Question": "'.$row['Question'].'", ';
-	    	$tempreturn .= '"Value": "'.$row['Value'].'"';
 
-	    	$tempreturn .= "}";
+	    	$review = $row["ReviewID"];
+	    	$student = $row["StudentID"];
 
 	    }
 
-	    $tempreturn .= "]";
+	    $return .= "]}]} ]";
 
-	    echo $tempreturn;
-
-	    // $student = "";
-	    // $review = "";
-
-	    // while($row = mysqli_fetch_assoc($result)){
-
-	    // 	if($review != $row["ReviewID"] && $review != ""){
-	    // 		$return .= "],"
-	    // 	}
-
-	    // 	if($student != $row["StudentID"] && $student != ""){
-	    // 		$return .= "],"
-	    // 	}
-	    	
-	    // 	$return .= '{StudentID: "'.$row['StudentID'].'",Student: "'.$row['FirstName'].' '.$row['LastName'].'",Class: "'.$row['StudentID'].'",';
-
-
-	    // 	$review = $row["ReviewID"];
-	    // 	$student = $row["StudentID"];
-
-	    // }
-
-	    // $return .= "]]";
-
-	    // echo $return;
+	    echo $return;
 	}
 
 }// end isSet Get
