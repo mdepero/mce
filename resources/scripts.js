@@ -438,6 +438,36 @@ function getReviews(){
 
 
 
+// =================================================================================================================================================
+// =================================================================================================================================================
+
+
+
+
+
+
+
+function addFaculty(){
+
+  fetchData( addFacultyReturn , $('#firstName').val(), $('#lastName').val() );
+
+}
+
+function addFacultyReturn(){
+  if(returnedData[0]=='success'){
+      $('#serverResponse').html("<b>Successfully added faculty member</b>");
+      $('#firstName').val("");
+      $('#lastName').val("");
+
+  }else{
+    alert("Error: sever returned an error inserting faculty member into database");
+  }
+}
+
+
+
+
+
 
 
 

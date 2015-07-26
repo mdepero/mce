@@ -275,7 +275,26 @@ if(isset($_REQUEST['get'])){
 	    $return .= "]}]} ]";
 
 	    echo $return;
-	}
+	}// end getReviews
+
+
+
+
+
+
+
+
+	if($_REQUEST['get'] == "addFacultyReturn"){
+		// Adds a Faculty Member
+
+	    // Create List of Professors [0]
+	    $sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `Active`) VALUES (NULL, '".$_REQUEST['v1']."', '".$_REQUEST['v2']."', '1');";
+	    $result = mysqli_query($conn, $sql);
+	    if($result)
+	    	echo '["success"]';
+	    else
+	    	echo '["ERROR inserting faculty member"]';
+
 
 }// end isSet Get
 
