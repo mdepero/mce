@@ -450,7 +450,7 @@ function getFacultyList(){
 
   $.each(returnedData, function(index, value) {
 
-      ret += '<tr><td>'+value['Name']+'</td><td>'+value['UniqueID']+'</td><td><button type="button" class="btn-warning" onclick="retireFaculty('+value['ID']+');">X</button></td></tr>';
+      ret += '<tr><td>'+value['Name']+'</td><td>'+value['UniqueID']+'</td><td><button type="button" class="btn-error" onclick="retireFacultyCall('+value['ID']+','+value['Name']+');">X</button></td></tr>';
   });
 
   ret += "</table>";
@@ -480,6 +480,7 @@ function addFacultyReturn(){
       $('#firstName').val("");
       $('#lastName').val("");
       $('#uniqueid').val("");
+      fetchData( getFacultyList ,"", "" )
 
   }else{
     if(returnedData[0] = "error"){
@@ -488,6 +489,26 @@ function addFacultyReturn(){
       alert("Error: sever returned an error inserting faculty member into database");
     }
   }
+}
+
+
+function retireFacultyCall( ID, NAME ){
+
+  fetchData( retireFaculty , ID, NAME );
+}
+
+retireFaculty(){
+  
+  if(returnedData[0] = 'success'){
+
+    $('#serverResponse').html("<b>Successfully retired faculty member  "+returnedData[1]+"</b><br/>");
+  }else{
+    
+    ('#serverResponse').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
+
+  }
+
+
 }
 
 

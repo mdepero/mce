@@ -304,6 +304,20 @@ if(isset($_REQUEST['get'])){
 	}
 
 
+	if($_REQUEST['get'] == "retireFaculty"){
+
+
+	    // Create List of Classes from professor and semester [2]
+	    $sql = "UPDATE `mce_db`.`mce_faculty` SET `Active` = '0' WHERE `mce_faculty`.`ID` = ".$_REQUEST['v1'].";";
+	    $result = mysqli_query($conn, $sql);
+	    if($result)
+	    	echo '["success","'.$_REQUEST['v2'].'"]';
+	    else
+	    	echo '["ERROR inserting faculty member"]';;
+
+	}
+
+
 
 	if($_REQUEST['get'] == "addFacultyReturn"){
 		// Adds a Faculty Member
@@ -311,7 +325,7 @@ if(isset($_REQUEST['get'])){
 		$professor = json_decode($_REQUEST['v1']);
 
 		// check faculty member not already added
-		$sql = "SELECT * FROM  mce_faculty WHERE `UniqueID` = '".$professor[2]."'";
+		$sql = "SELECT * FROM  mce_faculty WHERE `UniqueID` = '".$professor[2]."' AND Active = 1";
 	    $result = mysqli_query($conn, $sql);
 
 	    if( mysqli_num_rows($result) > 0 ){
