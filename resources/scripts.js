@@ -480,7 +480,7 @@ function addFacultyReturn(){
       $('#firstName').val("");
       $('#lastName').val("");
       $('#uniqueid').val("");
-      fetchData( getFacultyList ,"", "" )
+      fetchData( getFacultyList ,"", "" );
 
   }else{
     if(returnedData[0] = "error"){
@@ -501,10 +501,12 @@ function retireFaculty(){
   
   if(returnedData[0] = 'success'){
 
-    $('#serverResponse').html("<b>Successfully retired faculty member  "+returnedData[1]+"</b><br/>");
+    $('#serverResponse2').html("<b>Successfully retired faculty member  "+returnedData[1]+"</b><br/>");
+    fetchData( getFacultyList ,"", "" );
+    
   }else{
     
-    ('#serverResponse').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
+    ('#serverResponse2').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
 
   }
 
