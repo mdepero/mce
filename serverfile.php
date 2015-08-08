@@ -332,7 +332,7 @@ if(isset($_REQUEST['get'])){
 		$item = json_decode($_REQUEST['v1']);
 
 		// check if list item not already added if duplicates not allowed
-		if($table == 'tl_classlist'_)
+		if($table == 'tl_classlist')
 			$sql = "SELECT * FROM  mce_".$table." WHERE `ShortName` = '".$item[0]."' AND Active = 1";
 		else
 			// for faculty and student tables, or as a default which will return no results and thus not error on duplicates due to no other tables having a UniqueID column
