@@ -280,7 +280,7 @@ if(isset($_REQUEST['get'])){
 
 
 
-	if($_REQUEST['get'] == "getFacultyList"){
+	if($_REQUEST['get'] == "getItemList"){
 
 		$return = '[';
 
@@ -304,7 +304,7 @@ if(isset($_REQUEST['get'])){
 	}
 
 
-	if($_REQUEST['get'] == "retireFaculty"){
+	if($_REQUEST['get'] == "retireListItem"){
 
 
 	    // Create List of Classes from professor and semester [2]
@@ -313,13 +313,13 @@ if(isset($_REQUEST['get'])){
 	    if($result)
 	    	echo '["success","'.$_REQUEST['v2'].'"]';
 	    else
-	    	echo '["ERROR inserting faculty member"]';;
+	    	echo '["ERROR inserting item into database"]';;
 
 	}
 
 
 
-	if($_REQUEST['get'] == "addFacultyReturn"){
+	if($_REQUEST['get'] == "addListItemReturn"){
 		// Adds a Faculty Member
 
 		$professor = json_decode($_REQUEST['v1']);
@@ -329,7 +329,7 @@ if(isset($_REQUEST['get'])){
 	    $result = mysqli_query($conn, $sql);
 
 	    if( mysqli_num_rows($result) > 0 ){
-	    	die('["error","Faculty Member UniqueID Already Exists"]');
+	    	die('["error","Unique ID Already Exists"]');
 	    }
 
 	    $sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Active`) VALUES (NULL, '".$professor[0]."', '".$professor[1]."', '".$professor[2]."', '1');";
@@ -337,7 +337,7 @@ if(isset($_REQUEST['get'])){
 	    if($result)
 	    	echo '["success","'.$professor[0].' '.$professor[1].'"]';
 	    else
-	    	echo '["ERROR inserting faculty member"]';
+	    	echo '["ERROR inserting item to database"]';
 	}
 
 

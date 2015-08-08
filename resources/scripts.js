@@ -450,7 +450,7 @@ function getItemList(){
 
   $.each(returnedData, function(index, value) {
 
-      ret += '<tr><td>'+value['Name']+'</td><td>'+value['UniqueID']+'</td><td><button type="button" class="btn-danger" onclick="retireFacultyCall('+value['ID']+",'"+value['Name']+'\');">X</button></td></tr>';
+      ret += '<tr><td>'+value['Name']+'</td><td>'+value['UniqueID']+'</td><td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+",'"+value['Name']+'\');">X</button></td></tr>';
   });
 
   ret += "</table>";
