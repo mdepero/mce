@@ -494,7 +494,9 @@ function addFacultyReturn(){
 
 function retireFacultyCall( ID, NAME ){
 
-  fetchData( retireFaculty , ID, NAME );
+  if(confirm("Are you sure you want to delete faculty member "+NAME+"?")){
+    fetchData( retireFaculty , ID, NAME );
+  }
 }
 
 function retireFaculty(){
@@ -503,7 +505,7 @@ function retireFaculty(){
 
     $('#serverResponse2').html("<b>Successfully retired faculty member  "+returnedData[1]+"</b><br/>");
     fetchData( getFacultyList ,"", "" );
-    
+
   }else{
     
     ('#serverResponse2').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
