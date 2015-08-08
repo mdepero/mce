@@ -1,9 +1,11 @@
 ---
 layout: default
-title: "Add Faculty"
+title: "Faculty"
 ---
 
-<h1>Add a Faculty Member</h1>
+<h1>Faculty</h1>
+
+<h2>Add a Faculty Member</h2>
 
 <div id="serverResponse">
 </div>
@@ -23,3 +25,21 @@ title: "Add Faculty"
 
 	</div>
 </div>
+
+
+<h2>Delete a Faculty Member</h2>
+
+<div id="currentFaculty">
+
+</div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    fetchData( getFacultyList ,"", "" );
+
+  });// end document ready
+  
+</script>

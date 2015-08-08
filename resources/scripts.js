@@ -444,6 +444,19 @@ function getReviews(){
 
 
 
+function getFacultyList(){
+
+  var ret = "<table>";
+
+  $.each(returnedData, function(index, value) {
+
+      ret += '<tr><td>'+value['Name']+'</td><td>'+value['UniqueID']+'</td><td><button type="button" class="btn-warning" onclick="retireFaculty('+value['ID']+');">X</button></td></tr>';
+  });
+
+  ret += "</table>";
+
+}
+
 
 
 
@@ -464,7 +477,7 @@ function addFacultyReturn(){
       $('#serverResponse').html("<b>Successfully added faculty member "+returnedData[1]+"</b><br/>");
       $('#firstName').val("");
       $('#lastName').val("");
-      $('#uniqueid').val("")
+      $('#uniqueid').val("");
 
   }else{
     if(returnedData[0] = "error"){
