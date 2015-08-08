@@ -449,7 +449,7 @@ function getReviews(){
 
 function addFaculty(){
 
-  fetchData( addFacultyReturn , $('#firstName').val(), $('#lastName').val() );
+  fetchData( addFacultyReturn , '["'+$('#firstName').val()+'","'+$('#lastName').val()+'","'+$('#uniqueid').val()+'"]', "" );
 
 }
 
