@@ -455,6 +455,8 @@ function getFacultyList(){
 
   ret += "</table>";
 
+  $('#currentFaculty').html(ret);
+
 }
 
 
