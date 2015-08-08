@@ -464,8 +464,9 @@ function addFacultyReturn(){
   }else{
     if(returnedData[0] = "error"){
       $('#serverResponse').html("<b style='color:red;'>ERROR: "+returnedData[1]+"</b><br/>");
+    }else{
+      alert("Error: sever returned an error inserting faculty member into database");
     }
-    alert("Error: sever returned an error inserting faculty member into database");
   }
 }
 

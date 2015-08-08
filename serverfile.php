@@ -293,7 +293,7 @@ if(isset($_REQUEST['get'])){
 		$sql = "SELECT * FROM  mce_faculty WHERE `UniqueID` = '".$professor[2]."'";
 	    $result = mysqli_query($conn, $sql);
 
-	    if( mysql_num_rows($result) > 0 ){
+	    if( mysqli_num_rows($result) > 0 ){
 	    	die('["error","Faculty Member UniqueID Already Exists"]');
 	    }
 
