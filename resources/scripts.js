@@ -118,6 +118,7 @@ function addClassList(){
   $("#error").html("");
   if($.isEmptyObject(returnedData["Classes"])){ // Checks to see if the returned javascript object has any given properties or not
     $("#error").html("Sorry, no matches found. Please try again.");
+    $("#addClasses").prop("disabled",false);
     return;
   }
 
@@ -455,9 +456,10 @@ function addFaculty(){
 
 function addFacultyReturn(){
   if(returnedData[0]=='success'){
-      $('#serverResponse').html("<b>Successfully added faculty member</b>");
+      $('#serverResponse').html("<b>Successfully added faculty member "+returnedData[1]+"</b>");
       $('#firstName').val("");
       $('#lastName').val("");
+      $('#uniqueid').val("")
 
   }else{
     alert("Error: sever returned an error inserting faculty member into database");

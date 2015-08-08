@@ -288,10 +288,10 @@ if(isset($_REQUEST['get'])){
 		// Adds a Faculty Member
 
 	    $professor = json_decode($_REQUEST['v1']);
-	    $sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Active`) VALUES (NULL, '".$professor[0]."', '".$professor[1]."', '".$professor[3]."', '1');";
+	    $sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Active`) VALUES (NULL, '".$professor[0]."', '".$professor[1]."', '".$professor[2]."', '1');";
 	    $result = mysqli_query($conn, $sql);
 	    if($result)
-	    	echo '["success"]';
+	    	echo '["success","'.$professor[0].' '.$professor[1].'"]';
 	    else
 	    	echo '["ERROR inserting faculty member"]';
 	}
