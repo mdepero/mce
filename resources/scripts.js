@@ -444,7 +444,7 @@ function getReviews(){
 
 
 
-function getFacultyList(){
+function getItemList(){
 
   var ret = "<table>";
 
