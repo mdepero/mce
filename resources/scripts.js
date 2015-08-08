@@ -470,7 +470,7 @@ function addListItem(){
     return;
   }
 
-  fetchData( addListItemReturn , '["'+$('#listItem1').val()+'","'+$('#listItem2').val()+'","'+$('#listItem3').val()+'"]', "" );
+  fetchData( addListItemReturn , '["'+$('#listItem1').val()+'","'+$('#listItem2').val()+'","'+$('#listItem3').val()+'"]', $('#tableName').val() );
 
 }
 
@@ -495,7 +495,7 @@ function addListItemReturn(){
 function retireListItemCall( ID, NAME ){
 
   if(confirm("Are you sure you want to delete "+NAME+"?")){
-    fetchData( retireListItem , ID, NAME );
+    fetchData( retireListItem , '["'+ID+'","'+NAME+'","'+$('#talbeName').val()+'"]', "" );
   }
 }
 

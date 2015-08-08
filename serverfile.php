@@ -309,36 +309,43 @@ if(isset($_REQUEST['get'])){
 
 	if($_REQUEST['get'] == "retireListItem"){
 
+		$vars = json_decode($_REQUEST['v1']);
 
-	    // Create List of Classes from professor and semester [2]
-	    $sql = "UPDATE `mce_db`.`mce_faculty` SET `Active` = '0' WHERE `mce_faculty`.`ID` = ".$_REQUEST['v1'].";";
+	    $sql = "UPDATE `mce_db`.`mce_".$vars[2]."` SET `Active` = '0' WHERE `mce_".$vars[2]."`.`ID` = ".$vars[0].";";
 	    $result = mysqli_query($conn, $sql);
 	    if($result)
-	    	echo '["success","'.$_REQUEST['v2'].'"]';
+	    	echo '["success","'.$vars[1].'"]';
 	    else
-	    	echo '["ERROR inserting item into database"]';;
+	    	echo '["ERROR updating item to retired in database"]';;
 
 	}
 
 
 
 	if($_REQUEST['get'] == "addListItemReturn"){
-		// Adds a Faculty Member
+		// Adds a list item
 
-		$professor = json_decode($_REQUEST['v1']);
+		$table = $_REQUEST['v2'];
 
-		// check faculty member not already added
-		$sql = "SELECT * FROM  mce_faculty WHERE `UniqueID` = '".$professor[2]."' AND Active = 1";
+		$item = json_decode($_REQUEST['v1']);
+
+		// check if list item not already added if duplicates not allowed
+		$sql = "SELECT * FROM  mce_".$table." WHERE `UniqueID` = '".$item[2]."' AND Active = 1";
 	    $result = mysqli_query($conn, $sql);
 
 	    if( mysqli_num_rows($result) > 0 ){
 	    	die('["error","Unique ID Already Exists"]');
 	    }
 
-	    $sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Active`) VALUES (NULL, '".$professor[0]."', '".$professor[1]."', '".$professor[2]."', '1');";
+	    $name;
+
+	    if($table == "faculty"){
+	   		$sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Active`) VALUES (NULL, '".$item[0]."', '".$item[1]."', '".$item[2]."', '1');";
+	   		$name = $item[0].' '.$item[1];
+	    }
 	    $result = mysqli_query($conn, $sql);
 	    if($result)
-	    	echo '["success","'.$professor[0].' '.$professor[1].'"]';
+	    	echo '["success","'.$name.'"]';
 	    else
 	    	echo '["ERROR inserting item to database"]';
 	}
