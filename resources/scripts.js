@@ -455,7 +455,7 @@ function getFacultyList(){
 
   ret += "</table>";
 
-  $('#currentFaculty').html(ret);
+  $('#currentItems').html(ret);
 
 }
 
@@ -463,48 +463,48 @@ function getFacultyList(){
 
 
 
-function addFaculty(){
+function addListItem(){
 
-  if($('#firstName').val() == "" || $('#lastName').val() == "" || $('#uniqueid').val() == ""){
+  if($('#listItem1').val() == "" || $('#listItem2').val() == "" || $('#listItem3').val() == ""){
     $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
     return;
   }
 
-  fetchData( addFacultyReturn , '["'+$('#firstName').val()+'","'+$('#lastName').val()+'","'+$('#uniqueid').val()+'"]', "" );
+  fetchData( addListItemReturn , '["'+$('#listItem1').val()+'","'+$('#listItem2').val()+'","'+$('#listItem3').val()+'"]', "" );
 
 }
 
-function addFacultyReturn(){
+function addListItemReturn(){
   if(returnedData[0]=='success'){
-      $('#serverResponse').html("<b>Successfully added faculty member "+returnedData[1]+"</b><br/>");
-      $('#firstName').val("");
-      $('#lastName').val("");
-      $('#uniqueid').val("");
-      fetchData( getFacultyList ,"", "" );
+      $('#serverResponse').html("<b>Successfully added "+returnedData[1]+"</b><br/>");
+      $('#listItem1').val("");
+      $('#listItem2').val("");
+      $('#listItem3').val("");
+      fetchData( getItemList ,"", "" );
 
   }else{
     if(returnedData[0] = "error"){
       $('#serverResponse').html("<b style='color:red;'>ERROR: "+returnedData[1]+"</b><br/>");
     }else{
-      alert("Error: sever returned an error inserting faculty member into database");
+      alert("Error: sever returned an error inserting item into database");
     }
   }
 }
 
 
-function retireFacultyCall( ID, NAME ){
+function retireListItemCall( ID, NAME ){
 
-  if(confirm("Are you sure you want to delete faculty member "+NAME+"?")){
-    fetchData( retireFaculty , ID, NAME );
+  if(confirm("Are you sure you want to delete "+NAME+"?")){
+    fetchData( retireListItem , ID, NAME );
   }
 }
 
-function retireFaculty(){
+function retireListItem(){
   
   if(returnedData[0] = 'success'){
 
-    $('#serverResponse2').html("<b>Successfully retired faculty member  "+returnedData[1]+"</b><br/>");
-    fetchData( getFacultyList ,"", "" );
+    $('#serverResponse2').html("<b>Successfully retired  "+returnedData[1]+"</b><br/>");
+    fetchData( getItemList ,"", "" );
 
   }else{
     
