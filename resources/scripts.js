@@ -497,7 +497,7 @@ function retireFacultyCall( ID, NAME ){
   fetchData( retireFaculty , ID, NAME );
 }
 
-retireFaculty(){
+function retireFaculty(){
   
   if(returnedData[0] = 'success'){
 
