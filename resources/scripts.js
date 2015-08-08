@@ -456,12 +456,15 @@ function addFaculty(){
 
 function addFacultyReturn(){
   if(returnedData[0]=='success'){
-      $('#serverResponse').html("<b>Successfully added faculty member "+returnedData[1]+"</b>");
+      $('#serverResponse').html("<b>Successfully added faculty member "+returnedData[1]+"</b><br/>");
       $('#firstName').val("");
       $('#lastName').val("");
       $('#uniqueid').val("")
 
   }else{
+    if(returnedData[0] = "error"){
+      $('#serverResponse').html("<b style='color:red;'>ERROR: "+returnedData[1]+"</b><br/>");
+    }
     alert("Error: sever returned an error inserting faculty member into database");
   }
 }

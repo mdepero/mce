@@ -287,7 +287,16 @@ if(isset($_REQUEST['get'])){
 	if($_REQUEST['get'] == "addFacultyReturn"){
 		// Adds a Faculty Member
 
-	    $professor = json_decode($_REQUEST['v1']);
+		$professor = json_decode($_REQUEST['v1']);
+
+		// check faculty member not already added
+		$sql = "SELECT * FROM  mce_faculty WHERE `UniqueID` = '".$professor[2]."'";
+	    $result = mysqli_query($conn, $sql);
+
+	    if( mysql_num_rows($result) > 0 ){
+	    	die('["error","Faculty Member UniqueID Already Exists"]');
+	    }
+
 	    $sql = "INSERT INTO `mce_db`.`mce_faculty` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Active`) VALUES (NULL, '".$professor[0]."', '".$professor[1]."', '".$professor[2]."', '1');";
 	    $result = mysqli_query($conn, $sql);
 	    if($result)
