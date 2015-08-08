@@ -478,7 +478,7 @@ function addListItemReturn(){
   if(returnedData[0]=='success'){
       $('#serverResponse').html("<b>Successfully added "+returnedData[1]+"</b><br/>");
       $('#listItem1').val("");
-      if($('#tableName') != 'tl_questionlist'){
+      if( $('#tableName').val() != 'tl_questionlist'){
         // prevents form validation from breaking on question lists
         $('#listItem2').val("");
         $('#listItem3').val("");
