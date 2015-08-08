@@ -450,7 +450,7 @@ function getItemList(){
 
   $.each(returnedData, function(index, value) {
 
-      ret += '<tr><td>'+value['Name']+'</td><td>'+value['UniqueID']+'</td><td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+",'"+value['Name']+'\');">X</button></td></tr>';
+      ret += '<tr><td>'+value[0]+'</td><td>'+value[1]+'</td><td><button type="button" class="btn-danger" onclick="retireListItemCall('+value[2]+",'"+value[0]+'\');">X</button></td></tr>';
   });
 
   ret += "</table>";
@@ -480,7 +480,7 @@ function addListItemReturn(){
       $('#listItem1').val("");
       $('#listItem2').val("");
       $('#listItem3').val("");
-      fetchData( getItemList ,"", "" );
+      fetchData( getItemList , $('#tableName').val(), "" );
 
   }else{
     if(returnedData[0] = "error"){
@@ -504,7 +504,7 @@ function retireListItem(){
   if(returnedData[0] = 'success'){
 
     $('#serverResponse2').html("<b>Successfully retired  "+returnedData[1]+"</b><br/>");
-    fetchData( getItemList ,"", "" );
+    fetchData( getItemList , $('#tableName').val(), "" );
 
   }else{
     

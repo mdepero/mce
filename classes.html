@@ -1,9 +1,7 @@
 ---
 layout: default
-title: "Faculty"
+title: "Class List"
 ---
-
-<input type="hidden" id="tableName" value="faculty">
 
 <h1>Faculty</h1>
 
@@ -43,7 +41,7 @@ title: "Faculty"
 
   $(document).ready(function(){
 
-    fetchData( getItemList , $('#tableName').val(), "" );
+    fetchData( getItemList ,"", "" );
 
   });// end document ready
   

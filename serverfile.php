@@ -282,10 +282,12 @@ if(isset($_REQUEST['get'])){
 
 	if($_REQUEST['get'] == "getItemList"){
 
+		$table = $_REQUEST['v1'];
+
 		$return = '[';
 
 	    // Create List of Classes from professor and semester [2]
-	    $sql = "SELECT * FROM  mce_faculty WHERE Active = 1";
+	    $sql = "SELECT * FROM  mce_".$table." WHERE Active = 1";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -293,7 +295,8 @@ if(isset($_REQUEST['get'])){
 	    		$first = false;
 	    	else
 	    		$return .= ", ";
-	    	$return .= '{"Name":"'.$row['FirstName'].' '.$row['LastName'].'","UniqueID":"'. $row['UniqueID'] .'","ID": "'.$row['ID'].'"}';
+	    	if($table == "faculty")
+	    		$return .= '["'.$row['FirstName'].' '.$row['LastName'].'", "'. $row['UniqueID'] .'", "'.$row['ID'].'"]';
 
 	    }
 
