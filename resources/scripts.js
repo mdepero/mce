@@ -451,7 +451,8 @@ function getReviews(){
 function addFaculty(){
 
   if($('#firstName').val() == "" || $('#lastName').val() == "" || $('#uniqueid').val() == ""){
-    $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>")
+    $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
+    return;
   }
 
   fetchData( addFacultyReturn , '["'+$('#firstName').val()+'","'+$('#lastName').val()+'","'+$('#uniqueid').val()+'"]', "" );
