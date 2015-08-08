@@ -539,6 +539,42 @@ function retireListItem(){
 
 
 
+// ===================================================================================================================================
+// ===================================================================================================================================
+
+
+var facultyID, semester, classTypeID;
+
+
+function getFacultyID(){
+
+  if($('#facultyUniqueID').val() == ""){
+    $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
+    return;
+  }
+
+  fetchData( returnFacultyID , $('#facultyUniqueID').val(), "" );
+
+}
+
+function returnFacultyID(){
+  if(returnedData[0] != 'sucess'){
+    if(returnedData[0] == 'error'){
+      $('#serverResponse').html("<b style='color:red;'>"+returnedData[1]+"</b><br/>");
+    }else{
+      alert("ERROR: Server returned an error. Code: 'returnFacultyID'");
+    }
+  }else{
+    // returned faculty ID successfully, ask for current semester and store for future class additions
+    alert(returnedData[1]);
+  }
+}
+
+
+
+
+
+
 
 
 

@@ -355,7 +355,7 @@ if(isset($_REQUEST['get'])){
 		// check if list item not already added if duplicates not allowed
 		if($table == 'tl_classlist')
 			$sql = "SELECT * FROM  mce_".$table." WHERE `ShortName` = '".$item[0]."' AND Active = 1";
-		
+
 		elseif($table == 'tl_questionlist')
 			$sql = "SELECT * FROM  mce_".$table." WHERE `Question` = '".$item[0]."' AND Active = 1";
 		else
@@ -386,6 +386,31 @@ if(isset($_REQUEST['get'])){
 	    	echo '["success","'.$name.'"]';
 	    else
 	    	echo '["ERROR inserting item to database"]';
+	}
+
+
+
+
+
+	// ============================= Add class and students at same time =================================================
+	// ===================================================================================================================
+
+	if($_REQUEST['get'] == "returnFacultyID"){
+
+	    // Create List of Classes from professor and semester [2]
+	    $sql = "SELECT * FROM  mce_faculty WHERE Active = 1 and UniqueID = '".$_REQUEST['v1']."'";
+	    $result = mysqli_query($conn, $sql);
+
+	    if( mysqli_num_rows($result) == 0 ){
+	    	die('["error","No results found with your UniqueID. Maybe you need to be added as a faculty member in the system?"]');
+	    }
+	    if( mysqli_num_rows($result) > 1 ){
+	    	die('["error","Fatal Error! Multiple active faculty records with same UniqueID. Please report this error to system admin (link should be at the bottom of this site)"]');
+	    }
+
+	    $row = mysqli_fetch_assoc($result);
+	    echo '["success","'.$row['ID'].'"]';
+
 	}
 
 
