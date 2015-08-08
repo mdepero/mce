@@ -495,13 +495,13 @@ function addListItemReturn(){
 function retireListItemCall( ID, NAME ){
 
   if(confirm("Are you sure you want to delete "+NAME+"?")){
-    fetchData( retireListItem , '["'+ID+'","'+NAME+'","'+$('#talbeName').val()+'"]', "" );
+    fetchData( retireListItem , '["'+ID+'","'+NAME+'","'+$('#tableName').val()+'"]', "" );
   }
 }
 
 function retireListItem(){
   
-  if(returnedData[0] = 'success'){
+  if(returnedData[0] == 'success'){
 
     $('#serverResponse2').html("<b>Successfully retired  "+returnedData[1]+"</b><br/>");
     fetchData( getItemList , $('#tableName').val(), "" );
