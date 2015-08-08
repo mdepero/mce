@@ -558,7 +558,7 @@ function getFacultyID(){
 }
 
 function returnFacultyID(){
-  if(returnedData[0] != 'sucess'){
+  if(returnedData[0] != 'success'){
     if(returnedData[0] == 'error'){
       $('#serverResponse').html("<b style='color:red;'>"+returnedData[1]+"</b><br/>");
     }else{
