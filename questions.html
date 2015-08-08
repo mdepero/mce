@@ -1,0 +1,50 @@
+---
+layout: default
+title: "Question List"
+---
+
+<input type="hidden" id="tableName" value="tl_questionlist">
+
+<h1>Question List</h1>
+
+<h2>Add a Question</h2>
+
+<div id="serverResponse">
+</div>
+
+<div class="row">
+	<div class="col-sm-8 col-md-6 col-lg-4">
+
+		<input type="text" class="form-control" maxlength="80" name="listItem1" id="listItem1" placeholder="Question">
+
+		<input type="hidden" class="form-control" maxlength="80" name="listItem2" id="listItem2" placeholder="">
+
+		<input type="hidden" class="form-control" maxlength="80" name="listItem3" id="listItem3" placeholder="">
+
+		<br />
+
+		<button type="button" class="btn-primary" onclick="addListItem()">Submit</button>
+
+	</div>
+</div>
+
+
+<h2>Delete a Question</h2>
+
+<div id="serverResponse2">
+</div>
+
+<div id="currentItems">
+
+</div>
+
+
+<script type="text/javascript">
+
+  $(document).ready(function(){
+
+    fetchData( getItemList , $('#tableName').val(), "" );
+
+  });// end document ready
+  
+</script>

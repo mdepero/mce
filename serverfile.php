@@ -280,6 +280,25 @@ if(isset($_REQUEST['get'])){
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// ========================================== ITEM LISTS ADMIN =========================================================
+	// =====================================================================================================================
+
+
+
 	if($_REQUEST['get'] == "getItemList"){
 
 		$table = $_REQUEST['v1'];
@@ -299,6 +318,8 @@ if(isset($_REQUEST['get'])){
 	    		$return .= '["'.$row['FirstName'].' '.$row['LastName'].'", "'. $row['UniqueID'] .'", "'.$row['ID'].'"]';
 	    	if($table == "tl_classlist")
 	    		$return .= '["'.$row['ShortName'].' </td><td> '.$row['LongName'].'", "'. $row['Block'] .'", "'.$row['ID'].'"]';
+	    	if($table == "tl_questionlist")
+	    		$return .= '["'.$row['Question'].'", "", "'.$row['ID'].'"]';
 
 	    }
 
@@ -334,13 +355,16 @@ if(isset($_REQUEST['get'])){
 		// check if list item not already added if duplicates not allowed
 		if($table == 'tl_classlist')
 			$sql = "SELECT * FROM  mce_".$table." WHERE `ShortName` = '".$item[0]."' AND Active = 1";
+		
+		elseif($table == 'tl_questionlist')
+			$sql = "SELECT * FROM  mce_".$table." WHERE `Question` = '".$item[0]."' AND Active = 1";
 		else
 			// for faculty and student tables, or as a default which will return no results and thus not error on duplicates due to no other tables having a UniqueID column
 			$sql = "SELECT * FROM  mce_".$table." WHERE `UniqueID` = '".$item[2]."' AND Active = 1";
 	    $result = mysqli_query($conn, $sql);
 
 	    if( mysqli_num_rows($result) > 0 ){
-	    	die('["error","Unique ID Already Exists"]');
+	    	die('["error","The item you want to add already exists"]');
 	    }
 
 	    $name;
@@ -351,6 +375,10 @@ if(isset($_REQUEST['get'])){
 	    }
 	    if($table == "tl_classlist"){
 	   		$sql = "INSERT INTO `mce_db`.`mce_tl_classlist` (`ID`, `ShortName`, `LongName`, `Block`, `Active`) VALUES (NULL, '".$item[0]."', '".$item[1]."', '".$item[2]."', '1');";
+	   		$name = $item[0];
+	    }
+	    if($table == "tl_questionlist"){
+	   		$sql = "INSERT INTO `mce_db`.`mce_tl_questionlist` (`ID`, `Question`, `Active`) VALUES (NULL, '".$item[0]."', '1');";
 	   		$name = $item[0];
 	    }
 	    $result = mysqli_query($conn, $sql);
