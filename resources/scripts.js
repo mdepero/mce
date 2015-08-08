@@ -478,8 +478,11 @@ function addListItemReturn(){
   if(returnedData[0]=='success'){
       $('#serverResponse').html("<b>Successfully added "+returnedData[1]+"</b><br/>");
       $('#listItem1').val("");
-      $('#listItem2').val("");
-      $('#listItem3').val("");
+      if($('#tableName') != 'tl_questionlist'){
+        // prevents form validation from breaking on question lists
+        $('#listItem2').val("");
+        $('#listItem3').val("");
+      }
       fetchData( getItemList , $('#tableName').val(), "" );
 
   }else{
