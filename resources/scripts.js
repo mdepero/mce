@@ -580,44 +580,53 @@ function returnFacultyID(){
       $('#facultyInfo').fadeIn(DEFAULT_ANI_SPEED);
 
       var year = new Date().getFullYear();
+      var term = 0;
       var month = new Date().getMonth();
 
       if(month > SPRING_MONTH_CUTOFF){
-        year += .1;
+        term += 1;
       }
       if(month > SUMMER_MONTH_CUTOFF){
-        year += .1;
+        term += 1;
       }
       if(month > FALL_MONTH_CUTOFF){
-        year += .1;
+        term += 1;
       }
 
       alert(year);
 
-      var term, selected;
+      var term, selected,t,termText;
+      t = term;
       ret = "";
-      for(i = year + .1; i >= 2014.2; i -= .1){
-        alert("i = "+i);
-        var termID = i - Math.floor(i);
-        switch(termID){
+      termText = "";
+      for(var i = year + .1; i >= 2014 && t >=2; t--){
+        if(t < 0){
+          i--;
+          t = 2;
+        }
+        var j = i;
+        if(t == 3)
+          j++;
+        alert("year = "+j+" and term = "+t);
+        switch(t){
           case 0:
-            term = "Spring";
+            termText = "Spring";
             break;
-          case .1:
-            term = "Summer";
+          case 1:
+            termText = "Summer";
             break;
-          case .2:
-            term = "Fall";
+          case 2:
+            termText = "Fall";
             break;
           default:
             alert("Error in semester generation. Code: 'Attempted to make a semester out of year = "+i+"'");
             break;
         }
 
-        if( i == year) 
+        if( j == year && term == t) 
           selected = " selected";
 
-        ret += '<option value="'+term+' '+Math.floor(i)+'"'+selected+'>'+term+' '+Math.floor(i)+'</option>';
+        ret += '<option value="'+termtext+' '+j+'"'+selected+'>'+termText+' '+j+'</option>';
 
 
       }
