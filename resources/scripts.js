@@ -624,7 +624,7 @@ function returnFacultyID(){
             alert("Error in semester generation. Code: 'Attempted to make a semester out of year = "+year+" & term = "+term+"'");
             break;
         }
-
+        var selected = "";
         if( currentYear == year && currentTerm == t) 
           selected = " selected";
 
