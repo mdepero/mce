@@ -580,8 +580,9 @@ function returnFacultyID(){
       $('#facultyInfo').fadeIn(DEFAULT_ANI_SPEED);
 
       var year = new Date().getFullYear();
-      var term = 0;
       var month = new Date().getMonth();
+
+      var term = 0;
 
       if(month > SPRING_MONTH_CUTOFF){
         term += 1;
@@ -590,28 +591,25 @@ function returnFacultyID(){
         term += 1;
       }
       if(month > FALL_MONTH_CUTOFF){
-        term += 1;
+        term = 0;
+        year++;
       }
 
-      alert(year);
-
-      var term, selected,t,termText;
-      t = term;
-      t++;
-      ret = "";
-      termText = "";
-      for(var i = year; i >= 2014 && t >=2; t--){
-        if(t < 0){
-          i--;
-          t = 2;
-        }
-        var j = i;
-        if(t >= 3){
-          j++;
-          t -= 3;
-        }
-        alert("year = "+j+" and term = "+t);
-        switch(t){
+      alert(year + ' ' + term);
+      var currentYear = year;
+      var currentTerm = term;
+      
+      // Include next semester in list, but default to current semester
+      if(term == 2){
+        year ++;
+        term = 0;
+      }else{
+        term ++;
+      }
+      while (year > 2015 || (year == 2015 && term == 2) ){
+        alert("year = "+year+" and term = "+term);
+        var termText = "";
+        switch(term){
           case 0:
             termText = "Spring";
             break;
@@ -622,11 +620,11 @@ function returnFacultyID(){
             termText = "Fall";
             break;
           default:
-            alert("Error in semester generation. Code: 'Attempted to make a semester out of year = "+i+"'");
+            alert("Error in semester generation. Code: 'Attempted to make a semester out of year = "+year+" & term = "+term+"'");
             break;
         }
 
-        if( j == year && term == t) 
+        if( currentYear == year && currentTerm == t) 
           selected = " selected";
 
         ret += '<option value="'+termText+' '+j+'"'+selected+'>'+termText+' '+j+'</option>';
