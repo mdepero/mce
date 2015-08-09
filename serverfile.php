@@ -409,7 +409,7 @@ if(isset($_REQUEST['get'])){
 	    }
 
 	    $row = mysqli_fetch_assoc($result);
-	    echo '["success","'.$row['ID'].'"]';
+	    echo '["success","'.$row['ID'].'", "'.$row['FirstName'].' '.$row['LastName'].'"]';
 
 	}
 

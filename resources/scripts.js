@@ -14,6 +14,12 @@ var DEFAULT_ANI_SPEED = 1000;
 
 var FAST_ANI_SPEED = 600;
 
+// If current date is a month greater than (not inclusive) the months below, automatically jumps up to next semester. For example, if spring cutoff is 4 and the current month is 5, then the semester will default to next fall. If the fall cutoff is 11 and it is currently 12, it will default to next year's spring
+// NOTE: January = 0, February = 1, etc
+var SPRING_MONTH_CUTOFF = 3;// 3 = April, May starts jump to summer
+var SUMMER_MONTH_CUTOFF = 6;// 6 = July, August starts jumpt to fall
+var FALL_MONTH_CUTOFF = 10;// 10 = November, December starts jumpt to next year's spring
+
 
 var xmlhttp;
 if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
@@ -572,6 +578,48 @@ function returnFacultyID(){
     $("#0").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
       $('#facultyInfo').html(returnedData[2]);
       $('#facultyInfo').fadeIn(DEFAULT_ANI_SPEED);
+
+      var year = new Date().getYear();
+      var month = new Date().getMonth();
+
+      if(month > SPRING_MONTH_CUTOFF){
+        year += .1;
+      }
+      if(month > SUMMER_MONTH_CUTOFF){
+        year += .1;
+      }
+      if(month > FALL_MONTH_CUTOFF){
+        year += .1;
+      }
+
+      var term, selected;
+      ret = "";
+      for(i = year + .1; i >= 2014.2; i -= .1){
+        var termID = i - Math.floor(i);
+        switch(termID){
+          case 0:
+            term = "Spring";
+            break;
+          case .1:
+            term = "Summer";
+            break;
+          case .2:
+            term = "Fall";
+            break;
+          default:
+            alert("Error in semester generation. Code: 'Attempted to make a semester out of year = "+i+"'");
+            break;
+        }
+
+        if( i == year) 
+          selected = " selected";
+
+        ret += '<option value="'+term+' '+Math.floor(i)+'"'+selected+'>'+term+' '+Math.floor(i)+'</option>';
+
+
+      }
+      $('#semester').html(ret);
+
       $("#1").fadeIn(DEFAULT_ANI_SPEED);
     });
     
