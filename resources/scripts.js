@@ -608,7 +608,7 @@ function returnFacultyID(){
         term -= 4;
       }
       ret = "";
-      while (year > 2015 || (year == 2015 && term == 2) ){
+      while (year > 2015 || (year == 2015 && term >= 2) ){
         //alert("year = "+year+" and term = "+term);
         var termText = "";
         switch(term){
