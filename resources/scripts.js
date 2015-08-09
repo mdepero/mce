@@ -625,7 +625,7 @@ function returnFacultyID(){
             break;
         }
         var selected = "";
-        if( currentYear == year && currentTerm == t) 
+        if( currentYear == year && currentTerm == term) 
           selected = " selected";
 
         ret += '<option value="'+termText+' '+year+'"'+selected+'>'+termText+' '+year+'</option>';
