@@ -579,7 +579,7 @@ function returnFacultyID(){
       $('#facultyInfo').html(returnedData[2]);
       $('#facultyInfo').fadeIn(DEFAULT_ANI_SPEED);
 
-      var year = new Date().getYear();
+      var year = new Date().getFullYear();
       var month = new Date().getMonth();
 
       if(month > SPRING_MONTH_CUTOFF){
