@@ -629,7 +629,7 @@ function returnFacultyID(){
         if( j == year && term == t) 
           selected = " selected";
 
-        ret += '<option value="'+termtext+' '+j+'"'+selected+'>'+termText+' '+j+'</option>';
+        ret += '<option value="'+termText+' '+j+'"'+selected+'>'+termText+' '+j+'</option>';
 
 
       }
