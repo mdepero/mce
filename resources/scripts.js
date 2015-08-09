@@ -598,7 +598,7 @@ function returnFacultyID(){
       alert(year + ' ' + term);
       var currentYear = year;
       var currentTerm = term;
-      
+
       // Include next semester in list, but default to current semester
       if(term == 2){
         year ++;
@@ -627,7 +627,13 @@ function returnFacultyID(){
         if( currentYear == year && currentTerm == t) 
           selected = " selected";
 
-        ret += '<option value="'+termText+' '+j+'"'+selected+'>'+termText+' '+j+'</option>';
+        ret += '<option value="'+termText+' '+year+'"'+selected+'>'+termText+' '+year+'</option>';
+
+        term--;
+        if(term<0){
+          year--;
+          term = 2;
+        }
 
 
       }
