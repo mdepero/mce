@@ -602,11 +602,10 @@ function returnFacultyID(){
       var currentTerm = term;
 
       // Include next semester in list, but default to current semester
-      if(term == 2){
-        year ++;
-        term = 0;
-      }else{
-        term ++;
+      term += 2;
+      if(term > 2){
+        year++;
+        term -= 3;
       }
       ret = "";
       while (year > 2015 || (year == 2015 && term == 2) ){
