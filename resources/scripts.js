@@ -593,7 +593,7 @@ function returnFacultyID(){
         term += 1;
       }
       if(month > FALL_MONTH_CUTOFF){
-        term = 0;
+        term += 0;
         year++;
       }
 
@@ -602,10 +602,10 @@ function returnFacultyID(){
       var currentTerm = term;
 
       // Include next semester in list, but default to current semester
-      term += 2;
-      if(term > 2){
+      term += 3;
+      if(term > 3){
         year++;
-        term -= 3;
+        term -= 4;
       }
       ret = "";
       while (year > 2015 || (year == 2015 && term == 2) ){
@@ -621,6 +621,9 @@ function returnFacultyID(){
           case 2:
             termText = "Fall";
             break;
+          case 3:
+            termText = "Winter";
+            break;
           default:
             alert("Error in semester generation. Code: 'Attempted to make a semester out of year = "+year+" & term = "+term+"'");
             break;
@@ -634,7 +637,7 @@ function returnFacultyID(){
         term--;
         if(term<0){
           year--;
-          term = 2;
+          term = 3;
         }
 
 
