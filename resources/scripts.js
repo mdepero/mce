@@ -592,9 +592,12 @@ function returnFacultyID(){
         year += .1;
       }
 
+      alert(year);
+
       var term, selected;
       ret = "";
       for(i = year + .1; i >= 2014.2; i -= .1){
+        alert("i = "+i);
         var termID = i - Math.floor(i);
         switch(termID){
           case 0:
