@@ -579,10 +579,8 @@ function returnFacultyID(){
       $('#facultyInfo').html(returnedData[2]);
       $('#facultyInfo').fadeIn(DEFAULT_ANI_SPEED);
 
-      //var year = new Date().getFullYear();
-      //var month = new Date().getMonth();
-      var year = $('#year').val();
-      var month = $('#month').val();
+      var year = new Date().getFullYear();
+      var month = new Date().getMonth();
 
       var term = 0;
 
@@ -648,6 +646,19 @@ function returnFacultyID(){
     });
     
   }
+}
+
+
+
+function setSemester(){
+  semester = $('#semester').val();
+  
+  $("#1").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+      $('#semesterInfo').html(semester);
+      $('#semesterInfo').fadeIn(DEFAULT_ANI_SPEED);
+
+      $("#2").fadeIn(DEFAULT_ANI_SPEED);
+
 }
 
 

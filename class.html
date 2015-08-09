@@ -10,6 +10,7 @@ title: "Add a Class"
 <h2>Add a Class</h2>
 
 <h3 id="facultyInfo" style="display:none;"></h3>
+<h3 id="semesterInfo" style="display:none;"></h3>
 
 <div id="serverResponse">
 </div>
@@ -34,10 +35,6 @@ title: "Add a Class"
 
 		<h4>Select Class Semester</h4>
 
-		<input type="text" id="year" placeholder="year">
-		<input type="text" id="month" placeholder="month">
-		<button type="button" onclick="returnFacultyID()">Rerun</button>
-
 		<select class="form-control" id="semester">
 			<option>*ERROR* Semester list failed to generate.</option>
 		</select>
@@ -46,5 +43,14 @@ title: "Add a Class"
 
 		<button type="button" class="btn-primary" onclick="setSemester();">Submit</button>
 
+	</div>
+</div>
+
+
+
+
+<div class="row" id="2" style="display:none;">
+	<div class="col-sm-8 col-md-6 col-lg-4">
+		<h4>Select a Class</h4>
 	</div>
 </div>
