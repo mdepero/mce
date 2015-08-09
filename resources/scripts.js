@@ -593,7 +593,7 @@ function returnFacultyID(){
         term += 1;
       }
       if(month > FALL_MONTH_CUTOFF){
-        term += 0;
+        term = 0;
         year++;
       }
 
