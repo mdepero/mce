@@ -566,7 +566,15 @@ function returnFacultyID(){
     }
   }else{
     // returned faculty ID successfully, ask for current semester and store for future class additions
-    alert(returnedData[1]);
+    $('#serverResponse').html("");
+    facultyID = returnedData[1];
+
+    $("#0").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+      $('#facultyInfo').html(returnedData[2]);
+      $('#facultyInfo').fadeIn(DEFAULT_ANI_SPEED);
+      $("#1").fadeIn(DEFAULT_ANI_SPEED);
+    });
+    
   }
 }
 
