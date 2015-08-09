@@ -597,16 +597,19 @@ function returnFacultyID(){
 
       var term, selected,t,termText;
       t = term;
+      t++;
       ret = "";
       termText = "";
-      for(var i = year + .1; i >= 2014 && t >=2; t--){
+      for(var i = year; i >= 2014 && t >=2; t--){
         if(t < 0){
           i--;
           t = 2;
         }
         var j = i;
-        if(t == 3)
+        if(t >= 3){
           j++;
+          t -= 3;
+        }
         alert("year = "+j+" and term = "+t);
         switch(t){
           case 0:
