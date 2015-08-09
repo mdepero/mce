@@ -597,7 +597,7 @@ function returnFacultyID(){
         year++;
       }
 
-      alert(year + ' ' + term);
+      //alert(year + ' ' + term);
       var currentYear = year;
       var currentTerm = term;
 
@@ -610,7 +610,7 @@ function returnFacultyID(){
       }
       ret = "";
       while (year > 2015 || (year == 2015 && term == 2) ){
-        alert("year = "+year+" and term = "+term);
+        //alert("year = "+year+" and term = "+term);
         var termText = "";
         switch(term){
           case 0:
