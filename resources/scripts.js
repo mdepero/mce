@@ -658,6 +658,7 @@ function setSemester(){
       $('#semesterInfo').fadeIn(DEFAULT_ANI_SPEED);
 
       $("#2").fadeIn(DEFAULT_ANI_SPEED);
+  });
 
 }
 
