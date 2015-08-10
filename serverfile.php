@@ -414,6 +414,26 @@ if(isset($_REQUEST['get'])){
 	}
 
 
+
+	if($_REQUEST['get'] == "getClassListForAddAClass"){
+		$sql = "SELECT * FROM  mce_tl_classlist WHERE Active = 1";
+	    $result = mysqli_query($conn, $sql);
+	    var $ret = "[";
+	    var $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first)
+	    		$first = false;
+	    	else
+	    		$ret .= ', ';
+	    	$ret .= '{"ClassTypeID": "'.$row['ID'].'","ShortName":"'.$row['ShortName'].'", "LongName": "'.$row['LongName'].'"}'
+	    }
+	    $ret .= "]";
+	    
+	    echo $ret;
+
+	}
+
+
 }// end isSet Get
 
 

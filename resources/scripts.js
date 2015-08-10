@@ -652,14 +652,23 @@ function returnFacultyID(){
 
 function setSemester(){
   semester = $('#semester').val();
+  $('#semesterInfo').html(semester);
   
+  fetchData( getClassListForAddAClass , "", "" );
+
+}
+
+function getClassListForAddAClass(){
+  if(returnedData.length == 0){
+    $('#serverResponse').html("<b style='color:red;'>No active classes are in the class list. Please have an admin add classes.</b><br/>");
+    return;
+  }
   $("#1").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
-      $('#semesterInfo').html(semester);
+      
       $('#semesterInfo').fadeIn(DEFAULT_ANI_SPEED);
 
       $("#2").fadeIn(DEFAULT_ANI_SPEED);
   });
-
 }
 
 
