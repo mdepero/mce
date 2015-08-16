@@ -667,6 +667,15 @@ function getClassListForAddAClass(){
       
       $('#semesterInfo').fadeIn(DEFAULT_ANI_SPEED);
 
+      // Set class list options to pick from
+      var ret = "";
+      $$.each(returnedData, function(index, value) {
+
+        ret += '<option value="'+value['ClassTypeID']+'">'+value['ShortName']+' - '+value['LongName']+'</option>';
+      });
+
+      $('#class').html(ret);
+
       $("#2").fadeIn(DEFAULT_ANI_SPEED);
   });
 }
