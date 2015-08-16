@@ -669,7 +669,7 @@ function getClassListForAddAClass(){
 
       // Set class list options to pick from
       var ret = "";
-      $$.each(returnedData, function(index, value) {
+      $.each(returnedData, function(index, value) {
 
         ret += '<option value="'+value['ClassTypeID']+'">'+value['ShortName']+' - '+value['LongName']+'</option>';
       });
