@@ -689,6 +689,8 @@ function setClass(){
   
   $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
 
+    $('#classTypeInfo').fadeIn(DEFAULT_ANI_SPEED);
+
     $("#3").fadeIn(DEFAULT_ANI_SPEED);
       
   });
