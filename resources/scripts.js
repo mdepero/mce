@@ -671,7 +671,7 @@ function getClassListForAddAClass(){
       var ret = "";
       $.each(returnedData, function(index, value) {
 
-        ret += '<option value="'+value['ClassTypeID']+'">'+value['ShortName']+' - '+value['LongName']+'</option>';
+        ret += '<option value="'+value['ClassTypeID']+'" id="'+value['ClassTypeID']+'">'+value['ShortName']+' - '+value['LongName']+'</option>';
       });
 
       $('#class').html(ret);
@@ -682,8 +682,18 @@ function getClassListForAddAClass(){
 
 
 
+function setClass(){
 
+  classTypeID = $('#class').val();
+  $('#classTypeInfo').html($('#'+classTypeID).html());
+  
+  $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
 
+    $("#3").fadeIn(DEFAULT_ANI_SPEED);
+      
+  });
+
+}
 
 
 
