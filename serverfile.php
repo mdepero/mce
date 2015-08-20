@@ -374,7 +374,7 @@ if(isset($_REQUEST['get'])){
 	   		$name = $item[0].' '.$item[1];
 	    }
 	    if($table == "tl_classlist"){
-	   		$sql = "INSERT INTO `mce_db`.`mce_tl_classlist` (`ID`, `ShortName`, `LongName`, `Block`, `Active`) VALUES (NULL, '".$item[0]."', '".$item[1]."', '".$item[2]."', '1');";
+	   		$sql = "INSERT INTO `mce_db`.`mce_tl_classlist` (`ID`, `ShortName`, `LongName`, `Active`) VALUES (NULL, '".$item[0]."', '".$item[1]."', '1');";
 	   		$name = $item[0];
 	    }
 	    if($table == "tl_questionlist"){
