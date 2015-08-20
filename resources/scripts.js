@@ -727,28 +727,16 @@ function setStudents(){
 
 }
 
-function readSingleFile(evt) {
-    //Retrieve the first (and only!) File from the FileList object
-    var f = evt.target.files[0]; 
+var openFile = function(event) {
+  var input = event.target;
 
-    if (f) {
-      var r = new FileReader();
-      r.onload = function(e) { 
-        fileUploadData = e.target.result;
-        alert( "Got the file.n" 
-              +"name: " + f.name + "n"
-              +"type: " + f.type + "n"
-              +"size: " + f.size + " bytesn"
-              + "starts with: " + contents.substr(1, contents.indexOf("n"))
-        );  
-      }
-      r.readAsText(f);
-    } else { 
-      alert("Failed to load file");
-    }
-  }
-
-  document.getElementById('studentData').addEventListener('change', readSingleFile, false);
+  var reader = new FileReader();
+  reader.onload = function(){
+    var text = reader.result;
+    console.log(reader.result);
+  };
+  reader.readAsText(input.files[0]);
+};
 
 
 

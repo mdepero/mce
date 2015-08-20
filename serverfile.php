@@ -434,6 +434,9 @@ if(isset($_REQUEST['get'])){
 	}
 
 
+	// ************************************CONFIRM THAT type list and section are never used together*************************************
+
+
 }// end isSet Get
 
 
