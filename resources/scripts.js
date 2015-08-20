@@ -471,7 +471,11 @@ function getItemList(){
 
 function addListItem(){
 
-  if($('#listItem1').val() == "" || $('#listItem2').val() == "" || $('#listItem3').val() == ""){
+  // Allow for some inputs to be blank on some forms
+  if(
+    $('#listItem1').val() == "" || $('#listItem2').val() == "" || $('#listItem3').val() == "" || 
+    ( $('#tableName').val() == 'tl_classlist' && ($('#listItem1').val() == "" || $('#listItem2').val() == "") ) ||
+    ( $('#tableName').val() == 'tl_questionlist' && $('#listItem1').val() == "" ){
     $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
     return;
   }
@@ -484,11 +488,8 @@ function addListItemReturn(){
   if(returnedData[0]=='success'){
       $('#serverResponse').html("<b>Successfully added "+returnedData[1]+"</b><br/>");
       $('#listItem1').val("");
-      if( $('#tableName').val() != 'tl_questionlist'){
-        // prevents form validation from breaking on question lists
-        $('#listItem2').val("");
-        $('#listItem3').val("");
-      }
+      $('#listItem2').val("");
+      $('#listItem3').val("");
       fetchData( getItemList , $('#tableName').val(), "" );
 
   }else{

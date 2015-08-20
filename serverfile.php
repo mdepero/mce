@@ -317,7 +317,7 @@ if(isset($_REQUEST['get'])){
 	    	if($table == "faculty")
 	    		$return .= '["'.$row['FirstName'].' '.$row['LastName'].'", "'. $row['UniqueID'] .'", "'.$row['ID'].'"]';
 	    	if($table == "tl_classlist")
-	    		$return .= '["'.$row['ShortName'].' </td><td> '.$row['LongName'].'", "'.$row['ID'].'"]';
+	    		$return .= '["'.$row['ShortName'].' </td><td> '.$row['LongName'].'", "", "'.$row['ID'].'"]';
 	    	if($table == "tl_questionlist")
 	    		$return .= '["'.$row['Question'].'", "", "'.$row['ID'].'"]';
 
