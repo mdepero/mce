@@ -724,7 +724,7 @@ function setClass(){
 
 
 function setStudents(){
-  var f = $('#studentData').files[0]; 
+  var f = $('#studentData').target.files[0]; 
 
   if (f) {
     var r = new FileReader();
