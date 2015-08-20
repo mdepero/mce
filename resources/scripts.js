@@ -724,7 +724,14 @@ function setClass(){
 var fileUploadData;
 
 function setStudents(){
+  $('#serverResponse').html("");
 
+  if(!fileUploadData || fileUploadData == "" || fileUploadData.substring(1,5) != 'Name'){
+    $('#serverResponse').html("<b style='color:red;'>No file uploaded, or file uploaded is not a class list.</b><br/>");
+    return;
+  }
+
+  alert("Success");
 }
 
 var openFile = function(event) {
@@ -733,7 +740,7 @@ var openFile = function(event) {
   var reader = new FileReader();
   reader.onload = function(){
     var text = reader.result;
-    console.log(reader.result);
+    fileUploadData = reader.result;
   };
   reader.readAsText(input.files[0]);
 };
