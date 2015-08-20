@@ -471,12 +471,12 @@ function getItemList(){
 
 function addListItem(){
 
-  // Allow for some inputs to be blank on some forms
-  if(
-    $('#listItem1').val() == "" || $('#listItem2').val() == "" || $('#listItem3').val() == "" || 
-    ( $('#tableName').val() == 'tl_classlist' && ($('#listItem1').val() == "" || $('#listItem2').val() == "") ) ||
-    ( $('#tableName').val() == 'tl_questionlist' && $('#listItem1').val() == "" )
-    ) {
+  // Allow for some inputs to be blank on some forms, also really bad formatting/logic but I don't care because it's late and this is going to work
+  if(!(
+    ( $('#listItem1').val() != "" && $('#listItem2').val() != "" && $('#listItem3').val() != "") || 
+    ( $('#tableName').val() == 'tl_classlist' && ($('#listItem1').val() != "" || $('#listItem2').val() != "") ) ||
+    ( $('#tableName').val() == 'tl_questionlist' && $('#listItem1').val() != "" )
+    )) {
     $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
     return;
   }
