@@ -505,7 +505,7 @@ function addListItemReturn(){
 
 function retireListItemCall( ID, NAME ){
 
-  if(confirm("Are you sure you want to delete "+NAME+"?")){
+  if(confirm("Are you sure you want to delete "+NAME.replace("</td><td>","-")+"?")){
     fetchData( retireListItem , '["'+ID+'","'+NAME+'","'+$('#tableName').val()+'"]', "" );
   }
 }
