@@ -32,6 +32,26 @@ if (window.XMLHttpRequest){// code for IE7+, Firefox, Chrome, Opera, Safari
 
 
 
+
+
+
+
+
+// Check for the various File API support.
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  // Great success! All the File APIs are supported.
+} else {
+  $('#generalError').html("Your browser is not fully compatible with this form [File API's not supported]. Please upgrade to a modern browser such as Chrome for Firefox.");
+}
+
+
+
+
+
+
+
+
+
 var returnedData;
 
 function fetchData( callback, v1, v2 ){
@@ -551,7 +571,7 @@ function retireListItem(){
 // ===================================================================================================================================
 
 
-var facultyID, semester, classTypeID;
+var facultyID, semester, classTypeID, section;
 
 
 function getFacultyID(){
@@ -687,7 +707,8 @@ function getClassListForAddAClass(){
 function setClass(){
 
   classTypeID = $('#class').val();
-  $('#classTypeInfo').html($('#'+classTypeID).html());
+  section =  $('#section').val();
+  $('#classTypeInfo').html($('#'+classTypeID).html()+' - '+section);
   
   $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
 
