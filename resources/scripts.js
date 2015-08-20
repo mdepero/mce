@@ -475,7 +475,8 @@ function addListItem(){
   if(
     $('#listItem1').val() == "" || $('#listItem2').val() == "" || $('#listItem3').val() == "" || 
     ( $('#tableName').val() == 'tl_classlist' && ($('#listItem1').val() == "" || $('#listItem2').val() == "") ) ||
-    ( $('#tableName').val() == 'tl_questionlist' && $('#listItem1').val() == "" ){
+    ( $('#tableName').val() == 'tl_questionlist' && $('#listItem1').val() == "" )
+    ) {
     $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
     return;
   }
