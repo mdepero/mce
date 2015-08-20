@@ -571,7 +571,7 @@ function retireListItem(){
 // ===================================================================================================================================
 
 
-var facultyID, semester, classTypeID, section;
+var facultyID, semester, classTypeID, section, studentData;
 
 
 function getFacultyID(){
@@ -726,12 +726,13 @@ var fileUploadData;
 function setStudents(){
   $('#serverResponse').html("");
 
-  if(!fileUploadData || fileUploadData == "" || fileUploadData.substring(1,5) != 'Name'){
+  if(!fileUploadData || fileUploadData == "" || fileUploadData.length < 10 || fileUploadData.substring(1,5) != 'Name'){
     $('#serverResponse').html("<b style='color:red;'>No file uploaded, or file uploaded is not a class list.</b><br/>");
     return;
   }
 
   alert("Success");
+  //parse fileUploadData into student data
 }
 
 var openFile = function(event) {
