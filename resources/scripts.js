@@ -758,6 +758,8 @@ var openFile = function(event) {
         "UniqueID":studentRawData[i][3].replace("@miamioh.edu",""),
         "Major":studentRawData[i][4]
       });
+
+      console.log("Parsed: "+studentRawData[i][1].split(", ")[1]);
     }
 
     console.log("Text File Uploaded Successfully: " + JSON.stringify(studentData) );
