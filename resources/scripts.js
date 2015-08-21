@@ -721,7 +721,7 @@ function setClass(){
 }
 
 
-var fileUploadData,studentRawData,studentData;
+var fileUploadData,studentRawData,studentDataJSON,studentData;
 
 function setStudents(){
 
@@ -759,12 +759,23 @@ var openFile = function(event) {
         "UniqueID":studentRawData[i][3].replace("@miamioh.edu",""),
         "Major":studentRawData[i][4]
       });
-
-      console.log("Parsed: "+studentRawData[i][1].split(", ")[1]);
     }
 
-    console.log("Text File Uploaded Successfully: " + JSON.stringify(studentData) );
-    console.log(studentData);
+    var ret = "<tr><th>Name</th><th>UniqueID</th><th>Major</th></tr>";
+
+    studentDataJSON = studentData;
+
+    JSON.stringify(studentDataJSON);
+
+    console.log("Text File Uploaded Successfully: " + studentDataJSON );
+
+    $.each(returnedData, function(index, value) {
+      ret += '<tr><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td></tr>';
+    });
+    $('#studentData').html(ret);
+    $('#studentDataHeader').fadeIn(DEFAULT_ANI_SPEED);
+    $('#studentData').fadeIn(DEFAULT_ANI_SPEED);
+
 
   };// END reader.onload
 
