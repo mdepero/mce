@@ -730,9 +730,12 @@ function setClass(){
 }
 
 
-var fileUploadData,studentRawData,studentData;
+var fileUploadData,studentRawData;
+var studentData = [];
 
 function setStudents(){
+
+  if(!studentData || studentData.length<1)
 
   var fullClassData = {
     "Section":section,
@@ -781,6 +784,9 @@ var openFile = function(event) {
       $('#serverResponse').html("<b style='color:red;'>No file uploaded, or file uploaded is not a class list.</b><br/>");
       return;
     }
+
+    $('#studentCount').html("");
+    $('#studentData').html("");
 
     studentRawData = fileUploadData.split("\n");
     studentData = [];

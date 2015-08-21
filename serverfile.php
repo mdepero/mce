@@ -434,7 +434,62 @@ if(isset($_REQUEST['get'])){
 	}
 
 
-	// ************************************CONFIRM THAT type list and section are never used together*************************************
+	if($_REQUEST['get'] == "setStudentsReturn"){
+
+		$classData = json_decode($_REQUEST['v1']);
+
+		// Create List of Classes from professor and semester [2]
+	    $sql = "SELECT * FROM  mce_class WHERE Active = 1 and ClassTypeID = '".$classData['ClassTypeID']."' and Section = '".$classData['Section']."' and Semester = '".$classData['Semester']."'";
+	    $result = mysqli_query($conn, $sql);
+
+	    if( mysqli_num_rows($result) == 1 ){
+	    	die('["error","Error: An instance of this class and section already exists this semester."]');
+	    }
+	    if( mysqli_num_rows($result) > 1 ){
+	    	die('["error","Fatal Error! Multiple classes exist with this course, section, and semester. Please report this error to system admin (link should be at the bottom of this site)"]');
+	    }
+
+	    $studentIDs = [];
+
+	    foreach($classData['Students'] as $student){
+	    	// Determine if a student is already in the database. If they are, move on. If they aren't, add them.
+	    	$sql = "SELECT * FROM  mce_student WHERE Active = 1 and UniqueID = '".$student['UniqueID']."'";
+	    	$result = mysqli_query($conn, $sql);
+	    	if( mysqli_num_rows($result) > 1 ){
+	    		die('["error","Fatal Error! A student UniqueID is associated to more than one student: '.$student['UniqueID'].'. Please report this error to system admin (link should be at the bottom of this site)"]');
+	    	}
+	    	if( mysqli_num_rows($result) == 0 ){
+	    		$sql = "INSERT INTO `mce_db`.`mce_student` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Major`, `Active`) VALUES (NULL, '".$student['FirstName']."', '".$stduent['LastName']."', '".$student['UnqiueID']."', '".$student['Major']."', '1');";
+	    		$result = mysqli_query($conn, $sql);
+	    		if(!$result){
+	    			die('["error","Fatal Error! Student '.$student['UniqueID'].' failed to be added to the student database. Check for special characters in their name, etc."]');
+	    		}
+	    	}
+
+
+	    	// get the student's ID in the table and add it to the list of student IDs in the class
+	    	$sql = "SELECT * FROM  mce_student WHERE Active = 1 and UniqueID = '".$student['UniqueID']."'";
+	    	$result = mysqli_query($conn, $sql);
+	    	$row = mysqli_fetch_assoc($result);
+
+
+	    	array_push($studentIDs,$row['ID']);
+	    }
+
+
+
+	    $sql = "INSERT INTO `mce_db`.`mce_class` (`ID`, `Section`, `ClassTypeID`, `FacultyID`, `StudentList`, `Semester`) VALUES (NULL, '".$classData['Section']."', '".$classData['CLassTypeID']."', '".$classData['FacultyID']."', '".JSON_encode($studentIDs)."', '".$classData['Semester']."');";
+	    $result = mysqli_query($conn, $sql);
+	    if(!$result){
+	    	die('["error","Error: Failed to insert class data into database."]');
+	    }else{
+	    	echo '["success"]';
+	    }
+
+	}
+
+
+
 
 
 }// end isSet Get
