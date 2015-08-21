@@ -83,7 +83,7 @@ if(isset($_REQUEST['get'])){
 		$return = '{"Classes": {';
 
 	    // Create List of Classes from professor and semester [2]
-	    $sql = "SELECT c.ID,cl.ShortName,cl.LongName FROM  mce_class c left join mce_tl_classlist cl on c.ClassTypeID = cl.ID where FacultyID = '".$_REQUEST['v1']."' and Semester = '".$_REQUEST['v2']."' order by cl.ShortName asc";
+	    $sql = "SELECT c.ID,cl.ShortName,cl.LongName,c.Section FROM  mce_class c left join mce_tl_classlist cl on c.ClassTypeID = cl.ID where FacultyID = '".$_REQUEST['v1']."' and Semester = '".$_REQUEST['v2']."' order by cl.ShortName asc";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -91,7 +91,7 @@ if(isset($_REQUEST['get'])){
 	    		$first = false;
 	    	else
 	    		$return .= ", ";
-	    	$return .= '"'. $row['ID'] .'": "'.$row['ShortName'].' - '.$row['LongName'].'"';
+	    	$return .= '"'. $row['ID'] .'": "'.$row['ShortName'].' - '.$row['LongName'].' - '.$row['Section'].'"';
 
 	    }
 
@@ -436,14 +436,16 @@ if(isset($_REQUEST['get'])){
 
 	if($_REQUEST['get'] == "setStudentsReturn"){
 
-		echo $_REQUEST['v1'];
-
-		$classData = json_decode($_REQUEST['v1']);
+		$classData = json_decode($_REQUEST['v1'],TRUE);
 
 		// Create List of Classes from professor and semester [2]
 	    $sql = "SELECT * FROM  mce_class WHERE Active = 1 and ClassTypeID = '".$classData['ClassTypeID']."' and Section = '".$classData['Section']."' and Semester = '".$classData['Semester']."'";
-	    die($sql);
+	    
 	    $result = mysqli_query($conn, $sql);
+
+	    if(!$result){
+	    	die('["error","Failed to search for class duplicates"]');
+	    }
 
 	    if( mysqli_num_rows($result) == 1 ){
 	    	die('["error","Error: An instance of this class and section already exists this semester."]');
@@ -458,11 +460,14 @@ if(isset($_REQUEST['get'])){
 	    	// Determine if a student is already in the database. If they are, move on. If they aren't, add them.
 	    	$sql = "SELECT * FROM  mce_student WHERE Active = 1 and UniqueID = '".$student['UniqueID']."'";
 	    	$result = mysqli_query($conn, $sql);
+	    	if(!$result){
+		    	die('["error","Failed to search for instnaces of student alread in database. UniqueID: '.$student['UniqueID'].'"]');
+		    }
 	    	if( mysqli_num_rows($result) > 1 ){
 	    		die('["error","Fatal Error! A student UniqueID is associated to more than one student: '.$student['UniqueID'].'. Please report this error to system admin (link should be at the bottom of this site)"]');
 	    	}
 	    	if( mysqli_num_rows($result) == 0 ){
-	    		$sql = "INSERT INTO `mce_db`.`mce_student` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Major`, `Active`) VALUES (NULL, '".$student['FirstName']."', '".$stduent['LastName']."', '".$student['UnqiueID']."', '".$student['Major']."', '1');";
+	    		$sql = "INSERT INTO `mce_db`.`mce_student` (`ID`, `FirstName`, `LastName`, `UniqueID`, `Major`, `Active`) VALUES (NULL, '".$student['FirstName']."', '".$student['LastName']."', '".$student['UniqueID']."', '".$student['Major']."', '1');";
 	    		$result = mysqli_query($conn, $sql);
 	    		if(!$result){
 	    			die('["error","Fatal Error! Student '.$student['UniqueID'].' failed to be added to the student database. Check for special characters in their name, etc."]');
@@ -473,6 +478,9 @@ if(isset($_REQUEST['get'])){
 	    	// get the student's ID in the table and add it to the list of student IDs in the class
 	    	$sql = "SELECT * FROM  mce_student WHERE Active = 1 and UniqueID = '".$student['UniqueID']."'";
 	    	$result = mysqli_query($conn, $sql);
+	    	if(!$result){
+		    	die('["error","Failed to search for students ID in table. UniqueID: '.$student['UniqueID'].'"]');
+		    }
 	    	$row = mysqli_fetch_assoc($result);
 
 
@@ -481,7 +489,7 @@ if(isset($_REQUEST['get'])){
 
 
 
-	    $sql = "INSERT INTO `mce_db`.`mce_class` (`ID`, `Section`, `ClassTypeID`, `FacultyID`, `StudentList`, `Semester`) VALUES (NULL, '".$classData['Section']."', '".$classData['CLassTypeID']."', '".$classData['FacultyID']."', '".JSON_encode($studentIDs)."', '".$classData['Semester']."');";
+	    $sql = "INSERT INTO `mce_db`.`mce_class` (`ID`, `Section`, `ClassTypeID`, `FacultyID`, `StudentList`, `Semester`) VALUES (NULL, '".$classData['Section']."', '".$classData['ClassTypeID']."', '".$classData['FacultyID']."', '".JSON_encode($studentIDs)."', '".$classData['Semester']."');";
 	    $result = mysqli_query($conn, $sql);
 	    if(!$result){
 	    	die('["error","Error: Failed to insert class data into database."]');
