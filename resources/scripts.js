@@ -491,6 +491,8 @@ function getItemList(){
 
 function addListItem(){
 
+  $('#serverResponse').html("");
+
   // Allow for some inputs to be blank on some forms, also really bad formatting/logic but I don't care because it's late and this is going to work
   if(!(
     ( $('#listItem1').val() != "" && $('#listItem2').val() != "" && $('#listItem3').val() != "") || 
@@ -506,6 +508,7 @@ function addListItem(){
 }
 
 function addListItemReturn(){
+  $('#serverResponse').html("");
   if(returnedData[0]=='success'){
       $('#serverResponse').html("<b>Successfully added "+returnedData[1]+"</b><br/>");
       $('#listItem1').val("");
@@ -533,7 +536,7 @@ function retireListItemCall( ID, NAME ){
 function retireListItem(){
   
   if(returnedData[0] == 'success'){
-
+    $('#serverResponse').html("");
     $('#serverResponse2').html("<b>Successfully retired  "+returnedData[1]+"</b><br/>");
     fetchData( getItemList , $('#tableName').val(), "" );
 
@@ -575,7 +578,7 @@ var facultyID, semester, classTypeID, section, studentData;
 
 
 function getFacultyID(){
-
+  $('#serverResponse').html("");
   if($('#facultyUniqueID').val() == ""){
     $('#serverResponse').html("<b style='color:red;'>You are missing something on the current form.</b><br/>");
     return;
@@ -586,13 +589,18 @@ function getFacultyID(){
 }
 
 function returnFacultyID(){
+  $('#serverResponse').html("");
   if(returnedData[0] != 'success'){
     if(returnedData[0] == 'error'){
       $('#serverResponse').html("<b style='color:red;'>"+returnedData[1]+"</b><br/>");
     }else{
       alert("ERROR: Server returned an error. Code: 'returnFacultyID'");
     }
-  }else{
+    return;
+  }
+
+
+
     // returned faculty ID successfully, ask for current semester and store for future class additions
     $('#serverResponse').html("");
     facultyID = returnedData[1];
@@ -666,8 +674,9 @@ function returnFacultyID(){
 
       $("#1").fadeIn(DEFAULT_ANI_SPEED);
     });
-    
-  }
+  
+
+
 }
 
 
@@ -721,12 +730,42 @@ function setClass(){
 }
 
 
-var fileUploadData,studentRawData,studentDataJSON,studentData;
+var fileUploadData,studentRawData,studentData;
 
 function setStudents(){
 
+  var fullClassData = {
+    "Section":section,
+    "ClassTypeID":classTypeID,
+    "FacultyID":facultyID,
+    "Semester":semester,
+    "Students":studentData
+  }
+
+
+  fetchData( setStudentsReturn, JSON.stringify(fullClassData) , "");
 
 }
+
+
+function setStudentsReturn(){
+  $('#serverResponse').html("");
+  if(returnedData[0] != 'success'){
+    if(returnedData[0] == 'error'){
+      $('#serverResponse').html("<b style='color:red;'>"+returnedData[1]+"</b><br/>");
+    }else{
+      alert("ERROR: Server returned an error. Code: 'returnFacultyID'");
+    }
+    return;
+  }
+
+  // Server successfully added a class
+
+}
+
+
+
+// Text File Handling
 
 var openFile = function(event) {
   var input = event.target;
@@ -763,16 +802,13 @@ var openFile = function(event) {
 
     var ret = "<tr><th>Name</th><th>UniqueID</th><th>Major</th></tr>";
 
-    studentDataJSON = studentData;
-
-    studentDataJSON = JSON.stringify(studentDataJSON);
-
-    console.log("Text File Uploaded Successfully: " + studentDataJSON );
+    console.log("Text File Uploaded Successfully" );
 
     $.each(studentData, function(index, value) {
       ret += '<tr><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td></tr>';
     });
     $('#studentData').html(ret);
+    $('#studentCount').html('('+studentData.length+')');
     $('#studentDataHeader').fadeIn(DEFAULT_ANI_SPEED);
     $('#studentData').fadeIn(DEFAULT_ANI_SPEED);
 
