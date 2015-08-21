@@ -735,7 +735,10 @@ var studentData = [];
 
 function setStudents(){
 
-  if(!studentData || studentData.length<1)
+  if(!studentData || studentData.length<1){
+    $('#serverResponse').html();
+    $('#serverResponse').html("<b style='color:red;'>No student data to send. Please upload a valid .txt file with the student data.</b><br/>");
+  }
 
   var fullClassData = {
     "Section":section,

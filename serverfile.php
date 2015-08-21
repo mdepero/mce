@@ -436,10 +436,13 @@ if(isset($_REQUEST['get'])){
 
 	if($_REQUEST['get'] == "setStudentsReturn"){
 
+		echo $_REQUEST['v1'];
+
 		$classData = json_decode($_REQUEST['v1']);
 
 		// Create List of Classes from professor and semester [2]
 	    $sql = "SELECT * FROM  mce_class WHERE Active = 1 and ClassTypeID = '".$classData['ClassTypeID']."' and Section = '".$classData['Section']."' and Semester = '".$classData['Semester']."'";
+	    die($sql);
 	    $result = mysqli_query($conn, $sql);
 
 	    if( mysqli_num_rows($result) == 1 ){
