@@ -746,6 +746,7 @@ var openFile = function(event) {
     studentRawData = fileUploadData.split("\n");
     studentData = [];
     studentRawData.splice(0,1);
+    studentRawData.splice(studentRawData.length-1,studentRawData.length);// remove the extra array off the end caused by text file formatting
     if(studentRawData.length<1){
       $('#serverResponse').html("<b style='color:red;'>Student data file either contains no students or is corrupted.</b><br/>");
       return;
