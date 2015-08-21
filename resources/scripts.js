@@ -707,7 +707,7 @@ function getClassListForAddAClass(){
 function setClass(){
 
   classTypeID = $('#class').val();
-  section =  $('#section').val();
+  section =  $('#section').val().toUpperCase();
   $('#classTypeInfo').html($('#'+classTypeID).html()+' - '+section);
   
   $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
@@ -765,11 +765,11 @@ var openFile = function(event) {
 
     studentDataJSON = studentData;
 
-    JSON.stringify(studentDataJSON);
+    studentDataJSON = JSON.stringify(studentDataJSON);
 
     console.log("Text File Uploaded Successfully: " + studentDataJSON );
 
-    $.each(returnedData, function(index, value) {
+    $.each(studentData, function(index, value) {
       ret += '<tr><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td></tr>';
     });
     $('#studentData').html(ret);
