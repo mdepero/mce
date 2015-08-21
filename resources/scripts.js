@@ -753,10 +753,10 @@ var openFile = function(event) {
     for(var i = 0;i < studentRawData.length; i++){
       studentRawData[i]=studentRawData[i].split("\t");
       studentData.push({
-        "FirstName":studentRawData[1].split(", ")[0],
-        "LastName":studentRawData[1].split(", ")[1],
-        "UniqueID":studentRawData[3].replace("@miamioh.edu",""),
-        "Major":studentRawData[4]
+        "FirstName":studentRawData[i][1].split(", ")[0],
+        "LastName":studentRawData[i][1].split(", ")[1],
+        "UniqueID":studentRawData[i][3].replace("@miamioh.edu",""),
+        "Major":studentRawData[i][4]
       });
     }
 
