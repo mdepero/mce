@@ -721,18 +721,11 @@ function setClass(){
 }
 
 
-var fileUploadData;
+var fileUploadData,studentRawData,studentData;
 
 function setStudents(){
-  $('#serverResponse').html("");
 
-  if(!fileUploadData || fileUploadData == "" || fileUploadData.length < 10 || fileUploadData.substring(1,5) != 'Name'){
-    $('#serverResponse').html("<b style='color:red;'>No file uploaded, or file uploaded is not a class list.</b><br/>");
-    return;
-  }
 
-  alert("Success");
-  //parse fileUploadData into student data
 }
 
 var openFile = function(event) {
@@ -740,9 +733,39 @@ var openFile = function(event) {
 
   var reader = new FileReader();
   reader.onload = function(){
-    var text = reader.result;
+
     fileUploadData = reader.result;
-  };
+
+    $('#serverResponse').html("");
+
+    if(!fileUploadData || fileUploadData == "" || fileUploadData.length < 10 || fileUploadData.substring(1,5) != 'Name'){
+      $('#serverResponse').html("<b style='color:red;'>No file uploaded, or file uploaded is not a class list.</b><br/>");
+      return;
+    }
+
+    studentRawData = fileUploadData.split("\n");
+    studentData = [];
+    studentRawData.splice(0,1);
+    if(studentRawData.length<1){
+      $('#serverResponse').html("<b style='color:red;'>Student data file either contains no students or is corrupted.</b><br/>");
+      return;
+    }
+    for(var i = 0;i < studentRawData.length; i++){
+      studentRawData[i]=studentRawData[i].split("\t");
+      studentData.push({
+        "FirstName":studentRawData[1].split(", ")[0],
+        "LastName":studentRawData[1].split(", ")[1],
+        "UniqueID":studentRawData[3].replace("@miamioh.edu",""),
+        "Major":studentRawData[4]
+      });
+    }
+
+    console.log("Text File Uploaded Successfully: " + JSON.stringify(studentData) );
+    console.log(studentData);
+
+  };// END reader.onload
+
+  // Note: this code is run before the file is read in. Any code pertaining to the text file must go in the code block for "reader.onload" above
   reader.readAsText(input.files[0]);
 };
 
