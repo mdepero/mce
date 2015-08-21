@@ -767,6 +767,11 @@ function setStudentsReturn(){
   }
 
   // Server successfully added a class
+  $("#3").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+
+    $("#4").fadeIn(DEFAULT_ANI_SPEED);
+      
+  });
 
 }
 
