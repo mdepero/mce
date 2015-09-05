@@ -391,7 +391,7 @@ function sendForm(){
 
   if(returnedData[0] == "Success"){
 
-    $("#success").html("Your forms were successfully submitted :)");
+    $("#success").html("Your forms were successfully submitted.");
 
   }else{
 
