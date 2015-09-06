@@ -334,13 +334,16 @@ function nextForm(){
     console.log("Just showing new name and form");
     formNumber++;
     $('#name_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+    $('#key_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
     $('#form_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
   }else{
     console.log("Getting rid of old form and old name: "+ formNumber);
     $('#name_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED);
+    $('#key_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED);
     $('#form_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED, function(){
       formNumber++;
       $('#name_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
+      $('#key_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
       $('#form_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
     });
   }
