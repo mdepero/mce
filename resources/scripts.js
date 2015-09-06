@@ -321,8 +321,8 @@ function nextForm(){
         headerNumber++;
         $('#header_'+headerNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
       });
-      lastClass = formCheckBoxes[formNumber].name;
     }
+    lastClass = formCheckBoxes[formNumber].name;
   }
 
 
