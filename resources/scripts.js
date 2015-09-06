@@ -572,10 +572,8 @@ function retireListItemCall( ID, NAME ){
 
 function retireListItem(){
   
-  $('#serverResponse').html("");
-  $('#serverResponse2').html("");
-  
   if(returnedData[0] == 'success'){
+    $('#serverResponse').html("");
     $('#serverResponse2').html("<b>Successfully retired  "+returnedData[1]+"</b><br/>");
     fetchData( getItemList , $('#tableName').val(), "" );
 
@@ -603,11 +601,9 @@ function updateListItemCall( ROW, COL, OLD_VALUE){
 
 
 function updateListItem(){
-
-  $('#serverResponse').html("");
-  $('#serverResponse2').html("");
   
   if(returnedData[0] == 'success'){
+    $('#serverResponse').html("");
     $('#serverResponse2').html("<b>Successfully updated field from "+returnedData[1]+" to  "+returnedData[2]+"</b><br/>");
     fetchData( getItemList , $('#tableName').val(), "" );
 
