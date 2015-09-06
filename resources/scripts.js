@@ -370,11 +370,15 @@ function submitForm(){
   $.each(checkedResponses, function(index,value){
 
 
+    console.log("Got to checkpoint 1");
+
     // Correct for short answer add on
     if(value.value.indexOf('"Submit":') == -1){
       // was a short answer response, change value
       value.value = value.name.replace("INSERT_VALUE_OF_SHORT_ANSWER",value.value);
     }
+
+    console.log("got past checkpoint 1");
 
 
     if(first){
