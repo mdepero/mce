@@ -354,7 +354,6 @@ if(isset($_REQUEST['get'])){
 		else
 			$sql = "UPDATE `mce_db`.`mce_".$vars[0]."` SET `FirstName` = '".explode(' ',trim($vars[4]),2)[0]."', `LastName` = '".explode(' ',trim($vars[4]),2)[1]."' WHERE `mce_".$vars[0]."`.`ID` = ".$vars[1].";";
 
-		echo $sql;
 	    
 	    $result = mysqli_query($conn, $sql);
 	    if($result)
