@@ -345,6 +345,27 @@ if(isset($_REQUEST['get'])){
 
 
 
+	if($_REQUEST['get'] == "updateListItem"){
+
+		$vars = json_decode($_REQUEST['v1']);
+
+		if($vars[2] != 'Name')
+			$sql = "UPDATE `mce_db`.`mce_".$vars[0]."` SET `".$vars[2]."` = '".$vars[4]."' WHERE `mce_".$vars[0]."`.`ID` = ".$vars[1].";";
+		else
+			$sql = "UPDATE `mce_db`.`mce_".$vars[0]."(`FirstName`,`LastName`) = ('".explode(' ',$vars[4],2)[0]."','".explode(' ',$vars[4],2)[1]."') WHERE `mce_".$vars[0]."`.`ID` = ".$vars[1].";";
+
+
+	    
+	    $result = mysqli_query($conn, $sql);
+	    if($result)
+	    	echo '["success","'.$vars[3].'","'.$vars[4].'"]';
+	    else
+	    	echo '["ERROR updating item to retired in database"]';;
+
+	}
+
+
+
 	if($_REQUEST['get'] == "addListItemReturn"){
 		// Adds a list item
 
