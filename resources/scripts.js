@@ -273,11 +273,10 @@ function startForms(){
       });
 
       var row = $('#form_'+index)[0].insertRow(0);
-      row.insertCell().innerHTML = "1";
-      row.insertCell().innerHTML = "2";
-      row.insertCell().innerHTML = "3";
-      row.insertCell().innerHTML = "4";
-      row.insertCell().innerHTML = "5";
+      for(int i = 1;i <= NUM_OF_OPTIONS; i++){
+        row.insertCell().innerHTML = i;
+      }
+
       row.insertCell().innerHTML = "";
 
       if(index < formCheckBoxes.length-1){
