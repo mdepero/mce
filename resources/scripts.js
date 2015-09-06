@@ -882,11 +882,11 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table, qNumbe
     if(i==((NUM_OF_OPTIONS+1)/2))
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}' checked>";
     else
-      var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>"+qNumber+". ";
+      var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>";
 
   }
 
-  row.insertCell().innerHTML = Question;
+  row.insertCell().innerHTML = (qNumber+1)+". "+Question;
 }
 
 
