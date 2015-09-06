@@ -508,7 +508,7 @@ function getItemList(){
         if(index2 == 'ID'){
           ret += '<td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+",'"+value[0]+'\');">X</button></td></tr>';
         }else{
-          ret += '<td onclick="updateListValueCall('+value['ID']+','+index2+','+value2+');">'+value2+'</td>';
+          ret += '<td onclick="updateListValueCall(\"'+value['ID']+'\",\"'+index2+'\",\"'+value2+'\"");">'+value2+'</td>';
         }
       });
 
