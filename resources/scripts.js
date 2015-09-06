@@ -898,7 +898,7 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table, qNumbe
 
   if(Question.substring(0,13).toLowerCase() == "short answer:"){
     Question = Question.substring(13,Question.length).trim();
-    row.insertCell().innerHTML = (qNumber+1)+". "+Question+"<br /><textarea name='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\"INSERT_VALUE_OF_SHORT_ANSWER\"}'></textarea>";
+    row.insertCell().innerHTML = (qNumber+1)+". "+Question+"<br /><textarea class=\"shortAnswers\" name='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\"INSERT_VALUE_OF_SHORT_ANSWER\"}'></textarea>";
 
   }else{
     row.insertCell().innerHTML = (qNumber+1)+". "+Question;
