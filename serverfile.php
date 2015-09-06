@@ -315,11 +315,11 @@ if(isset($_REQUEST['get'])){
 	    	else
 	    		$return .= ", ";
 	    	if($table == "faculty")
-	    		$return .= '["'.$row['FirstName'].' '.$row['LastName'].'", "'. $row['UniqueID'] .'", "'.$row['ID'].'"]';
+	    		$return .= '{"Name":"'.$row['FirstName'].' '.$row['LastName'].'", "UniqueID":"'. $row['UniqueID'] .'", "ID":"'.$row['ID'].'"}';
 	    	if($table == "tl_classlist")
-	    		$return .= '["'.$row['ShortName'].' </td><td> '.$row['LongName'].'", "", "'.$row['ID'].'"]';
+	    		$return .= '{"ShortName":"'.$row['ShortName'].'","LongName": "'.$row['LongName'].'","ID": "'.$row['ID'].'"}';
 	    	if($table == "tl_questionlist")
-	    		$return .= '["'.$row['Question'].'", "", "'.$row['ID'].'"]';
+	    		$return .= '{"Question":"'.$row['Question'].'", "":"", "ID": "'.$row['ID'].'"}';
 
 	    }
 

@@ -497,7 +497,23 @@ function getItemList(){
 
   $.each(returnedData, function(index, value) {
 
-      ret += '<tr><td>'+value[0]+'</td><td>'+value[1]+'</td><td><button type="button" class="btn-danger" onclick="retireListItemCall('+value[2]+",'"+value[0]+'\');">X</button></td></tr>';
+      ret += '<tr>';
+      var primary = "";
+      var notFirst = false;
+      $.each(value, function(index2, value2) {
+        if(!notFirst)
+          primary = value2;
+        notFirst = true;
+
+        if(index2 == 'ID'){
+          ret += '<td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+",'"+value[0]+'\');">X</button></td></tr>';
+        }else{
+          ret += '<td onclick="updateListValueCall('+value['ID']+','+index2+','+value2+');">'+value2+'</td>';
+        }
+      }
+
+
+      ret += '</tr>';
   });
 
   ret += "</table>";
@@ -572,6 +588,33 @@ function retireListItem(){
 
 
 
+function updateListItemCall( ROW, COL, OLD_VALUE){
+
+  var updateValue = prompt("What would you like to change this value to? (Enter nothing to cancel)\n\nOld Value: "+OLD_VALUE);
+
+  if(updateValue == ""){
+    return;
+  }
+
+  fetchData( updateListItem, '["'+$('#tableName').val()+'","'+ROW+'","'+OLD_VALUE+'","'+updateValue+'"]', "");
+}
+
+
+function updateListItem(){
+  
+  if(returnedData[0] == 'success'){
+    $('#serverResponse').html("");
+    $('#serverResponse2').html("<b>Successfully updated field to  "+returnedData[1]+"</b><br/>");
+    fetchData( getItemList , $('#tableName').val(), "" );
+
+  }else{
+    
+    ('#serverResponse2').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
+
+  }
+
+
+}
 
 
 
