@@ -4,6 +4,10 @@
  */
 
 
+// Adjust Review Options
+var NUM_OF_OPTIONS = 3;
+var OPTIONS_KEY = "(1) Unacceptable, (2) Acceptable, (3) Exceptional";
+
 
 // URL to folder that contains serverfile.php, including '/' on the end
 var serverRootURL = "http://107.10.18.206/";
@@ -13,8 +17,6 @@ var SLOW_ANI_SPEED = 1500;
 var DEFAULT_ANI_SPEED = 1000;
 
 var FAST_ANI_SPEED = 600;
-
-var NUM_OF_OPTIONS = 3;
 
 // If current date is a month greater than (not inclusive) the months below, automatically jumps up to next semester. For example, if spring cutoff is 4 and the current month is 5, then the semester will default to next fall. If the fall cutoff is 11 and it is currently 12, it will default to next year's spring
 // NOTE: January = 0, February = 1, etc
@@ -263,6 +265,8 @@ function startForms(){
   $.each(formCheckBoxes, function(index, value) {
 
     $('#forms').append( '<h3 id="name_'+index+'">'+$('label[for="'+value.id+'"]').html()+'</h3>');
+
+    $('#forms').append( '<div id="key_'+index+'">'+OPTIONS_KEY+'</div>');
 
     $('#forms').append( '<table id="form_'+index+'" class="radios"></table>' );
 
