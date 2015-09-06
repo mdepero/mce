@@ -590,13 +590,13 @@ function retireListItem(){
 
 function updateListItemCall( ROW, COL, OLD_VALUE){
 
-  var updateValue = prompt("What would you like to change this value to? (Enter nothing to cancel)\n\nOld Value: "+OLD_VALUE);
+  var updateValue = prompt("What would you like to change this value to?\n\nOld Value: "+OLD_VALUE);
 
   if(updateValue == "" || updateValue === null){
     return;
   }
 
-  fetchData( updateListItem, '["'+$('#tableName').val()+'","'+ROW+'","'+OLD_VALUE+'","'+updateValue+'"]', "");
+  fetchData( updateListItem, '["'+$('#tableName').val()+'","'+ROW+'","'+COL+'","'+OLD_VALUE+'","'+updateValue+'"]', "");
 }
 
 
