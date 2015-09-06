@@ -272,7 +272,7 @@ function startForms(){
 
       $.each(questions, function(index2, value2) {
 
-        newQuestionSet(value.value, value.name, value2["ID"], value2["Question"], $('#form_'+index)[0] );
+        newQuestionSet(value.value, value.name, value2["ID"], value2["Question"], $('#form_'+index)[0], index2 );
 
       });
 
@@ -873,7 +873,7 @@ var openFile = function(event) {
 /*
  * This function creates sets of radio buttons for each review question
  */
-function newQuestionSet( StudentID, ClassID, QuestionID, Question, table){
+function newQuestionSet( StudentID, ClassID, QuestionID, Question, table, qNumber){
 
   var row = table.insertRow();
 
@@ -882,7 +882,7 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table){
     if(i==((NUM_OF_OPTIONS+1)/2))
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}' checked>";
     else
-      var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>";
+      var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>"+qNumber+". ";
 
   }
 
