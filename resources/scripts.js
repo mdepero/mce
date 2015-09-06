@@ -316,7 +316,7 @@ function nextForm(){
   }else{
     console.log("Comparison ("+(formNumber+1)+"): "+lastClass +", "+formCheckBoxes[formNumber+1].name);
     if(lastClass != formCheckBoxes[formNumber+1].name){
-      console.log("Getting rid of old header and showing new: "+headerNumber);
+      console.log("Next class, getting rid of old header and showing new header: "+headerNumber);
       $('#header_'+headerNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED, function() {
         headerNumber++;
         $('#header_'+headerNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
@@ -337,7 +337,7 @@ function nextForm(){
     $('#key_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
     $('#form_'+formNumber).show('slide', {direction: 'right'}, FAST_ANI_SPEED);
   }else{
-    console.log("Getting rid of old form and old name: "+ formNumber);
+    console.log("Getting rid of old form and showing new form: "+ formNumber);
     $('#name_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED);
     $('#key_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED);
     $('#form_'+formNumber).hide('slide', {direction: 'left'}, FAST_ANI_SPEED, function(){
