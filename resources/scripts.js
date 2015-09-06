@@ -273,7 +273,7 @@ function startForms(){
       });
 
       var row = $('#form_'+index)[0].insertRow(0);
-      for(int i = 1;i <= NUM_OF_OPTIONS; i++){
+      for(var i = 1;i <= NUM_OF_OPTIONS; i++){
         row.insertCell().innerHTML = i;
       }
 
