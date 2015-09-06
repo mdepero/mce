@@ -592,7 +592,7 @@ function retireListItem(){
 
 function updateListItemCall( ROW, COL, OLD_VALUE){
 
-  var updateValue = prompt("What would you like to change this value to?\n\nOld Value: "+OLD_VALUE);
+  var updateValue = prompt("What would you like to change this value to?\n\nWarning: This cannot be undone.",OLD_VALUE);
 
   if(updateValue == "" || updateValue === null){
     return;
