@@ -296,7 +296,7 @@ function startForms(){
 
   $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#3").show();
-    $("#forms h2,h3,table").hide();
+    $("#forms h2,h3,table,div").hide();
     $("#forms").promise().done(function() { nextForm(); });// Wait until all of the inner elements of forms have been hidden, then begin nextForm
   });
 
