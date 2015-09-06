@@ -370,7 +370,7 @@ function submitForm(){
   $.each(checkedResponses, function(index,value){
 
 
-    console.log("Got to checkpoint 1:"+ value.value));
+    console.log("Got to checkpoint 1:"+ value.value);
 
     // Correct for short answer add on
     if(value.value.indexOf('"Student":') == -1){
