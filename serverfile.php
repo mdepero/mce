@@ -199,7 +199,7 @@ if(isset($_REQUEST['get'])){
 	    		$sql = "INSERT INTO `mce_answer` (`ID`, `ReviewID`, `QuestionID`, `Value`) VALUES (NULL, '".$nextID."', '".$answer["QuestionID"]."', '".$answer["Value"]."');";
 	    		$result = mysqli_query($conn, $sql);
 		    	if(!$result){
-		    		die('["ERROR inserting review"]');
+		    		die('["ERROR inserting answer"]');
 		    	}
 	    	}
 	    }
