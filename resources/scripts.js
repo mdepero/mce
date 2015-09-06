@@ -361,13 +361,21 @@ function nextForm(){
 
 function submitForm(){
 
-  var checkedResponses = $('#forms input:radio:checked');
+  var checkedResponses = $('#forms input:radio:checked, .shortAnswers');
   var responseJSON = '[[';
 
   var first = true;
   var lastStudentID = "";
   var lastClassID = "";
   $.each(checkedResponses, function(index,value){
+
+
+    // Correct for short answer add on
+    if(value.value.indexOf('"Submit":') == -1){
+      // was a short answer response, change value
+      value.value = value.name.replace("INSERT_VALUE_OF_SHORT_ANSWER",value.value);
+    }
+
 
     if(first){
       first = false;
@@ -879,14 +887,23 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table, qNumbe
 
   for(var i=1; i<=NUM_OF_OPTIONS; i++){
 
-    if(i==((NUM_OF_OPTIONS+1)/2))
+    if(i==((NUM_OF_OPTIONS+1)/2)  &&  Question.substring(0,13).toLowerCase() != "short answer:")
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}' checked>";
-    else
+    else if(Question.substring(0,13).toLowerCase() != "short answer:")
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>";
+    else
+      var cell = row.insertCell();
 
   }
 
-  row.insertCell().innerHTML = (qNumber+1)+". "+Question;
+  if(Question.substring(0,13).toLowerCase() == "short answer:"){
+    Question = Question.substring(13,Question.length);
+    row.insertCell().innerHTML = (qNumber+1)+". "+Question+"<br /><textarea name='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\"INSERT_VALUE_OF_SHORT_ANSWER\"}'></textarea>";
+
+  }else{
+    row.insertCell().innerHTML = (qNumber+1)+". "+Question;
+  }
+
 }
 
 
