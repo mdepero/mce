@@ -510,7 +510,7 @@ function getItemList(){
         }else{
           ret += '<td onclick="updateListValueCall('+value['ID']+','+index2+','+value2+');">'+value2+'</td>';
         }
-      }
+      });
 
 
       ret += '</tr>';
