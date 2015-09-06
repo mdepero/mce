@@ -604,7 +604,7 @@ function updateListItem(){
   
   if(returnedData[0] == 'success'){
     $('#serverResponse').html("");
-    $('#serverResponse2').html("<b>Successfully updated field to  "+returnedData[1]+"</b><br/>");
+    $('#serverResponse2').html("<b>Successfully updated field from "+returnedData[1]+" to  "+returnedData[2]+"</b><br/>");
     fetchData( getItemList , $('#tableName').val(), "" );
 
   }else{
