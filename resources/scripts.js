@@ -373,7 +373,7 @@ function submitForm(){
     // Correct for short answer add on
     if(value.value.indexOf('"StudentID":') == -1){
       // was a short answer response, change value
-      value.value = value.name.replace("INSERT_VALUE_OF_SHORT_ANSWER",value.value);
+      value.value = value.name.replace("INSERT_VALUE_OF_SHORT_ANSWER",value.value).replace("'","''");
     }
 
 
