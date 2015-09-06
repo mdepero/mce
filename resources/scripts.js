@@ -14,6 +14,8 @@ var DEFAULT_ANI_SPEED = 1000;
 
 var FAST_ANI_SPEED = 600;
 
+var NUM_OF_OPTIONS = 3;
+
 // If current date is a month greater than (not inclusive) the months below, automatically jumps up to next semester. For example, if spring cutoff is 4 and the current month is 5, then the semester will default to next fall. If the fall cutoff is 11 and it is currently 12, it will default to next year's spring
 // NOTE: January = 0, February = 1, etc
 var SPRING_MONTH_CUTOFF = 3;// 3 = April, May starts jump to summer
@@ -864,9 +866,9 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table){
 
   var row = table.insertRow();
 
-  for(var i=1; i<=5; i++){
+  for(var i=1; i<=NUM_OF_OPTIONS; i++){
 
-    if(i==3)
+    if(i==(NUM_OF_OPTIONS/2))
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}' checked>";
     else
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>";
