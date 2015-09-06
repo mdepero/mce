@@ -352,8 +352,7 @@ if(isset($_REQUEST['get'])){
 		if($vars[2] != 'Name')
 			$sql = "UPDATE `mce_db`.`mce_".$vars[0]."` SET `".$vars[2]."` = '".$vars[4]."' WHERE `mce_".$vars[0]."`.`ID` = ".$vars[1].";";
 		else
-			$sql = "UPDATE `mce_db`.`mce_".$vars[0]."(`FirstName`,`LastName`) = ('".explode(' ',$vars[4],2)[0]."','".explode(' ',$vars[4],2)[1]."') WHERE `mce_".$vars[0]."`.`ID` = ".$vars[1].";";
-
+			$sql = "UPDATE `mce_db`.`mce_".$vars[0]." SET (`FirstName`,`LastName`) = ('".explode(' ',$vars[4],2)[0]."','".explode(' ',$vars[4],2)[1]."') WHERE `mce_".$vars[0]."`.`ID` = ".$vars[1].";";
 
 	    
 	    $result = mysqli_query($conn, $sql);

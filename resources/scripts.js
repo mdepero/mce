@@ -609,7 +609,7 @@ function updateListItem(){
 
   }else{
     
-    ('#serverResponse2').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
+    $('#serverResponse2').html("<b style='color:red;'>ERROR: Server returned an error updating database</b><br/>");
 
   }
 
