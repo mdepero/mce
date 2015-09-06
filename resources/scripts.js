@@ -867,7 +867,7 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table){
 
   for(var i=1; i<=NUM_OF_OPTIONS; i++){
 
-    if(i==(NUM_OF_OPTIONS/2))
+    if(i==((NUM_OF_OPTIONS+1)/2))
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}' checked>";
     else
       var cell = row.insertCell().innerHTML= "<input type='radio' name='"+StudentID+"_"+ClassID+"_"+QuestionID+"' value='{\"StudentID\": \""+StudentID+"\",\"ClassID\": \""+ClassID+"\",\"QuestionID\": \""+QuestionID+"\", \"Value\":\""+i+"\"}'>";
