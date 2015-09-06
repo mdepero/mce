@@ -266,7 +266,7 @@ function startForms(){
 
     $('#forms').append( '<h3 id="name_'+index+'">'+$('label[for="'+value.id+'"]').html()+'</h3>');
 
-    $('#forms').append( '<div id="key_'+index+'">'+OPTIONS_KEY+'</div>');
+    $('#forms').append( '<div id="key_'+index+'" style="display:none;">'+OPTIONS_KEY+'</div>');
 
     $('#forms').append( '<table id="form_'+index+'" class="radios"></table>' );
 
@@ -296,7 +296,7 @@ function startForms(){
 
   $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#3").show();
-    $("#forms h2,h3,table,div").hide();
+    $("#forms h2,h3,table").hide();
     $("#forms").promise().done(function() { nextForm(); });// Wait until all of the inner elements of forms have been hidden, then begin nextForm
   });
 
