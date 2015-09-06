@@ -117,11 +117,11 @@ if(isset($_REQUEST['get'])){
 			else
 				$return .= ', ';
 
-			$sql = "SELECT c.ID,cl.ShortName,cl.LongName FROM  mce_class c left join mce_tl_classlist cl on c.ClassTypeID = cl.ID where c.ID = ".$classID;
+			$sql = "SELECT c.ID,c.Section,cl.ShortName,cl.LongName FROM  mce_class c left join mce_tl_classlist cl on c.ClassTypeID = cl.ID where c.ID = ".$classID;
 		    $result = mysqli_query($conn, $sql);
 		    $row = mysqli_fetch_assoc($result);
 
-			$return .= '{"Class": {"Name": "'.$row['ShortName'].' - '.$row['LongName'].'","ID":"'.$row['ID'].'"},"Students": {';
+			$return .= '{"Class": {"Name": "'.$row['ShortName'].' - '.$row['LongName'].' - '.$row['Section'].'","ID":"'.$row['ID'].'"},"Students": {';
 
 		    // Create List of students in each class [3]
 		    $sql = "SELECT s.ID,s.LastName,s.FirstName FROM mce_student s where EXISTS( SELECT * FROM mce_class c where c.ID = '".$classID."' and c.StudentList LIKE CONCAT('%',s.ID,'%')) order by s.LastName asc";

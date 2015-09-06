@@ -283,12 +283,17 @@ function startForms(){
 
       row.insertCell().innerHTML = "";
 
+      var buffer = "";
+      for(var i = 1;i<=NUM_OF_OPTIONS;i++){
+        buffer += "<td></td>";
+      }
+
       if(index < formCheckBoxes.length-1){
 
-        $('#form_'+index).append( '<tr><td></td><td></td><td></td><td></td><td></td><td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm();">Next Student</button></td></tr>' );
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm();">Next Student</button></td></tr>' );
       }else{
 
-        $('#form_'+index).append( '<tr><td></td><td></td><td></td><td></td><td></td><td><button class="btn btn-success" id="submit" onclick="javascript:submitForm();">Submit</button></td></tr>' );
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-success" id="submit" onclick="javascript:submitForm();">Submit</button></td></tr>' );
       }
 
   });
