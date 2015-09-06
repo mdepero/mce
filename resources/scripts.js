@@ -378,7 +378,7 @@ function submitForm(){
       value.value = value.name.replace("INSERT_VALUE_OF_SHORT_ANSWER",value.value);
     }
 
-    console.log("got past checkpoint 1");
+    console.log("got past checkpoint 1:"+ value);
 
 
     if(first){
