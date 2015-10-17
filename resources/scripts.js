@@ -284,10 +284,10 @@ function startForms(){
 
       if(index < formCheckBoxes.length-1){
 
-        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm();">Next Student</button></td></tr>' );
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm(this);">Next Student</button></td></tr>' );
       }else{
 
-        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-success" id="submit" onclick="javascript:submitForm();">Submit</button></td></tr>' );
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-success" id="submit" onclick="javascript:submitForm(this);">Submit</button></td></tr>' );
       }
       // End Top Buttons
 
@@ -306,10 +306,10 @@ function startForms(){
 
       if(index < formCheckBoxes.length-1){
 
-        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm();">Next Student</button></td></tr>' );
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm(this);">Next Student</button></td></tr>' );
       }else{
 
-        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-success" id="submit" onclick="javascript:submitForm();">Submit</button></td></tr>' );
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-success" id="submit" onclick="javascript:submitForm(this);">Submit</button></td></tr>' );
       }
 
   });
@@ -318,13 +318,18 @@ function startForms(){
   $("#2").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#3").show();
     $("#forms h2,h3,table").hide();
-    $("#forms").promise().done(function() { nextForm(); });// Wait until all of the inner elements of forms have been hidden, then begin nextForm
+    $("#forms").promise().done(function() { nextForm(null); });// Wait until all of the inner elements of forms have been hidden, then begin nextForm
   });
 
 }
 
 var lastClass = "";
-function nextForm(){
+function nextForm(button){
+
+  if(button != null){
+    button.disabled = true;
+
+  }
 
 
   // new class, move to next class header
@@ -377,7 +382,7 @@ function nextForm(){
   if(!first){
     toggleFinalSubmit *= -1;
     console.log("toggled flipped to " + toggleFinalSubmit);
-    submitForm();
+    submitForm(null);
   }
 
 }
@@ -385,7 +390,12 @@ function nextForm(){
 
 
 
-function submitForm(){
+function submitForm(button){
+
+  if(button != null){
+    button.disabled = true;
+
+  }
 
   // submit on each query. By toggling the above int, detect if last submit or just one
   toggleFinalSubmit *= -1;
