@@ -376,6 +376,7 @@ function nextForm(){
   // submit on each next. By toggling the above int, detect if last submit or just one.
   if(!first){
     toggleFinalSubmit *= -1;
+    console.log("toggled flipped to " + toggleFinalSubmit);
     submitForm();
   }
 
@@ -388,6 +389,7 @@ function submitForm(){
 
   // submit on each query. By toggling the above int, detect if last submit or just one
   toggleFinalSubmit *= -1;
+  console.log("toggled flipped to on submit " + toggleFinalSubmit);
 
   var checkedResponses = $('#form_'+(formNumber)+' input:radio:checked, #form_'+(formNumber)+' .shortAnswers');
   var responseJSON = '[[';
