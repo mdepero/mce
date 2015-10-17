@@ -347,10 +347,13 @@ function nextForm(){
   }
 
 
+  var first = false;
 
 
   // new class, move to next class header
   if(formNumber == -1){
+
+    first = true;
 
     console.log("Just showing new name and form");
     formNumber++;
@@ -373,7 +376,8 @@ function nextForm(){
   toggleFinalSubmit *= -1;
 
   // submit on each next. By toggling the above int, detect if last submit or just one.
-  submitForm();
+  if(!first)
+    submitForm();
 
 }
 
@@ -385,7 +389,7 @@ function submitForm(){
   // submit on each query. By toggling the above int, detect if last submit or just one
   toggleFinalSubmit *= -1;
 
-  var checkedResponses = $('#form_'+(formNumber-1)+' input:radio:checked, #form_'+(formNumber-1)+' .shortAnswers');
+  var checkedResponses = $('#form_'+(formNumber)+' input:radio:checked, #form_'+(formNumber)+' .shortAnswers');
   var responseJSON = '[[';
 
   var first = true;
@@ -431,8 +435,8 @@ function submitForm(){
   //alert(responseJSON);
 
   // don't submit on the first nextForm to allow first form to load
-  console.log("FornNumber on submit: "+formNumber)
-  if(formNumber>0)
+  console.log("FormNumber on submit: "+formNumber)
+  if(formNumber>=0)
     fetchData(sendForm, responseJSON, "");
 
 }
