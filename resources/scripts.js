@@ -1007,15 +1007,17 @@ function newCheckBox( value, label, name){
   checkID++;
 
   var checkDisable = "";
+  var disabledClass = "";
 
   if(label.indexOf("&&DISABLE&&") > -1){
-    console.log("Disabled a Checkbox.");
+
     checkDisable = "disabled";
+    disabledClass = ' class="disabledCheck" '
     label = label.replace("&&DISABLE&&","");
 
   }
 
-  return '<tr><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="check_' +checkID+ '" '+checkDisable+'></td><td><label for="check_'+checkID+'">'+label+'</label></td></tr>';
+  return '<tr><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="check_' +checkID+ '" '+checkDisable+'></td><td><label for="check_'+checkID+'"'+disabledClass+'>'+label+'</label></td></tr>';
 
 }
 

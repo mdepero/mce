@@ -49,6 +49,11 @@ table td{
 
 }
 
+.disabledCheck{
+
+	color: #ccc;
+}
+
 .radios td{
 	padding: 4px 0px;
 	text-align:center;
