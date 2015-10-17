@@ -451,7 +451,7 @@ function sendForm(){
 
     }else{
 
-      $("#error").html("ERROR: An error occured attempting to subit the previous form.");
+      $("#error").html("ERROR: An error occured attempting to submit the previous form.");
 
     }
 
