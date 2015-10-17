@@ -1009,6 +1009,7 @@ function newCheckBox( value, label, name){
   var checkDisable = "";
 
   if(label.indexOf("&&DISABLE&&") > -1){
+    console.log("Disabled a Checkbox.");
     checkDisable = "disabled";
     label = label.replace("&&DISABLE&&","");
 
