@@ -395,8 +395,8 @@ function submitForm(){
 
 
     // remove processed items from future submissions, allows for submission of content on each next rather than all at end
-    value.prop( "checked", false );
-    value.attr( "class" , "");
+    value.checked = false;
+    value.className = "";
 
     // Correct for short answer add on
     if(value.value.indexOf('"StudentID":') == -1){
