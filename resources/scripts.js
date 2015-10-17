@@ -385,7 +385,7 @@ function submitForm(){
   // submit on each query. By toggling the above int, detect if last submit or just one
   toggleFinalSubmit *= -1;
 
-  var checkedResponses = $('#form_'+(formNumber)+' input:radio:checked, #form_'+(formNumber)+' .shortAnswers');
+  var checkedResponses = $('#form_'+(formNumber-1)+' input:radio:checked, #form_'+(formNumber-1)+' .shortAnswers');
   var responseJSON = '[[';
 
   var first = true;
@@ -431,7 +431,7 @@ function submitForm(){
   //alert(responseJSON);
 
   // don't submit on the first nextForm to allow first form to load
-  if(formNumber>=0)
+  if(formNumber>0)
     fetchData(sendForm, responseJSON, "");
 
 }
@@ -451,13 +451,13 @@ function sendForm(){
 
     }else{
 
-      $("#error").html("ERROR: An error occured attempting to submit the previous form.");
+      // not the final submit
 
     }
 
   }else{
 
-    $("#error").html("An error occured attempting to submit your forms.");
+    $("#error").html("ERROR: An error occured attempting to submit the previous form.");
   }
 
 }
