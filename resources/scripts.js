@@ -385,7 +385,7 @@ function submitForm(){
   // submit on each query. By toggling the above int, detect if last submit or just one
   toggleFinalSubmit *= -1;
 
-  var checkedResponses = $('#forms input:radio:checked, .shortAnswers');
+  var checkedResponses = $('#form_'+(formNumber-1)+' input:radio:checked, #form_'+(formNumber-1)+' .shortAnswers');
   var responseJSON = '[[';
 
   var first = true;
@@ -394,9 +394,6 @@ function submitForm(){
   $.each(checkedResponses, function(index,value){
 
 
-    // remove processed items from future submissions, allows for submission of content on each next rather than all at end
-    value.checked = false;
-    value.className = "";
 
     // Correct for short answer add on
     if(value.value.indexOf('"StudentID":') == -1){
@@ -433,7 +430,9 @@ function submitForm(){
 
   //alert(responseJSON);
 
-  fetchData(sendForm, responseJSON, "");
+  // don't submit on the first nextForm to allow first form to load
+  if(formNumber>0
+    fetchData(sendForm, responseJSON, "");
 
 }
 
