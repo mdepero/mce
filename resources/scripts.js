@@ -248,6 +248,11 @@ function callAddForms(){
 
 }
 
+
+var toggleFinalSubmit = -1;
+
+
+
 function startForms(){
 
   questions = returnedData;
@@ -270,6 +275,22 @@ function startForms(){
 
     $('#forms').append( '<table id="form_'+index+'" class="radios"></table>' );
 
+      
+      // Top Buttons
+      var buffer = "";
+      for(var i = 1;i<=NUM_OF_OPTIONS;i++){
+        buffer += "<td></td>";
+      }
+
+      if(index < formCheckBoxes.length-1){
+
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-primary" id="submit" onclick="javascript:nextForm();">Next Student</button></td></tr>' );
+      }else{
+
+        $('#form_'+index).append( '<tr>'+buffer+'<td><button class="btn btn-success" id="submit" onclick="javascript:submitForm();">Submit</button></td></tr>' );
+      }
+      // End Top Buttons
+
       $.each(questions, function(index2, value2) {
 
         newQuestionSet(value.value, value.name, value2["ID"], value2["Question"], $('#form_'+index)[0], index2 );
@@ -282,11 +303,6 @@ function startForms(){
       }
 
       row.insertCell().innerHTML = "";
-
-      var buffer = "";
-      for(var i = 1;i<=NUM_OF_OPTIONS;i++){
-        buffer += "<td></td>";
-      }
 
       if(index < formCheckBoxes.length-1){
 
@@ -354,12 +370,20 @@ function nextForm(){
   }
 
 
+  toggleFinalSubmit *= -1;
+
+  // submit on each next. By toggling the above int, detect if last submit or just one.
+  submitForm();
+
 }
 
 
 
 
 function submitForm(){
+
+  // submit on each query. By toggling the above int, detect if last submit or just one
+  toggleFinalSubmit *= -1;
 
   var checkedResponses = $('#forms input:radio:checked, .shortAnswers');
   var responseJSON = '[[';
@@ -370,9 +394,14 @@ function submitForm(){
   $.each(checkedResponses, function(index,value){
 
 
+    // remove processed items from future submissions, allows for submission of content on each next rather than all at end
+    value.prop( "checked", false );
+    value.attr( "class" , "");
+
     // Correct for short answer add on
     if(value.value.indexOf('"StudentID":') == -1){
-      // was a short answer response, change value
+
+      // was a short answer response, change value to combine previous system into short answer
       value.value = value.name.replace("INSERT_VALUE_OF_SHORT_ANSWER",value.value).replace("'","''");
     }
 
@@ -412,16 +441,25 @@ function sendForm(){
 
   if(returnedData[0] == "Success"){
 
-    $("#success").html("Your forms were successfully submitted.");
+
+    if(toggleFinalSubmit == 1){
+
+      // last form was the last one, display final page
+      $("#success").html("Your forms were successfully submitted.");
+        $("#3").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+          $("#4").fadeIn(DEFAULT_ANI_SPEED);
+        });
+
+    }else{
+
+      $("#error").html("ERROR: An error occured attempting to subit the previous form.");
+
+    }
 
   }else{
 
     $("#error").html("An error occured attempting to submit your forms.");
   }
-
-  $("#3").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
-    $("#4").fadeIn(DEFAULT_ANI_SPEED);
-  });
 
 }
 
