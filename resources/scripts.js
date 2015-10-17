@@ -431,6 +431,7 @@ function submitForm(){
   //alert(responseJSON);
 
   // don't submit on the first nextForm to allow first form to load
+  console.log("FornNumber on submit: "+formNumber)
   if(formNumber>0)
     fetchData(sendForm, responseJSON, "");
 
