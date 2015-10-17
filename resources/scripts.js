@@ -373,11 +373,11 @@ function nextForm(){
   }
 
 
-  toggleFinalSubmit *= -1;
-
   // submit on each next. By toggling the above int, detect if last submit or just one.
-  if(!first)
+  if(!first){
+    toggleFinalSubmit *= -1;
     submitForm();
+  }
 
 }
 
