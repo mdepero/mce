@@ -1001,11 +1001,20 @@ function newQuestionSet( StudentID, ClassID, QuestionID, Question, table, qNumbe
 /*
  * This function is for quickly creating check boxes with labels
  */
+ var checkID = 0
 function newCheckBox( value, label, name){
 
-  var randID = Math.floor(Math.random()*1000000);
+  checkID++;
 
-  return '<tr><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="' +randID+ '"></td><td><label for="'+randID+'">'+label+'</label></td></tr>';
+  var checkDisable = "";
+
+  if(name.indexOf("&&DISABLE&&") > -1){
+    checkDisable = "disabled";
+    name = name.replace("&&DISABLE&&","");
+
+  }
+
+  return '<tr><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="check_' +checkID+ '" '+checkDisable+'></td><td><label for="check_'+checkID+'">'+label+'</label></td></tr>';
 
 }
 

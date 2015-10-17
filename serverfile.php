@@ -132,7 +132,14 @@ if(isset($_REQUEST['get'])){
 		    		$first = false;
 		    	else
 		    		$return .= ", ";
-		    	$return .= '"'. $row['ID'] .'": "'.$row['LastName'].', '.$row['FirstName'].'"';
+
+				$check = mysql_query("SELECT * FROM mce_review WHERE StudentID ='"+$row['ID']+"' AND ClassID = '"+$classID+"' LIMIT 1");
+
+			    if(mysql_fetch_array($check) !== false)
+			        $return .= '"'. $row['ID'] .'": "&&DISABLE&&'.$row['LastName'].', '.$row['FirstName'].'"';// student already reviewed, add marker
+			    $return .= '"'. $row['ID'] .'": "'.$row['LastName'].', '.$row['FirstName'].'"';// student not reviwed yet, 
+
+		    	
 
 		    }
 
