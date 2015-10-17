@@ -1008,9 +1008,9 @@ function newCheckBox( value, label, name){
 
   var checkDisable = "";
 
-  if(name.indexOf("&&DISABLE&&") > -1){
+  if(label.indexOf("&&DISABLE&&") > -1){
     checkDisable = "disabled";
-    name = name.replace("&&DISABLE&&","");
+    label = label.replace("&&DISABLE&&","");
 
   }
 

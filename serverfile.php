@@ -133,13 +133,17 @@ if(isset($_REQUEST['get'])){
 		    	else
 		    		$return .= ", ";
 
-				$check = mysql_query("SELECT * FROM mce_review WHERE StudentID ='"+$row['ID']+"' AND ClassID = '"+$classID+"' LIMIT 1");
 
-			    if(mysql_fetch_array($check) !== false)
+
+		    	//$return .= '"'. $row['ID'] .'": "'.$row['LastName'].', '.$row['FirstName'].'"';
+
+		    	$sql = "SELECT * FROM mce_review WHERE StudentID ='" . $row['ID'] . "' AND ClassID = '" . $classID . "' LIMIT 1";
+				$check = mysqli_query($conn, $sql);
+
+			    if(mysqli_num_rows ( $check ) > 0)
 			        $return .= '"'. $row['ID'] .'": "&&DISABLE&&'.$row['LastName'].', '.$row['FirstName'].'"';// student already reviewed, add marker
-			    $return .= '"'. $row['ID'] .'": "'.$row['LastName'].', '.$row['FirstName'].'"';// student not reviwed yet, 
-
-		    	
+			    else
+			    	$return .= '"'. $row['ID'] .'": "'.$row['LastName'].', '.$row['FirstName'].'"';// student not reviwed yet, 
 
 		    }
 
