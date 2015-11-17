@@ -318,7 +318,7 @@ if(isset($_REQUEST['get'])){
 
 	    // Create List of Classes from professor and semester [2]
 	    if($table == "class"){
-			$sql = "SELECT cl.ShortName, c.ID, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID WHERE c.Active = 1";
+			$sql = "SELECT cl.ShortName, cl.LongName, c.ID, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID ORDER BY cl.ShortName ASC WHERE c.Active = 1";
 	    }else{
 	    	$sql = "SELECT * FROM  mce_".$table." WHERE Active = 1";
 	    }
@@ -337,7 +337,7 @@ if(isset($_REQUEST['get'])){
 	    	if($table == "tl_questionlist")
 	    		$return .= '{"Question":"'.$row['Question'].'", "":"", "ID": "'.$row['ID'].'"}';
 	    	if($table == "class")
-	    		$return .= '{"Name":"'.$row['ShortName'].' '.$row['Section'].'", "Faculty":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
+	    		$return .= '{"Name":"'.$row['ShortName'].' '.$row['Section'].'","Description":"'.$row['LongName'].'", "Faculty":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
 
 	    }
 
