@@ -337,7 +337,7 @@ if(isset($_REQUEST['get'])){
 	    	if($table == "tl_questionlist")
 	    		$return .= '{"Question":"'.$row['Question'].'", "":"", "ID": "'.$row['ID'].'"}';
 	    	if($table == "class")
-	    		$return .= '{"NOEDIT":"'.$row['ShortName'].' '.$row['Section'].'", "NOEDIT":"'.$row['LongName'].'", "NOEDIT":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
+	    		$return .= '{"NOEDIT1":"'.$row['ShortName'].' '.$row['Section'].'", "NOEDIT2":"'.$row['LongName'].'", "NOEDIT3":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
 
 	    }
 

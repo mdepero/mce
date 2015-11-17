@@ -563,10 +563,11 @@ function getItemList(){
           ret += '<td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+",'"+value[0]+'\');">X</button></td></tr>';
         }else{
 
-          if(index2 == "NOEDIT"){
+          if(index2.indexOf("NOEDIT") >= 0){
             ret += '<td onclick="alert(\'This field cannot be edited. You must delete this class and add it again.\');">'+value2+'</td>';
 
           }else{
+
             ret += '<td onclick="updateListItemCall(\''+value['ID']+'\',\''+index2+'\',\''+value2+'\');">'+value2+'</td>';
           }
         }
