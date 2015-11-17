@@ -544,6 +544,11 @@ function getReviews(){
 // =================================================================================================================================================
 
 
+function getFirstElement( data ) {
+        for (elem in data ) 
+            return elem;
+   }
+
 
 function getItemList(){
 
@@ -560,7 +565,7 @@ function getItemList(){
         notFirst = true;
 
         if(index2 == 'ID'){
-          ret += '<td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+",'"+value[0]+'\');">X</button></td></tr>';
+          ret += '<td><button type="button" class="btn-danger" onclick="retireListItemCall('+value['ID']+',\''+getFirstElement(value)+'\');">X</button></td></tr>';
         }else{
 
           if(index2.indexOf("NOEDIT") >= 0){

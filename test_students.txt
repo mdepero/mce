@@ -1,0 +1,29 @@
+	Name	Banner ID	Email	Major	Hours	Grade Mode	Level	Midterm Grade	Final Grade	Status	Date Added
+yes	Budd, Ali	+01435715	buddae@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	10-JUL-15
+yes	Cesaroni, Paxton	+01386363	cesarope@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Cuba, Nicki	+01420803	cubanf@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	07-APR-15
+yes	Davis, Megan	+01428342	davismm2@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	21-APR-15
+yes	Dotson, Ben	+01384234	dotsonbd@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	07-APR-15
+yes	Ferguson, Laura	+01384646	ferguslr@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Fitz, Maggie	+01428127	fitzml@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	21-APR-15
+yes	Fraylick, Macy	+01420046	fraylimc@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Goffena, Nicole	+01301562	goffenns@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	10-JUL-15
+yes	Guerin, Valerie	+01419053	guerinvi@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	21-APR-15
+yes	Holland, Katherine	+01374333	hollankv@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Ineson, Emily	+01433123	inesonea@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	21-APR-15
+yes	Landon, Megan	+01426061	landonmm@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	21-APR-15
+yes	Lawrence, Kate	+01431161	lawrenk3@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	10-JUL-15
+yes	Lombardo, Vincent	+01487008	lombarv@miamioh.edu	Middle Childhood Education	3	S	UG	Req	__	Web Registered	16-APR-15
+yes	Mack, Kelly	+01435661	mackkf@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	11-JUL-15
+yes	Marcotte, Toni	+01419192	marcotja@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	07-APR-15
+yes	Marshall, Miranda	+01406525	marshama@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	McCoy, Ariel	+01432599	mccoyaa@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Mickus, Amanda	+01421725	mickusal@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	10-JUL-15
+yes	Nandrasy, Morgan	+01396890	nandraml@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Piscopo, Emmie	+01387756	piscopme@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Schneider, Anna Beth	+01399689	schneiae@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	07-APR-15
+yes	Schultheis, Emily	+01425061	schulte4@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
+yes	Skelly, Brooke	+01424094	skellybb@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	10-JUL-15
+yes	South, Letta	+01182921	obaniola@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	14-APR-15
+yes	Talebi, Nicole	+01423186	talebin@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	06-APR-15
+yes	Trick, Tyler	+01433517	tricktj@miamioh.edu	Middle Childhood Education	3	S	UG	Opt	__	Web Registered	16-APR-15
