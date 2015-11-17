@@ -318,7 +318,7 @@ if(isset($_REQUEST['get'])){
 
 	    // Create List of Classes from professor and semester [2]
 	    if($table == "class"){
-			$sql = "SELECT cl.ShortName, cl.LongName, c.ID, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID ORDER BY cl.ShortName ASC WHERE c.Active = 1";
+			$sql = "SELECT cl.ShortName, cl.LongName, c.ID, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID WHERE c.Active = 1 ORDER BY cl.ShortName";
 	    }else{
 	    	$sql = "SELECT * FROM  mce_".$table." WHERE Active = 1";
 	    }
