@@ -485,7 +485,10 @@ function sendForm(){
 function nextClass(id){
 
   $("#section").val("");
+  $("#studentDataFile").val("");
   $("#classTypeInfo").html("");
+  $("#studentData").html("");
+
 
   $("#"+id).fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#2").fadeIn(DEFAULT_ANI_SPEED);
