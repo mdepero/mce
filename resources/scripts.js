@@ -482,14 +482,12 @@ function sendForm(){
 
 
 
-function nextClass(){
+function nextClass(id){
 
   $("#section").val("");
-  $("#facultyInfo").html("");
-  $("#semesterInfo").html("");
   $("#classTypeInfo").html("");
 
-  $("#4").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+  $("#"+id).fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#2").fadeIn(DEFAULT_ANI_SPEED);
   });
 
