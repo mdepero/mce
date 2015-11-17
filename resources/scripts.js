@@ -546,7 +546,7 @@ function getReviews(){
 
 function getFirstElement( data ) {
         for (elem in data ) 
-            return elem;
+            return data[elem];
    }
 
 
