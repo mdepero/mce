@@ -317,7 +317,12 @@ if(isset($_REQUEST['get'])){
 		$return = '[';
 
 	    // Create List of Classes from professor and semester [2]
-	    $sql = "SELECT * FROM  mce_".$table." WHERE Active = 1";
+	    if($table == "class"){
+			$sql = "SELECT cl.ShortName, c.ID, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID WHERE c.Active = 1";
+	    }else{
+	    	$sql = "SELECT * FROM  mce_".$table." WHERE Active = 1";
+	    }
+	    
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -331,6 +336,8 @@ if(isset($_REQUEST['get'])){
 	    		$return .= '{"ShortName":"'.$row['ShortName'].'","LongName": "'.$row['LongName'].'","ID": "'.$row['ID'].'"}';
 	    	if($table == "tl_questionlist")
 	    		$return .= '{"Question":"'.$row['Question'].'", "":"", "ID": "'.$row['ID'].'"}';
+	    	if($table == "class")
+	    		$return .= '{"Name":"'.$row['ShortName'].' '.$row['Section'].'", "Faculty":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
 
 	    }
 
