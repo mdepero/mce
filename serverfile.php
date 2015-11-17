@@ -59,7 +59,7 @@ if(isset($_REQUEST['get'])){
 
 
 	    // Generate list of active class semesters [1]
-	    $sql = "SELECT c.ID, c.Semester FROM  mce_class c inner join mce_tl_classlist cl on c.ClassTypeID = cl.ID where cl.Active = '1' group by c.Semester order by c.ID asc";
+	    $sql = "SELECT c.ID, c.Semester FROM  mce_class c inner join mce_tl_classlist cl on c.ClassTypeID = cl.ID where c.Active = '1' group by c.Semester order by c.ID asc";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -83,7 +83,7 @@ if(isset($_REQUEST['get'])){
 		$return = '{"Classes": {';
 
 	    // Create List of Classes from professor and semester [2]
-	    $sql = "SELECT c.ID,cl.ShortName,cl.LongName,c.Section FROM  mce_class c left join mce_tl_classlist cl on c.ClassTypeID = cl.ID where FacultyID = '".$_REQUEST['v1']."' and Semester = '".$_REQUEST['v2']."' order by cl.ShortName asc";
+	    $sql = "SELECT c.ID,cl.ShortName,cl.LongName,c.Section FROM  mce_class c left join mce_tl_classlist cl on c.ClassTypeID = cl.ID where FacultyID = '".$_REQUEST['v1']."' and Semester = '".$_REQUEST['v2']."' and c.Active = '1' order by cl.ShortName asc";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -318,7 +318,7 @@ if(isset($_REQUEST['get'])){
 
 	    // Create List of Classes from professor and semester [2]
 	    if($table == "class"){
-			$sql = "SELECT cl.ShortName, cl.LongName, c.ID, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID WHERE c.Active = 1 ORDER BY cl.ShortName";
+			$sql = "SELECT cl.ShortName, cl.LongName, c.ID, c.Semester, c.Section, f.FirstName, f.LastName FROM  mce_class c LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID WHERE c.Active = 1 ORDER BY cl.ShortName";
 	    }else{
 	    	$sql = "SELECT * FROM  mce_".$table." WHERE Active = 1";
 	    }
@@ -337,7 +337,7 @@ if(isset($_REQUEST['get'])){
 	    	if($table == "tl_questionlist")
 	    		$return .= '{"Question":"'.$row['Question'].'", "":"", "ID": "'.$row['ID'].'"}';
 	    	if($table == "class")
-	    		$return .= '{"NOEDIT1":"'.$row['ShortName'].' '.$row['Section'].'", "NOEDIT2":"'.$row['LongName'].'", "NOEDIT3":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
+	    		$return .= '{"NOEDIT1":"'.$row['ShortName'].' '.$row['Section'].'", "NOEDIT1.5":"'.$row['Semester'].'", "NOEDIT2":"'.$row['LongName'].'", "NOEDIT3":"'.$row['LastName'].', '.$row['FirstName'].'", "ID": "'.$row['ID'].'"}';
 
 	    }
 

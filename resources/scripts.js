@@ -482,6 +482,17 @@ function sendForm(){
 
 
 
+function nextClass(){
+
+  $("#4").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+    $("#2").fadeIn(DEFAULT_ANI_SPEED);
+  });
+
+}
+
+
+
+
 
 
 
@@ -569,7 +580,7 @@ function getItemList(){
         }else{
 
           if(index2.indexOf("NOEDIT") >= 0){
-            ret += '<td onclick="alert(\'This field cannot be edited. You must delete this class and add it again.\');">'+value2+'</td>';
+            ret += '<td onclick="alert(\'This field cannot be edited. Please edit it\'s associated course, or delete it and create a new one.\');">'+value2+'</td>';
 
           }else{
 
