@@ -484,6 +484,8 @@ function sendForm(){
 
 function nextClass(){
 
+  $("#section").val("");
+
   $("#4").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
     $("#2").fadeIn(DEFAULT_ANI_SPEED);
   });
