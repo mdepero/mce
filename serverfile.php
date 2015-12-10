@@ -226,6 +226,9 @@ if(isset($_REQUEST['get'])){
 
 		// array of students, each student array of reviews, each review array of answers
 
+echo "Confidential Information, contact matt for access to review data";
+
+/*
 	    $return = '[';
 
 	    // Create List of Professors [0]
@@ -286,6 +289,9 @@ if(isset($_REQUEST['get'])){
 	    $return .= "]}]} ]";
 
 	    echo $return;
+*/
+
+
 	}// end getReviews
 
 
