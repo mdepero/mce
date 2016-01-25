@@ -84,7 +84,19 @@ title: "Add a Class"
 
 		<br />
 
-		<button type="button" class="btn-primary" onclick="setStudents();">Submit</button>
+		<button type="button" class="btn-primary" onclick="setStudents();">Submit File</button>
+
+		<br /><br /><h4>Add Student Manually</h4>
+		<div class="row">
+			<div class="col-lg-3 col-md-6"><input type="text" class="form-control" maxlength="100" id="Man_FirstName" placeholder="First Name"></div>
+			<div class="col-lg-3 col-md-6"><input type="text" class="form-control" maxlength="100" id="Man_LastName" placeholder="Last Name"></div>
+			<div class="col-lg-3 col-md-6"><input type="text" class="form-control" maxlength="100" id="Man_UniqueID" placeholder="Unique ID (not email)"></div>
+			<div class="col-lg-3 col-md-6"><input type="text" class="form-control" maxlength="100" id="Man_Major" placeholder="Major"></div>
+		</div>
+
+		<br />
+		
+		<button type="button" class="btn-primary" onclick="addManStudent();">Add Single Student</button>
 
 		<br /> <br /><button type="button" class="btn-secondary" onclick="nextClass(3);">Back</button>
 

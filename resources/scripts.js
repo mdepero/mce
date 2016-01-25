@@ -966,17 +966,9 @@ var openFile = function(event) {
       });
     }
 
-    var ret = "<tr><th>Name</th><th>UniqueID</th><th>Major</th></tr>";
-
     console.log("Text File Uploaded Successfully" );
 
-    $.each(studentData, function(index, value) {
-      ret += '<tr><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td></tr>';
-    });
-    $('#studentData').html(ret);
-    $('#studentCount').html('('+studentData.length+')');
-    $('#studentDataHeader').fadeIn(DEFAULT_ANI_SPEED);
-    $('#studentData').fadeIn(DEFAULT_ANI_SPEED);
+    displayCurrentStudentData();
 
 
   };// END reader.onload
@@ -986,10 +978,42 @@ var openFile = function(event) {
 };
 
 
+function displayCurrentStudentData(){
+
+  var ret = "<tr><th>Name</th><th>UniqueID</th><th>Major</th><th>Remove</th></tr>";
+
+    $.each(studentData, function(index, value) {
+      ret += '<tr id="studentDataRow_'+index+'"><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td><td><button type="button" class="btn-danger" onclick="removeStudent(' + index +'">X</button></td></tr>';
+    });
+    $('#studentData').html(ret);
+    $('#studentCount').html('('+studentData.length+')');
+    $('#studentDataHeader').fadeIn(DEFAULT_ANI_SPEED);
+    $('#studentData').fadeIn(DEFAULT_ANI_SPEED);
+}
 
 
 
+function removeStudent( i ){
 
+  studentData.splice(i, 1);
+
+  displayCurrentStudentData();
+
+
+}
+
+
+function addManStudent(){
+  studentData.push({
+      "FirstName":$('#Man_FirstName').val(),
+      "LastName":$('#Man_LastName').val(),
+      "UniqueID":$('#Man_UniqueID').val().replace("@miamioh.edu","").toLowerCase(),
+      "Major":$('#Man_Major').val()
+    });
+
+  displayCurrentStudentData();
+  
+}
 
 
 
