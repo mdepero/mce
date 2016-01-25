@@ -1024,10 +1024,33 @@ function addManStudent(){
 
 
 
+function callDeleteReview( classID, studentID ){
+
+  if(confirm("Are you sure you want to delete this review?")){
+
+    fetchData(deleteReview, classID, studentID );
+
+  }
+
+}
 
 
+function deleteReview(){
 
+  $('#serverResponse').html("");
 
+  if(returnedData['status'] == 'success'){
+    $('#class_'+returnedData['classID']+'_student_"'+returnedData['studentID']+' input').prop('disabled',false);
+    $('#class_'+returnedData['classID']+'_student_"'+returnedData['studentID']+' label').removeClass('disabledCheck');
+    $('#class_'+returnedData['classID']+'_student_"'+returnedData['studentID']+' .disabledCheck').remove();
+  
+  }else{
+
+    $('#serverResponse').html("<b style='color:red;'>An Error Occurred Deleting the Review. Review not deleted.</b><br/>");
+
+  }
+
+}
 
 
 
@@ -1076,16 +1099,19 @@ function newCheckBox( value, label, name){
 
   var checkDisable = "";
   var disabledClass = "";
+  var deleteReview = "";
 
   if(label.indexOf("&&DISABLE&&") > -1){
 
     checkDisable = "disabled";
     disabledClass = ' class="disabledCheck" '
     label = label.replace("&&DISABLE&&","");
+    deleteReview = '<td class="disabledCheck">Already reviewed. <button type="button" class="btn-default" onclick="callDeleteReview(' + name +', ' + value + ');">Delete Review</button></td>';
+
 
   }
 
-  return '<tr><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="check_' +checkID+ '" '+checkDisable+'></td><td><label for="check_'+checkID+'"'+disabledClass+'>'+label+'</label></td></tr>';
+  return '<tr id="class_'+name+'_student_'+value+'"><td><input type="checkbox" name="' + name + '" value="'+ value + '" id="check_' +checkID+ '" '+checkDisable+'></td><td><label for="check_'+checkID+'"'+disabledClass+'>'+label+'</label></td>'+deleteReview+'</tr>';
 
 }
 

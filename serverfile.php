@@ -137,7 +137,7 @@ if(isset($_REQUEST['get'])){
 
 		    	//$return .= '"'. $row['ID'] .'": "'.$row['LastName'].', '.$row['FirstName'].'"';
 
-		    	$sql = "SELECT * FROM mce_review WHERE StudentID ='" . $row['ID'] . "' AND ClassID = '" . $classID . "' LIMIT 1";
+		    	$sql = "SELECT * FROM mce_review WHERE StudentID ='" . $row['ID'] . "' AND ClassID = '" . $classID . "' AND Active = 1 LIMIT 1";
 				$check = mysqli_query($conn, $sql);
 
 			    if(mysqli_num_rows ( $check ) > 0)
@@ -216,6 +216,19 @@ if(isset($_REQUEST['get'])){
 	    }
 
 	    echo '["Success"]';
+	}
+
+
+	if($_REQUEST['get'] == "deleteReview"){
+
+		$sql = "UPDATE `mce_review` SET `Active` = '0' WHERE `ClassID` = ".$_REQUEST['v1']." AND `StudentID` = ".$_REQUEST['v2'].";";
+		$result = mysqli_query($conn, $sql);
+		if(!$result){
+			die('{"status":"error","message":"failed to update table"}');
+		}else{
+			die('{"status":"success","ClassID":"'.$_REQUEST['v1'].'","StudentID":"'.$_REQUEST['v2'].'"}');
+		}
+
 	}
 
 
