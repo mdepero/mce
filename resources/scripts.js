@@ -1040,9 +1040,9 @@ function deleteReview(){
   $('#serverResponse').html("");
 
   if(returnedData['status'] == 'success'){
-    $('#class_'+returnedData['classID']+'_student_"'+returnedData['studentID']+' input').prop('disabled',false);
-    $('#class_'+returnedData['classID']+'_student_"'+returnedData['studentID']+' label').removeClass('disabledCheck');
-    $('#class_'+returnedData['classID']+'_student_"'+returnedData['studentID']+' .disabledCheck').remove();
+    $('#class_'+returnedData['classID']+'_student_'+returnedData['studentID']+' input').prop('disabled',false);
+    $('#class_'+returnedData['classID']+'_student_'+returnedData['studentID']+' label').removeClass('disabledCheck');
+    $('#class_'+returnedData['classID']+'_student_'+returnedData['studentID']+' .disabledCheck').remove();
   
   }else{
 

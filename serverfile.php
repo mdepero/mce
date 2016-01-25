@@ -226,7 +226,7 @@ if(isset($_REQUEST['get'])){
 		if(!$result){
 			die('{"status":"error","message":"failed to update table"}');
 		}else{
-			die('{"status":"success","ClassID":"'.$_REQUEST['v1'].'","StudentID":"'.$_REQUEST['v2'].'"}');
+			die('{"status":"success","classID":"'.$_REQUEST['v1'].'","studentID":"'.$_REQUEST['v2'].'"}');
 		}
 
 	}
