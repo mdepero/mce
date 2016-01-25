@@ -1010,6 +1010,11 @@ function addManStudent(){
       "UniqueID":$('#Man_UniqueID').val().replace("@miamioh.edu","").toLowerCase(),
       "Major":$('#Man_Major').val()
     });
+  $('#Man_FirstName').val("");
+  $('#Man_LastName').val("");
+  $('#Man_UniqueID').val("");
+  $('#Man_Major').val("");
+
 
   displayCurrentStudentData();
 
