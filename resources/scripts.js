@@ -983,7 +983,7 @@ function displayCurrentStudentData(){
   var ret = "<tr><th>Name</th><th>UniqueID</th><th>Major</th><th>Remove</th></tr>";
 
     $.each(studentData, function(index, value) {
-      ret += '<tr id="studentDataRow_'+index+'"><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td><td><button type="button" class="btn-danger" onclick="removeStudent(' + index +'">X</button></td></tr>';
+      ret += '<tr id="studentDataRow_'+index+'"><td>'+value['FirstName']+' '+value['LastName']+'</td><td>'+value['UniqueID']+'</td><td>'+value['Major']+'</td><td><button type="button" class="btn-danger" onclick="removeStudent(' + index +');">X</button></td></tr>';
     });
     $('#studentData').html(ret);
     $('#studentCount').html('('+studentData.length+')');
@@ -1012,7 +1012,7 @@ function addManStudent(){
     });
 
   displayCurrentStudentData();
-  
+
 }
 
 
