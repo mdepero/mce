@@ -1154,7 +1154,7 @@ function displayReviewDetail( id ){
 }
 
 
-function getStudentReport(){
+function getReviewDetails(){
 
   if( returnedData['Answers'].length == 0){
    
