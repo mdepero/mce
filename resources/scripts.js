@@ -1154,7 +1154,7 @@ function getStudentReport(){
 
   $('#student_'+returnedData['StudentID']).append(ret);
 
-  displayStudentReviews();
+  displayStudentReviews( returnedData['StudentID'] );
 
 }
 
@@ -1199,7 +1199,7 @@ function getReviewDetails(){
 
   $('#review_'+returnedData['ReviewID']).append( ret );
 
-  displayReviewDetail();
+  displayReviewDetail( returnedData['ReviewID'] );
 
 }
 
