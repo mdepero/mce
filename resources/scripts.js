@@ -1122,8 +1122,8 @@ function displayStudentReviews( id ){
 
   fetchData(getStudentReport, $("#semester").html(), id );
 
-  $('#studentClick').removeClass('clickable');
-  $('#studentClick').prop('onclick',null).off('click');
+  $('#studentClick_'+id).removeClass('clickable');
+  $('#studentClick_'+id).prop('onclick',null).off('click');
 
 
 }
