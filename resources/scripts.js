@@ -1189,7 +1189,7 @@ function getReviewDetails(){
 
     });
 
-    ret += '#review_'+returnedData['ReviewID']).append('</table>';
+    ret += '</table>';
 
   }
 
