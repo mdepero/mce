@@ -1137,11 +1137,45 @@ function getStudentReport(){
 
   $.each(returnedData['Reviews'], function(index, value) {
 
-    $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayreviewDetail(\''+value['ID']+'\');">'+value['ShortName']+' '+value['Section']+' - '+value['LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'['+value['Average']+']</span></div>');
+    $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayReviewDetail(\''+value['ID']+'\');">'+value['Class_ShortName']+' '+value['Section']+' - '+value['Class_LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'<!--['+value['Average']+']--></span></div>');
 
   });
 
 }
+
+function displayReviewDetail( id ){
+
+  fetchData(getReviewDetails, id, "" );
+
+  $('#reviewClick_'+id).removeClass('clickable');
+  $('#reviewClick_'+id).prop('onclick',null).off('click');
+
+
+}
+
+
+function getStudentReport(){
+
+  if( returnedData['Answers'].length == 0){
+   
+    $('#review_'+returnedData['ReviewID']).append('<div class="review">An Error Occured. No responses to report</div>');
+  
+  }else{
+
+    $('#review_'+returnedData['ReviewID']).append('<table id="answersFor_'+returnedData['ReviewID']+'" class="review">');
+
+    $.each(returnedData['Answers'], function(index, value) {
+
+      $('#answersFor_'+returnedData['ReviewID']).append('<tr id="answer_'+value['ID']+'"><td>'+value['Question']+'</td><td>'+value['Value']+'</td></tr>');
+
+    });
+
+    $('#review_'+returnedData['ReviewID']).append('</table>');
+
+  }
+
+}
+
 
 
 
