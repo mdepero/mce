@@ -1158,7 +1158,7 @@ function getStudentReport(){
 
 function displayReviewDetail( id ){
 
-  if ($('#review_'+id).find('#answersFor_'+id).length){
+  if ($('#review_'+id).find('#wrapperFor_'+id).length){
     // already queried
     $('#wrapperFor_'+id).slideToggle(FAST_ANI_SPEED);
 
