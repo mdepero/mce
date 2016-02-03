@@ -1076,7 +1076,7 @@ function getSemesterList(){
 
   $.each(returnedData, function(index, value) {
 
-    $('#semesters').append('<button type="button" class="btn btn-default" onclick="loadStudentsFromSemester(\"'+value+'\");">'+value+'</button><br />');
+    $('#semesters').append('<button type="button" class="btn btn-default" onclick="loadStudentsFromSemester(\\"'+value+'\\");">'+value+'</button><br />');
 
   });
 

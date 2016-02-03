@@ -469,7 +469,7 @@ echo "Confidential Information, contact matt for access to review data";
 
 		$return = '[';
 
-	    $sql = "SELECT a.ID, a.Value, q.Question FROM  mce_answer a LEFT JOIN mce_tl_questionlist q on a.QuestionID = q.ID WHERE ReviewID = '"$_REQUEST['v1']"'";
+	    $sql = "SELECT a.ID, a.Value, q.Question FROM  mce_answer a LEFT JOIN mce_tl_questionlist q on a.QuestionID = q.ID WHERE ReviewID = '".$_REQUEST['v1']."'";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
