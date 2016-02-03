@@ -1137,7 +1137,7 @@ function getStudentReport(){
 
   $.each(returnedData['Reviews'], function(index, value) {
 
-    $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayReviewDetail(\''+value['ID']+'\');">'+value['Class_ShortName']+' '+value['Section']+' - '+value['Class_LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'<!--['+value['Average']+']--></span></div>');
+    $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayReviewDetail(\''+value['ID']+'\');">'+value['Class_ShortName']+' '+value['Section']+' - '+value['Class_LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'<!--['+value['Average']+']--></span></div>');
 
   });
 
@@ -1145,10 +1145,14 @@ function getStudentReport(){
 
 function displayReviewDetail( id ){
 
-  fetchData(getReviewDetails, id, "" );
+  if ($('#review_'+id).find('#answersFor_'+id).length){
+    // already queried
+    $('#answersFor_'+id).slideToggle();
 
-  $('#reviewClick_'+id).removeClass('clickable');
-  $('#reviewClick_'+id).prop('onclick',null).off('click');
+  }else{
+    // needs queried
+    fetchData(getReviewDetails, id, "" );
+  }
 
 
 }
@@ -1162,7 +1166,7 @@ function getReviewDetails(){
   
   }else{
 
-    $('#review_'+returnedData['ReviewID']).append('<table id="answersFor_'+returnedData['ReviewID']+'" class="review">');
+    $('#review_'+returnedData['ReviewID']).append('<table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">');
 
     $.each(returnedData['Answers'], function(index, value) {
 
