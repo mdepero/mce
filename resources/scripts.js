@@ -1120,7 +1120,7 @@ function getStudentListForSemester(){
 
 function displayStudentReviews( id ){
 
-  fetchData(getStudentReport, id, $("#semester").html() );
+  fetchData(getStudentReport, $("#semester").html(), id );
 
   $('#studentClick').removeClass('clickable');
   $('#studentClick').prop('onclick',null).off('click');
