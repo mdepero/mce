@@ -347,7 +347,7 @@ echo "Confidential Information, contact matt for access to review data";
 
 		$return = '[';
 
-	    $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE '%' + s.ID + '%')";
+	    $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE CONCAT('%', s.ID, '%') ) ORDER BY LastName";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -357,7 +357,7 @@ echo "Confidential Information, contact matt for access to review data";
 	    		$return .= ", ";
 
 
-	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReivewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
+	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReviewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
 	    	$countQuery = mysqli_query($conn, $sql);
 	    	$sum = 0;
 	    	$count = 0;
@@ -370,8 +370,13 @@ echo "Confidential Information, contact matt for access to review data";
 
 	    	}
 
+	    	if($count == 0)
+	    		$avg = "No Reviews Yet";
+	    	else
+	    		$avg = (($sum*1.00)/$count);
 
-	    	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":'.(($sum*1.00)/$count).'}';
+
+	    	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":"'.$avg.'"}';
 
 	    }
 
@@ -411,48 +416,12 @@ echo "Confidential Information, contact matt for access to review data";
 
 	    	}
 
-	    	$return .= '{"ID":"'.$row['ID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":'.(($sum*1.00)/$count).'}';
-
-	    }
-
-	    $return .= "]";
-
-	    echo $return;
-
-
-	}// end getFullStudentList
-
-
-
-	if($_REQUEST['get'] == "getStudentListForSemester"){
-
-		$return = '[';
-
-	    $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE '%' + s.ID + '%')";
-	    $result = mysqli_query($conn, $sql);
-	    $first = true;
-	    while($row = mysqli_fetch_assoc($result)){
-	    	if($first == true)
-	    		$first = false;
+	    	if($count == 0)
+	    		$avg = "No Reviews Yet";
 	    	else
-	    		$return .= ", ";
+	    		$avg = (($sum*1.00)/$count);
 
-
-	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReivewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
-	    	$countQuery = mysqli_query($conn, $sql);
-	    	$sum = 0;
-	    	$count = 0;
-	    	while($queryData = mysqli_fetch_assoc($countQuery)){
-
-	    		if(is_int($queryData['Value'])){
-	    			$sum += $queryData['Value'];
-	    			$count++;
-	    		}
-
-	    	}
-
-
-	    	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":'.(($sum*1.00)/$count).'}';
+	    	$return .= '{"ID":"'.$row['ID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
 
 	    }
 
@@ -462,6 +431,51 @@ echo "Confidential Information, contact matt for access to review data";
 
 
 	}// end getFullStudentList
+
+
+
+	// if($_REQUEST['get'] == "getStudentListForSemester"){
+
+	// 	$return = '[';
+
+	//     $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE CONCAT('%', s.ID, '%') )";
+	//     $result = mysqli_query($conn, $sql);
+	//     $first = true;
+	//     while($row = mysqli_fetch_assoc($result)){
+	//     	if($first == true)
+	//     		$first = false;
+	//     	else
+	//     		$return .= ", ";
+
+
+	//     	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReviewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
+	//     	$countQuery = mysqli_query($conn, $sql);
+	//     	$sum = 0;
+	//     	$count = 0;
+	//     	while($queryData = mysqli_fetch_assoc($countQuery)){
+
+	//     		if(is_int($queryData['Value'])){
+	//     			$sum += $queryData['Value'];
+	//     			$count++;
+	//     		}
+
+	//     	}
+
+	//     	if($count == 0)
+	//     		$avg = "N/A";
+	//     	else
+	//     		$avg = (($sum*1.00)/$count);
+
+	//     	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":"'.$avg.'"}';
+
+	//     }
+
+	//     $return .= "]";
+
+	//     echo $return;
+
+
+	// }// end getFullStudentList
 
 
 
@@ -694,7 +708,7 @@ echo "Confidential Information, contact matt for access to review data";
 	    	$sql = "SELECT * FROM  mce_student WHERE Active = 1 and UniqueID = '".$student['UniqueID']."'";
 	    	$result = mysqli_query($conn, $sql);
 	    	if(!$result){
-		    	die('["error","Failed to search for instnaces of student alread in database. UniqueID: '.$student['UniqueID'].'"]');
+		    	die('["error","Failed to search for instances of student already in database. UniqueID: '.$student['UniqueID'].'"]');
 		    }
 	    	if( mysqli_num_rows($result) > 1 ){
 	    		die('["error","Fatal Error! A student UniqueID is associated to more than one student: '.$student['UniqueID'].'. Please report this error to system admin (link should be at the bottom of this site)"]');

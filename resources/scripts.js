@@ -959,8 +959,8 @@ var openFile = function(event) {
     for(var i = 0;i < studentRawData.length; i++){
       studentRawData[i]=studentRawData[i].split("\t");
       studentData.push({
-        "FirstName":studentRawData[i][1].split(", ")[0],
-        "LastName":studentRawData[i][1].split(", ")[1],
+        "FirstName":studentRawData[i][1].split(", ")[1],
+        "LastName":studentRawData[i][1].split(", ")[0],
         "UniqueID":studentRawData[i][3].replace("@miamioh.edu",""),
         "Major":studentRawData[i][4]
       });
@@ -1093,6 +1093,8 @@ function getSemesterList(){
 function loadStudentsFromSemester( sem ){
 
   fetchData(getStudentListForSemester, sem, "");
+
+  $("#semester").html(sem);
 
   $(".loadStudents").prop("disabled",true);
 
