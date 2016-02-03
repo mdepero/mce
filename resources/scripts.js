@@ -1078,7 +1078,7 @@ function getSemesterList(){
 
     $('#semesters').append('<button type="button" class="btn btn-default" onclick="loadStudentsFromSemester(\"'+value+'\");">'+value+'</button><br />');
 
-  }
+  });
 
   $("#start").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
 
