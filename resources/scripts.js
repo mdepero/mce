@@ -1105,7 +1105,7 @@ function getStudentListForSemester(){
 
   $.each(returnedData, function(index, value) {
 
-    $('#reviews').append('<div id="student_'+value['StudentID']+'">'+value['LastName']+', '+value['FirstName']+'</div>');
+    $('#reviews').append('<div id="student_'+value['StudentID']+'">'+value['LastName']+', '+value['FirstName']+' ['+value['Average']+']</div>');
 
   });
 
