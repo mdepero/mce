@@ -1147,7 +1147,7 @@ function displayReviewDetail( id ){
 
   if ($('#review_'+id).find('#answersFor_'+id).length){
     // already queried
-    $('#answersFor_'+id).slideToggle();
+    $('#answersFor_'+id).slideToggle(FAST_ANI_SPEED);
 
   }else{
     // needs queried
