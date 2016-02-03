@@ -1138,19 +1138,21 @@ function displayStudentReviews( id ){
 
 function getStudentReport(){
 
-  $('#student_'+returnedData['StudentID']).append('<div id="studentReviewWrapper_'+returnedData['StudentID']+'">');
+  var ret = '<div id="studentReviewWrapper_'+returnedData['StudentID']+'">';
 
   if( returnedData['Reviews'].length == 0){
-    $('#student_'+returnedData['StudentID']).append('<div class="review">No reviews created yet</div>');
+    ret += '<div class="review">No reviews created yet</div>';
   }
 
   $.each(returnedData['Reviews'], function(index, value) {
 
-    $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayReviewDetail(\''+value['ID']+'\');">'+value['Class_ShortName']+' '+value['Section']+' - '+value['Class_LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'<!--['+value['Average']+']--></span></div>');
+    ret += '<div id="review_'+value['ID']+'" class="review"><span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayReviewDetail(\''+value['ID']+'\');">'+value['Class_ShortName']+' '+value['Section']+' - '+value['Class_LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'<!--['+value['Average']+']--></span></div>';
 
   });
 
-  $('#student_'+returnedData['StudentID']).append('</div>');
+  ret += '</div>';
+
+  $('#student_'+returnedData['StudentID']).append(ret);
 
 }
 
@@ -1171,27 +1173,29 @@ function displayReviewDetail( id ){
 
 function getReviewDetails(){
 
-  $('#review_'+returnedData['ReviewID']).append('<div id="wrapperFor_'+returnedData['ReviewID']+'">');
+  var ret = '<div id="wrapperFor_'+returnedData['ReviewID']+'">';
 
   if( returnedData['Answers'].length == 0){
    
-    $('#review_'+returnedData['ReviewID']).append('<div class="review">An Error Occured. No responses to report</div>');
+    ret += '<div class="review">An Error Occured. No responses to report</div>';
   
   }else{
 
-    $('#review_'+returnedData['ReviewID']).append('<table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">');
+    ret += '<table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">';
 
     $.each(returnedData['Answers'], function(index, value) {
 
-      $('#answersFor_'+returnedData['ReviewID']).append('<tr id="answer_'+value['ID']+'"><td>'+value['Question']+'</td><td>'+value['Value']+'</td></tr>');
+      ret += '<tr id="answer_'+value['ID']+'"><td>'+value['Question']+'</td><td>'+value['Value']+'</td></tr>';
 
     });
 
-    $('#review_'+returnedData['ReviewID']).append('</table>');
+    ret += '#review_'+returnedData['ReviewID']).append('</table>';
 
   }
 
-  $('#review_'+returnedData['ReviewID']).append('</div>');
+  ret += '</div>';
+
+  $('#review_'+returnedData['ReviewID']).append( ret );
 
 }
 
