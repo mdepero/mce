@@ -1138,7 +1138,7 @@ function displayStudentReviews( id ){
 
 function getStudentReport(){
 
-  var ret = '<div id="studentReviewWrapper_'+returnedData['StudentID']+'">';
+  var ret = '<div id="studentReviewWrapper_'+returnedData['StudentID']+'" style="display:none;">';
 
   if( returnedData['Reviews'].length == 0){
     ret += '<div class="review">No reviews created yet</div>';
@@ -1153,6 +1153,8 @@ function getStudentReport(){
   ret += '</div>';
 
   $('#student_'+returnedData['StudentID']).append(ret);
+
+  displayStudentReviews();
 
 }
 
@@ -1173,7 +1175,7 @@ function displayReviewDetail( id ){
 
 function getReviewDetails(){
 
-  var ret = '<div id="wrapperFor_'+returnedData['ReviewID']+'">';
+  var ret = '<div id="wrapperFor_'+returnedData['ReviewID']+'" style="display:none;">';
 
   if( returnedData['Answers'].length == 0){
    
@@ -1196,6 +1198,8 @@ function getReviewDetails(){
   ret += '</div>';
 
   $('#review_'+returnedData['ReviewID']).append( ret );
+
+  displayReviewDetail();
 
 }
 
