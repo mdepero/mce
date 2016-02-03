@@ -1120,16 +1120,25 @@ function getStudentListForSemester(){
 
 function displayStudentReviews( id ){
 
-  fetchData(getStudentReport, $("#semester").html(), id );
+  if ($('#student_'+id).find('#studentReviewWrapper_'+id).length){
+    // already queried
+    $('#studentReviewWrapper_'+id).slideToggle(FAST_ANI_SPEED);
 
-  $('#studentClick_'+id).removeClass('clickable');
-  $('#studentClick_'+id).prop('onclick',null).off('click');
+  }else{
+    // needs queried
+    fetchData(getStudentReport, $("#semester").html(), id );
+  }
+
+  // $('#studentClick_'+id).removeClass('clickable');
+  // $('#studentClick_'+id).prop('onclick',null).off('click');
 
 
 }
 
 
 function getStudentReport(){
+
+  $('#student_'+returnedData['StudentID']).append('<div id="studentReviewWrapper_'+returnedData['StudentID']+'">');
 
   if( returnedData['Reviews'].length == 0){
     $('#student_'+returnedData['StudentID']).append('<div class="review">No reviews created yet</div>');
@@ -1140,6 +1149,8 @@ function getStudentReport(){
     $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayReviewDetail(\''+value['ID']+'\');">'+value['Class_ShortName']+' '+value['Section']+' - '+value['Class_LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'<!--['+value['Average']+']--></span></div>');
 
   });
+
+  $('#student_'+returnedData['StudentID']).append('</div>');
 
 }
 
@@ -1160,13 +1171,15 @@ function displayReviewDetail( id ){
 
 function getReviewDetails(){
 
+  $('#review_'+returnedData['ReviewID']).append('<div id="wrapperFor_'+returnedData['ReviewID']+'">');
+
   if( returnedData['Answers'].length == 0){
    
     $('#review_'+returnedData['ReviewID']).append('<div class="review">An Error Occured. No responses to report</div>');
   
   }else{
 
-    $('#review_'+returnedData['ReviewID']).append('<div id="wrapperFor_'+returnedData['ReviewID']+'"><table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">');
+    $('#review_'+returnedData['ReviewID']).append('<table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">');
 
     $.each(returnedData['Answers'], function(index, value) {
 
@@ -1174,9 +1187,11 @@ function getReviewDetails(){
 
     });
 
-    $('#review_'+returnedData['ReviewID']).append('</table></div>');
+    $('#review_'+returnedData['ReviewID']).append('</table>');
 
   }
+
+  $('#review_'+returnedData['ReviewID']).append('</div>');
 
 }
 
