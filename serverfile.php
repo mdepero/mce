@@ -391,10 +391,10 @@ echo "Confidential Information, contact matt for access to review data";
 
 	if($_REQUEST['get'] == "getStudentReport"){
 
-		$return = '[';
+		$return = '{"StudentID":"'.$_REQUEST['v2'].'", "Reviews":[';
 
 
-	    $sql = "SELECT r.ID, r.StudentID, r.DateReviewed, c.Section, cl.ShortName, cl.LongName, f.FirstName, f.LastName FROM mce_review r LEFT JOIN mce_class c on r.ClassID = c.ID LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID where r.StudentID = '".$_REQUEST['v2']."' AND c.Semester = '".$_REQUEST['v1']."' ORDER BY cl.ShortName ASC";
+	    $sql = "SELECT r.ID, r.DateReviewed, c.Section, cl.ShortName, cl.LongName, f.FirstName, f.LastName FROM mce_review r LEFT JOIN mce_class c on r.ClassID = c.ID LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID where r.StudentID = '".$_REQUEST['v2']."' AND c.Semester = '".$_REQUEST['v1']."' ORDER BY cl.ShortName ASC";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -421,11 +421,11 @@ echo "Confidential Information, contact matt for access to review data";
 	    	else
 	    		$avg = (($sum*1.00)/$count);
 
-	    	$return .= '{"ID":"'.$row['ID'].'", "StudentID":"'.$row['StudentID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
+	    	$return .= '{"ID":"'.$row['ID'].', "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
 
 	    }
 
-	    $return .= "]";
+	    $return .= "] }";
 
 	    echo $return;
 

@@ -1131,11 +1131,11 @@ function displayStudentReviews( id ){
 
 function getStudentReport(){
 
-  if( returnedData.length == 0){
-    $('#student_'+value['StudentID']).append('<div class="review">No reviews created yet</div>');
+  if( returnedData['Reviews'].length == 0){
+    $('#student_'+returnedData['StudentID']).append('<div class="review">No reviews created yet</div>');
   }
 
-  $.each(returnedData, function(index, value) {
+  $.each(returnedData['Reviews'], function(index, value) {
 
     $('#student_'+value['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayreviewDetail(\''+value['ID']+'\');">'+value['ShortName']+' '+value['Section']+' - '+value['LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'['+value['Average']+']</span></div>');
 
