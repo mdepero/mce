@@ -394,7 +394,7 @@ echo "Confidential Information, contact matt for access to review data";
 		$return = '[';
 
 
-	    $sql = "SELECT r.ID, r.DateReviewed, c.Section, cl.ShortName, cl.LongName, f.FirstName, f.LastName FROM mce_review r LEFT JOIN mce_class c on r.ClassID = c.ID LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID where r.StudentID = '".$_REQUEST['v2']."' AND c.Semester = '".$_REQUEST['v1']."' ORDER BY cl.ShortName ASC";
+	    $sql = "SELECT r.ID, r.StudentID, r.DateReviewed, c.Section, cl.ShortName, cl.LongName, f.FirstName, f.LastName FROM mce_review r LEFT JOIN mce_class c on r.ClassID = c.ID LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID where r.StudentID = '".$_REQUEST['v2']."' AND c.Semester = '".$_REQUEST['v1']."' ORDER BY cl.ShortName ASC";
 	    $result = mysqli_query($conn, $sql);
 	    $first = true;
 	    while($row = mysqli_fetch_assoc($result)){
@@ -421,7 +421,7 @@ echo "Confidential Information, contact matt for access to review data";
 	    	else
 	    		$avg = (($sum*1.00)/$count);
 
-	    	$return .= '{"ID":"'.$row['ID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
+	    	$return .= '{"ID":"'.$row['ID'].'", "StudentID":"'.$row['StudentID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
 
 	    }
 
@@ -432,50 +432,6 @@ echo "Confidential Information, contact matt for access to review data";
 
 	}// end getFullStudentList
 
-
-
-	// if($_REQUEST['get'] == "getStudentListForSemester"){
-
-	// 	$return = '[';
-
-	//     $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE CONCAT('%', s.ID, '%') )";
-	//     $result = mysqli_query($conn, $sql);
-	//     $first = true;
-	//     while($row = mysqli_fetch_assoc($result)){
-	//     	if($first == true)
-	//     		$first = false;
-	//     	else
-	//     		$return .= ", ";
-
-
-	//     	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReviewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
-	//     	$countQuery = mysqli_query($conn, $sql);
-	//     	$sum = 0;
-	//     	$count = 0;
-	//     	while($queryData = mysqli_fetch_assoc($countQuery)){
-
-	//     		if(is_int($queryData['Value'])){
-	//     			$sum += $queryData['Value'];
-	//     			$count++;
-	//     		}
-
-	//     	}
-
-	//     	if($count == 0)
-	//     		$avg = "N/A";
-	//     	else
-	//     		$avg = (($sum*1.00)/$count);
-
-	//     	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":"'.$avg.'"}';
-
-	//     }
-
-	//     $return .= "]";
-
-	//     echo $return;
-
-
-	// }// end getFullStudentList
 
 
 

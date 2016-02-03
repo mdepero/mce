@@ -1105,7 +1105,7 @@ function getStudentListForSemester(){
 
   $.each(returnedData, function(index, value) {
 
-    $('#reviews').append('<div id="student_'+value['StudentID']+'">'+value['LastName']+', '+value['FirstName']+' ['+value['Average']+']</div>');
+    $('#reviews').append('<div id="student_'+value['StudentID']+'"><span class="clickable" id="studentClick_'+value['StudentID']+'" onclick="displayStudentReviews(\''+value['StudentID']+'\');">'+value['LastName']+', '+value['FirstName']+'</span></div>');
 
   });
 
@@ -1113,6 +1113,32 @@ function getStudentListForSemester(){
 
     $('#reviews').fadeIn(DEFAULT_ANI_SPEED);
         
+  });
+
+}
+
+
+function displayStudentReviews( id ){
+
+  fetchData(getStudentReport, id, $("#semester").html() );
+
+  $('#studentClick').removeClass('clickable');
+  $('#studentClick').prop('onclick',null).off('click');
+
+
+}
+
+
+function getStudentReport(){
+
+  if( returnedData.length == 0){
+    $('#student_'+value['StudentID']).append('<div class="review">No reviews created yet</div>');
+  }
+
+  $.each(returnedData, function(index, value) {
+
+    $('#student_'+value['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayreviewDetail(\''+value['ID']+'\');">'+value['ShortName']+' '+value['Section']+' - '+value['LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'['+value['Average']+']</span></div>');
+
   });
 
 }

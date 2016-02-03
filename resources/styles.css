@@ -27,6 +27,14 @@ table td{
 	padding: 6px 10px;
 }
 
+.clickable{
+	cursor:pointer;
+}
+
+.review{
+	margin-left: 5em;
+}
+
 .form{
 
 	display: block;
