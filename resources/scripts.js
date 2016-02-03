@@ -1064,6 +1064,7 @@ function review_password(){
     $("#pass-status").html("");
 
     fetchData(getSemesterList, "","" );
+    $("#loadSemesters").prop("disabled",true);
 
   }else{
 
@@ -1076,7 +1077,7 @@ function getSemesterList(){
 
   $.each(returnedData, function(index, value) {
 
-    $('#semesters').append('<button type="button" class="btn btn-default" onclick="loadStudentsFromSemester(\\"'+value+'\\");">'+value+'</button><br />');
+    $('#semesters').append('<button type="button" class="btn btn-default" class="loadStudents" onclick="loadStudentsFromSemester(\''+value+'\');">'+value+'</button><br />');
 
   });
 
@@ -1089,7 +1090,30 @@ function getSemesterList(){
 }
 
 
+function loadStudentsFromSemester( sem ){
 
+  fetchData(getStudentListForSemester, sem, "");
+
+  $(".loadStudents").prop("disabled",true);
+
+}
+
+
+function getStudentListForSemester(){
+
+  $.each(returnedData, function(index, value) {
+
+    $('#reviews').append('<div id="student_'+value['StudentID']+'">'+value['LastName']+', '+value['FirstName']+'</div>');
+
+  });
+
+  $("#semesters").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+
+    $('#reviews').fadeIn(DEFAULT_ANI_SPEED);
+        
+  });
+
+}
 
 
 
