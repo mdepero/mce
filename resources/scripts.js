@@ -1137,7 +1137,7 @@ function getStudentReport(){
 
   $.each(returnedData['Reviews'], function(index, value) {
 
-    $('#student_'+value['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayreviewDetail(\''+value['ID']+'\');">'+value['ShortName']+' '+value['Section']+' - '+value['LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'['+value['Average']+']</span></div>');
+    $('#student_'+returnedData['StudentID']).append('<div id="review_'+value['ID']+'" class="review"><<span class="clickable" id="reviewClick_'+value['ID']+'" onclick="displayreviewDetail(\''+value['ID']+'\');">'+value['ShortName']+' '+value['Section']+' - '+value['LongName']+' with '+value['Faculty_FirstName']+' '+value['Faculty_LastName']+'['+value['Average']+']</span></div>');
 
   });
 

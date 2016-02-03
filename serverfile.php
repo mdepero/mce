@@ -403,7 +403,7 @@ echo "Confidential Information, contact matt for access to review data";
 	    	else
 	    		$return .= ", ";
 
-	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReivewID = r.ID  WHERE r.ID = '".$row['ID']."'";
+	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReviewID = r.ID  WHERE r.ID = '".$row['ID']."'";
 	    	$countQuery = mysqli_query($conn, $sql);
 	    	$sum = 0;
 	    	$count = 0;
@@ -421,7 +421,7 @@ echo "Confidential Information, contact matt for access to review data";
 	    	else
 	    		$avg = (($sum*1.00)/$count);
 
-	    	$return .= '{"ID":"'.$row['ID'].', "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
+	    	$return .= '{"ID":"'.$row['ID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":"'.$avg.'"}';
 
 	    }
 
