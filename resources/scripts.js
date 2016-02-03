@@ -1166,7 +1166,7 @@ function getReviewDetails(){
   
   }else{
 
-    $('#review_'+returnedData['ReviewID']).append('<table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">');
+    $('#review_'+returnedData['ReviewID']).append('<div id="wrapperFor_'+returnedData['ReviewID']+'"><table id="answersFor_'+returnedData['ReviewID']+'" class="review reviewDetailTable">');
 
     $.each(returnedData['Answers'], function(index, value) {
 
@@ -1174,7 +1174,7 @@ function getReviewDetails(){
 
     });
 
-    $('#review_'+returnedData['ReviewID']).append('</table>');
+    $('#review_'+returnedData['ReviewID']).append('</table></div>');
 
   }
 
