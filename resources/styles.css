@@ -35,6 +35,11 @@ table td{
 	margin-left: 5em;
 }
 
+.reviewDetailTable td{
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
 .form{
 
 	display: block;
