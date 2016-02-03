@@ -8,7 +8,7 @@
 
 // Variables
 
-$databaseURL = "107.10.18.206:3306";
+$databaseURL = "107.10.27.126:3306";// no http:// (b/c it's not http idiot)
 $databaseUser = "mce_admin";
 $databasePassword = "mce_password";
 $databaseName = "mce_db";
@@ -234,6 +234,13 @@ if(isset($_REQUEST['get'])){
 
 
 
+
+
+// =========================================================== Read Reviews =========================================================
+	// =========================================================================================================
+
+
+
 	if($_REQUEST['get'] == "getReviews"){
 		// Return the set of all reviews
 
@@ -310,9 +317,178 @@ echo "Confidential Information, contact matt for access to review data";
 
 
 
+	if($_REQUEST['get'] == "getSemesterList"){
+
+		$return = '[';
+
+	    $sql = "SELECT Semester FROM  mce_class where Active = '1' GROUP BY Semester";
+	    $result = mysqli_query($conn, $sql);
+	    $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first == true)
+	    		$first = false;
+	    	else
+	    		$return .= ", ";
+	    	$return .= '"'.$row['Semester'].'"';
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+
+
+	}// end getSemester
 
 
 
+
+	if($_REQUEST['get'] == "getStudentListForSemester"){
+
+		$return = '[';
+
+	    $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE '%' + s.ID + '%')";
+	    $result = mysqli_query($conn, $sql);
+	    $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first == true)
+	    		$first = false;
+	    	else
+	    		$return .= ", ";
+
+
+	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReivewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
+	    	$countQuery = mysqli_query($conn, $sql);
+	    	$sum = 0;
+	    	$count = 0;
+	    	while($queryData = mysqli_fetch_assoc($countQuery)){
+
+	    		if(is_int($queryData['Value'])){
+	    			$sum += $queryData['Value'];
+	    			$count++;
+	    		}
+
+	    	}
+
+
+	    	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":'.(($sum*1.00)/$count).'}';
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+
+
+	}// end getFullStudentList
+
+
+
+	if($_REQUEST['get'] == "getStudentReport"){
+
+		$return = '[';
+
+
+	    $sql = "SELECT r.ID, r.DateReviewed, c.Section, cl.ShortName, cl.LongName, f.FirstName, f.LastName FROM mce_review r LEFT JOIN mce_class c on r.ClassID = c.ID LEFT JOIN mce_tl_classlist cl on c.ClassTypeID = cl.ID LEFT JOIN mce_faculty f on c.FacultyID = f.ID where r.StudentID = '".$_REQUEST['v2']."' AND c.Semester = '".$_REQUEST['v1']."' ORDER BY cl.ShortName ASC";
+	    $result = mysqli_query($conn, $sql);
+	    $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first == true)
+	    		$first = false;
+	    	else
+	    		$return .= ", ";
+
+	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReivewID = r.ID  WHERE r.ID = '".$row['ID']."'";
+	    	$countQuery = mysqli_query($conn, $sql);
+	    	$sum = 0;
+	    	$count = 0;
+	    	while($queryData = mysqli_fetch_assoc($countQuery)){
+
+	    		if(is_int($queryData['Value'])){
+	    			$sum += $queryData['Value'];
+	    			$count++;
+	    		}
+
+	    	}
+
+	    	$return .= '{"ID":"'.$row['ID'].'", "DateReviewed": "'. $row['DateReviewed'] .'", "Faculty_FirstName": "'.$row['FirstName'].'", "Faculty_LastName": "'.$row['LastName'].'", "Section": "'.$row['Section'].'", "Class_ShortName": "'.$row['ShortName'].'", "Class_LongName": "'.$row['LongName'].'", "Average":'.(($sum*1.00)/$count).'}';
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+
+
+	}// end getFullStudentList
+
+
+
+	if($_REQUEST['get'] == "getStudentListForSemester"){
+
+		$return = '[';
+
+	    $sql = "SELECT * FROM  mce_student s where Active = '1' AND EXISTS (SELECT * FROM mce_class WHERE Active = '1' AND Semester = '".$_REQUEST['v1']."' AND StudentList LIKE '%' + s.ID + '%')";
+	    $result = mysqli_query($conn, $sql);
+	    $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first == true)
+	    		$first = false;
+	    	else
+	    		$return .= ", ";
+
+
+	    	$sql = "SELECT a.Value FROM mce_answer a LEFT JOIN mce_review r on a.ReivewID = r.ID LEFT JOIN mce_class c on r.ClassID = c.ID WHERE c.Semester = '".$_REQUEST['v1']."' AND r.StudentID = '".$row['ID']."'";
+	    	$countQuery = mysqli_query($conn, $sql);
+	    	$sum = 0;
+	    	$count = 0;
+	    	while($queryData = mysqli_fetch_assoc($countQuery)){
+
+	    		if(is_int($queryData['Value'])){
+	    			$sum += $queryData['Value'];
+	    			$count++;
+	    		}
+
+	    	}
+
+
+	    	$return .= '{"StudentID": "'. $row['ID'] .'", "FirstName": "'.$row['FirstName'].'", "LastName": "'.$row['LastName'].'", "Major": "'.$row['Major'].'", "Average":'.(($sum*1.00)/$count).'}';
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+
+
+	}// end getFullStudentList
+
+
+
+	if($_REQUEST['get'] == "getReviewDetails"){
+
+		$return = '[';
+
+	    $sql = "SELECT a.ID, a.Value, q.Question FROM  mce_answer a LEFT JOIN mce_tl_questionlist q on a.QuestionID = q.ID WHERE ReviewID = '"$_REQUEST['v1']"'";
+	    $result = mysqli_query($conn, $sql);
+	    $first = true;
+	    while($row = mysqli_fetch_assoc($result)){
+	    	if($first == true)
+	    		$first = false;
+	    	else
+	    		$return .= ", ";
+
+
+	    	$return .= '{"ID": "'. $row['ID'] .'", "Value": "'.$row['Value'].'", "Question": "'.$row['Question'].'"}';
+
+	    }
+
+	    $return .= "]";
+
+	    echo $return;
+
+
+	}// end getReviewDetails
 
 
 

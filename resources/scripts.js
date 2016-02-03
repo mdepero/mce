@@ -1058,6 +1058,54 @@ function deleteReview(){
 
 
 
+function review_password(){
+  if($("#password").val() == "miamimce"){
+
+    $("#pass-status").html("");
+
+    fetchData(getSemesterList, "","" );
+
+  }else{
+
+    $('#pass-status').html("Incorrect Password");
+  }
+}
+
+
+function getSemesterList(){
+
+  $.each(returnedData, function(index, value) {
+
+    $('#semesters').append('<button type="button" class="btn btn-default" onclick="loadStudentsFromSemester(\"'+value+'\");">'+value+'</button><br />');
+
+  }
+
+  $("#start").fadeOut(DEFAULT_ANI_SPEED, "swing", function(){
+
+    $('#semesters').fadeIn(DEFAULT_ANI_SPEED);
+        
+  });
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*
