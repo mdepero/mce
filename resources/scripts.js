@@ -10,7 +10,7 @@ var OPTIONS_KEY = "(1) Unacceptable, (2) Acceptable, (3) Exceptional";
 
 
 // URL to folder that contains serverfile.php, including '/' on the end
-var serverRootURL = "http://107.10.27.126/";
+var serverRootURL = "http://ceclnx01.cec.miamioh.edu/~deperomm/mce/serverfile.php";
 
 var SLOW_ANI_SPEED = 1500;
 
